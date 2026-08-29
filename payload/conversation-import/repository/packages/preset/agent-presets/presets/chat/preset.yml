@@ -1,0 +1,3 @@
+name: 聊天
+description: 产品内部使用的纯对话预设，不提供文件、命令或 Agent 工具。
+order: 99

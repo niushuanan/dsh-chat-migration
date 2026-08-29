@@ -4,7 +4,7 @@
 
 [![DSH Plugin](https://img.shields.io/badge/DSH-Plugin-111111)](https://github.com/niushuanan/xiaozhuang-dsh) [![MIT](https://img.shields.io/badge/license-MIT-16a34a)](LICENSE)
 
-把 DeepSeek 官方平台导出的全部历史对话迁入 DeepSeek Harness，并用同一个插件开启不绑定工作区、不授予本地执行权限的聊天模式。原始标题、时间顺序、问题、回答和导出中已有的思维过程会映射到原生聊天记录。
+本组合仓库提供两个可独立安装、启停和导出的原生插件：“聊天模式”用于不绑定工作区、不授予本地执行权限地直接聊天；“导入对话”用于把 DeepSeek 官方平台导出的历史迁入 DeepSeek Harness。原始标题、时间顺序、问题、回答和导出中已有的思维过程会映射到原生聊天记录。
 
 <p align="center"><img src="docs/06-chat-import.webp" alt="DeepSeek 历史对话导入设置页" width="800"></p>
 
@@ -15,7 +15,7 @@
 1. 点击 GitHub 的 **Code → Download ZIP**，下载本仓库。
 2. 把 ZIP 交给能够读取并修改目标 DSH 项目的 AI。
 3. 对 AI 说：**先阅读 AGENTS.md、INSTALL.md 和 manifest.json，只安装这个插件，并保留现有插件、数据、对话、附件和设置。**
-4. 安装后在 **设置 → 小庄的插件** 启用“聊天迁移”；同一个开关会同时启用聊天模式与 **设置 → 导入对话**。
+4. 安装后在 **设置 → 小庄的插件** 分别启用“聊天模式”和“导入对话”。只需要其中一项时，安装 AI 也可以按 `manifest.json` 只安装对应插件。
 
 ## 使用
 
@@ -26,8 +26,9 @@
 
 ## 内容
 
-- <code>payload/</code>：从主仓库生成的聊天模式、导入器和直接运行依赖。
-- <code>manifest.json</code>：插件组合、Cordis 行、来源 commit 和逐文件 SHA-256。
+- <code>payload/chat-mode/</code>：从主仓库生成的聊天模式及其直接运行依赖。
+- <code>payload/conversation-import/</code>：从主仓库生成的 DeepSeek 导入器及其直接运行依赖。
+- <code>manifest.json</code>：两个独立插件、Cordis 行、来源 commit 和逐文件 SHA-256。
 - <code>INSTALL.md</code>：直接安装、冲突适配、失败恢复和最小验证说明。
 - <code>docs/</code>：当前版本的真实产品截图。
 
@@ -35,4 +36,4 @@
 
 ## 来源与许可
 
-本仓库是 [Xiaozhuang DSH](https://github.com/niushuanan/xiaozhuang-dsh) 的单向发布副本，不是独立开发源。当前内容同步自主仓库 commit [`286f34870a`](https://github.com/niushuanan/xiaozhuang-dsh/commit/286f34870a70a8d5c3e26157b3aef9a516ce7bd5)。代码采用 [MIT License](LICENSE)。
+本仓库是 [Xiaozhuang DSH](https://github.com/niushuanan/xiaozhuang-dsh) 的单向发布副本，不是独立开发源。当前内容同步自主仓库 commit [`45e273b8ef`](https://github.com/niushuanan/xiaozhuang-dsh/commit/45e273b8ef17168c7e2cfc28572e13096e404ad5)。代码采用 [MIT License](LICENSE)。
