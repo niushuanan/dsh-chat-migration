@@ -1,0 +1,4213 @@
+{
+  "schemaVersion": 1,
+  "kind": "xiaozhuang-dsh-plugin-export",
+  "createdAt": "2026-08-29T03:20:00.754Z",
+  "sourceCommit": "1e8349b1f0ffdbe7fc98a789bdfad6a1a142a156",
+  "plugins": [
+    {
+      "id": "chat-migration",
+      "name": "聊天迁移",
+      "rows": [
+        {
+          "id": "ui-plain-chat",
+          "name": "@deepseek-ai/dsh-client-ui-plain-chat"
+        },
+        {
+          "id": "session-log-download",
+          "name": "@deepseek-ai/dsh-session-log-export"
+        },
+        {
+          "id": "composer-add-menu",
+          "name": "@deepseek-ai/dsh-composer-add-menu"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "repository",
+          "path": "packages/client/ui-plain-chat"
+        },
+        {
+          "kind": "repository",
+          "path": "packages/client/ui-composer-add-menu"
+        },
+        {
+          "kind": "repository",
+          "path": "packages/client/connection"
+        },
+        {
+          "kind": "repository",
+          "path": "packages/client/ui-chat"
+        },
+        {
+          "kind": "repository",
+          "path": "packages/client/ui-sidebar"
+        },
+        {
+          "kind": "repository",
+          "path": "packages/client/ui-workspace"
+        },
+        {
+          "kind": "repository",
+          "path": "packages/client/ui-conversation"
+        },
+        {
+          "kind": "repository",
+          "path": "packages/client/ui-agent-preset"
+        },
+        {
+          "kind": "repository",
+          "path": "packages/client/ui-primitives"
+        },
+        {
+          "kind": "repository",
+          "path": "packages/api/session-controller"
+        },
+        {
+          "kind": "repository",
+          "path": "packages/session-query/session-log-export"
+        },
+        {
+          "kind": "repository",
+          "path": "packages/preset/agent-presets/presets/chat"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/README.md",
+      "size": 645,
+      "sha256": "b3e033662f70115603d0cba7b26cb212b6978a1b20406fe52db3643509510ec4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/README.zh.md",
+      "size": 593,
+      "sha256": "4aa62d0c562bfcef0605db49af1470b6cfc10cc9bc36c118840ecc7377e85d78"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/lib/client.js",
+      "size": 6042,
+      "sha256": "94facac35c2017b78e92a3bcf18b14def8765ebae551c255962a8e5779aab344"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/lib/index.js",
+      "size": 149,
+      "sha256": "85359e9b0308eef168466b5163e67e6d87daaee71506f3df3af030c8b3d4b373"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/lib/invariant.js",
+      "size": 580,
+      "sha256": "cf43d27937932db52c9ac429c4bd16359ab11f5ed0543e5d46dfc190223c3d19"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/lib/types/client/ChatAction.d.ts",
+      "size": 492,
+      "sha256": "0ea4da5409018c75a555dd50e680f51e3be9b300209501f24df18422992c1b3c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/lib/types/client/index.d.ts",
+      "size": 491,
+      "sha256": "5aa5a04ed2b056cefb11dce4db15d2f65514a96adb4bcf7da1dfa35d8632f920"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/lib/types/client/locales.d.ts",
+      "size": 458,
+      "sha256": "08695a0d97264ac9259ad20ba880d7e8cc4dbfe64235af653bdfd465fb80a628"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/lib/types/client/start-chat.d.ts",
+      "size": 814,
+      "sha256": "9ba3f0156f30b7f4d3b7e670588dfae7448c90b98d9676419da8bce686a76a2f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/lib/types/index.d.ts",
+      "size": 143,
+      "sha256": "275007d0369755091268224e19b180c67fa0356503788b2d9b74b48c37d84b28"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/lib/types/invariant.d.ts",
+      "size": 429,
+      "sha256": "fce80dbfac848efe94b5dd24e372ca7e3fb5dcbdd889de422d4f46ff7843cd67"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/package.json",
+      "size": 2409,
+      "sha256": "fd3fd69524556709cf8d34d2ca6c07e8dabcb72b4013344e2fe544722a99656e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/src/client/ChatAction.module.css",
+      "size": 1223,
+      "sha256": "89e232e6285ef33c126c13e82e177b66f8a88829dc61d72ec9966219cad5be69"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/src/client/ChatAction.tsx",
+      "size": 1140,
+      "sha256": "07202fd7057ad5f62978eb460187088b84280880c9e500049e155271cdfa679f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/src/client/index.ts",
+      "size": 1435,
+      "sha256": "10daa271a1b6124c80131493deb0fd31e4848a6dad44579435e2f12ef9707359"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/src/client/locales.ts",
+      "size": 484,
+      "sha256": "cb554755e34511c86ea18a10feadef839e8a914ef7efef8812e201dace5733a0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/src/client/start-chat.ts",
+      "size": 1770,
+      "sha256": "144f700dfaacb67c169561d532300c818550c27391eb631f1ed43dabaf4e725f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/src/css-modules.d.ts",
+      "size": 109,
+      "sha256": "1b119eae282e4981c7ee24bbcf0ceafe34d57f6d5e6b148b2b7cc7c09cd89513"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/src/index.ts",
+      "size": 102,
+      "sha256": "fa3370c62c7cf8118bb22d258d0a574a77e33209a33eac3a75a640ac9d2ee748"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/src/invariant.ts",
+      "size": 695,
+      "sha256": "10a56ac25d2e6309d97812fc5199c68bef9f8f58d81ddc0229b1999ebe24464d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/tsconfig.json",
+      "size": 608,
+      "sha256": "638917dc21ffc4ba6c5f03a15c307a0fe72c7147f2fe0235198074454ff08c36"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-plain-chat/tsdown.config.ts",
+      "size": 171,
+      "sha256": "8910f4685d6de4edf617bdbdfb701fcbfdeb59ced660f6dba06d1e0e12424cf9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-composer-add-menu/README.md",
+      "size": 2388,
+      "sha256": "fc357b4c8abe6058ab4eeca7ee178a09b48a51c0abfc19b61b550cb5f3e137d8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-composer-add-menu/README.zh.md",
+      "size": 2102,
+      "sha256": "0691e9d10fe261b7ad5df1aac90b75dd52881b23dcdcd27388b29f25aeb46506"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-composer-add-menu/lib/client.js",
+      "size": 19070,
+      "sha256": "ce59f8c4cc60ed12a4d40c5ceb224fa6e33f4a24190ca194a646c6d04d633d6a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-composer-add-menu/lib/index.js",
+      "size": 126,
+      "sha256": "e5fa13c087de198dd722ff32ad803c033b09f3134cf1ef16226bff86b54e3460"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-composer-add-menu/lib/invariant.js",
+      "size": 326,
+      "sha256": "56105d5594d056a2be7cb9856014b7fb951c9aad887b5bdcf7145046e03416dc"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-composer-add-menu/lib/types/client/ComposerAddMenu.d.ts",
+      "size": 451,
+      "sha256": "ea2dd13f601adc533a6205b1651fe4c9ce51500d398d4d424137da8bccaa9b3a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-composer-add-menu/lib/types/client/index.d.ts",
+      "size": 616,
+      "sha256": "ab28915a17b0e2f00675e9856ae8bafb30c75b2374b8c1c2f95709b1bf443607"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-composer-add-menu/lib/types/client/locales.d.ts",
+      "size": 1608,
+      "sha256": "360b2ceeba03496d24376c78b3950ec34d830eeafef0cf822c66242f928494f5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-composer-add-menu/lib/types/index.d.ts",
+      "size": 120,
+      "sha256": "d461b3455951a7001617f08fda1e42f346b384943348efdc43b92a22a0dc68a5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-composer-add-menu/lib/types/invariant.d.ts",
+      "size": 256,
+      "sha256": "2f24c3b3a1417abcc50396a5aa6b1acaf272b8f29f565e2650ff3a95c21b2e06"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-composer-add-menu/package.json",
+      "size": 2277,
+      "sha256": "187910872b4c6497ff5b24bf6481071c4b4d3008d5d09f594f9af2143387859d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-composer-add-menu/src/client/ComposerAddMenu.module.css",
+      "size": 3870,
+      "sha256": "7531ca1a056a5bb9d6de0887e710d7e68926f221e3e0bbb9841ca98e44ad4b6b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-composer-add-menu/src/client/ComposerAddMenu.tsx",
+      "size": 7560,
+      "sha256": "8e032d6ade3ae489628542be1de28083be3f39ef33c25f02c305d6729d17cc2c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-composer-add-menu/src/client/index.ts",
+      "size": 1167,
+      "sha256": "004b3c06af28e9d95e1b3765c1a86701378b277cdecfb105e61e61437a9e0c9e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-composer-add-menu/src/client/locales.ts",
+      "size": 2177,
+      "sha256": "3465794a1797ac68d39e4eda494e49fc96465053bf8fbd4f5b5f97a3cf0578de"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-composer-add-menu/src/css-modules.d.ts",
+      "size": 109,
+      "sha256": "1b119eae282e4981c7ee24bbcf0ceafe34d57f6d5e6b148b2b7cc7c09cd89513"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-composer-add-menu/src/index.ts",
+      "size": 79,
+      "sha256": "b45ae8e4e690457c231035287eebb4d53a909b3fa6b3d28b3b297c938d1e08d9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-composer-add-menu/src/invariant.ts",
+      "size": 438,
+      "sha256": "485b3ff683180b1d8f019c30fa1e64de6f661ec193743215e6690566ec8745c4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-composer-add-menu/tsconfig.json",
+      "size": 470,
+      "sha256": "df08e2b8ece615ffe91e88f5a66364621338737515cc4e2bc88bebf2d2cfd9d3"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-composer-add-menu/tsdown.config.ts",
+      "size": 168,
+      "sha256": "e184eaaf88757e865e4b24cb68042cf57f1df9a9ca84fc520e43dc2d11fc8629"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/README.md",
+      "size": 6337,
+      "sha256": "866f47b1409d3d4f907b18275c37eb915034a4d5c44f3d03a1f569c6dec4c582"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/README.zh.md",
+      "size": 5876,
+      "sha256": "fbfa9878ecfb4dff074f2444545c83cb3aaed7f1e2479aca52b6e600b737d4b0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/client.js",
+      "size": 154818,
+      "sha256": "4e411c64b95f1e318b8db205e30ab83f32fc855cd14d8d31dee5f3768d00b474"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/index.js",
+      "size": 30554,
+      "sha256": "a3740db6b9ebb13a94fa67c20d05b3578c3e18d1ce800dac6dc83015d09cb6a4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/invariant.js",
+      "size": 1160,
+      "sha256": "e9b7509017023af3abcb2921556d773b42964ffc2783a08127fc400cf680fccf"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/types/api-path.d.ts",
+      "size": 300,
+      "sha256": "c3d4b847a38f629340020290a3d010e02331eabb5bda091dd92bd4726acca2e6"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/types/api-request-trust.d.ts",
+      "size": 2413,
+      "sha256": "e1116c29ceec8d18c3761782b3eb1727eb8857728024a68bbdf419a1fb70b1dd"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/types/browser-auth.d.ts",
+      "size": 2438,
+      "sha256": "6ae2c491dcfb1595091b1adaa9dde348863fe06e73d94c888b7377a6aa3bf382"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/types/client/api.d.ts",
+      "size": 819,
+      "sha256": "33f39c20aea0134aa72d29c7beeabcc123f73b45e9f158d9a5288522941bff3c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/types/client/connection.d.ts",
+      "size": 3708,
+      "sha256": "a9082e905a22079d42fe0c396a0d857b25ccb8c54b3cc7bf7043deafedc009be"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/types/client/fixture.d.ts",
+      "size": 1383,
+      "sha256": "517ab6db1e1e081700938116c7b2f31f7b409250d40ad05b131d5fcf0de3ca27"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/types/client/index.d.ts",
+      "size": 4907,
+      "sha256": "1fae4c40727551d52528b462a34679c9afe8445a4c2a238a7d4038dcd3ea673a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/types/client/random-uuid.d.ts",
+      "size": 340,
+      "sha256": "cefe0ac6d56946945557b175e51c825ebcaf1c55da8b34b721b3fd583d634e1d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/types/client/rpc.d.ts",
+      "size": 890,
+      "sha256": "59275c00db19bc2cbbc50857288f72417422667bf53d73fface271eca02528e9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/types/client/web-api-client.d.ts",
+      "size": 851,
+      "sha256": "9a9bac5e53e5489b3f4aa75c64131f566ae03c1108f60ff81da6930d12008547"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/types/http-bridge.d.ts",
+      "size": 1558,
+      "sha256": "7fafb69161c3617737d4ee52d2c03263a9f7421060c54b6eee4ac8120648c290"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/types/index.d.ts",
+      "size": 2326,
+      "sha256": "25b132781ad4ea429e92c998ee6962e3fc0c7a88050e4e3199d427e1ffb9e37b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/types/invariant.d.ts",
+      "size": 703,
+      "sha256": "7fa685a9150180bf2938febdafd17620e91ab2fb05a790ab8e1c0a4f0e413342"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/types/loopback-hostname.d.ts",
+      "size": 590,
+      "sha256": "92c6e6074b3e8c0e1d2ffefbb9ea2116c3ced9c74638d3a2b7697fa796256001"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/types/rpc-host.d.ts",
+      "size": 2417,
+      "sha256": "ac4b54a1f54a5198cc037b2fa2d54eca164f4c71378a33de4fbe2c2c48ce11e8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/types/rpc-schema.d.ts",
+      "size": 1345,
+      "sha256": "1c6e01cba164467997830d42d572029e2623846b4e14da7ce60aca9b5df49e93"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/types/rpc.d.ts",
+      "size": 10025,
+      "sha256": "d1662275b4a7277831c67d05c94205f3cae91302d970316cd5c5831888a743b1"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/lib/types/websocket-downlink.d.ts",
+      "size": 1833,
+      "sha256": "e7c77e2514d52f8afef247f160583d3e7e04f6b465bdce9c56e2f37e59db76a7"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/package.json",
+      "size": 2418,
+      "sha256": "5f66b5befdffb55434bdaa618d7f42c88ca1b2eea1628c30232aa0d3bff01065"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/src/api-path.ts",
+      "size": 254,
+      "sha256": "8d420a69c9e80584818433e3d909f09e9be13bc9a9d6a5be3bb02c427c328934"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/src/api-request-trust.ts",
+      "size": 6221,
+      "sha256": "8085ac726be6b597ee61a0da1318ab956004d4d44325c941f7784feec93c0748"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/src/browser-auth.ts",
+      "size": 12036,
+      "sha256": "90f6a4220979bd98d9d71f009a457a0d8af9d9608496dd5fa78dd7045871ea98"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/src/client/api.ts",
+      "size": 819,
+      "sha256": "32076f6d669224999664ad3f53283b9fca896a632a6fbbf03383419d94c87a5d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/src/client/connection.ts",
+      "size": 8753,
+      "sha256": "a034a9d9791b1cd102a4a9615d00555dcb37ddd1ea2f5e7c3d04e7de73ce7cab"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/src/client/fixture.ts",
+      "size": 149539,
+      "sha256": "b5eedd108c9618f88e84d88647bcb7322a46c99029438ff91119577417283351"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/src/client/index.ts",
+      "size": 8552,
+      "sha256": "ca7a4b1080970cea3c7f7565b218d86717b708cd7d74a1dbd02516f7eb29e658"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/src/client/random-uuid.ts",
+      "size": 743,
+      "sha256": "c037b0e0224ca27a70682fd86d06e3527e6f45acf467b0b70a56e1d8c3000f7c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/src/client/rpc.ts",
+      "size": 4383,
+      "sha256": "6844f7f3d6b7e7815b94e2bb37d218a764df5d77e788a81b2c44df7114e19dd0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/src/http-bridge.ts",
+      "size": 3991,
+      "sha256": "ea3b3aacbc80be2ac4b6718d9741fe8ce7c9186762d9c741a0d0f0db7de62f1e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/src/index.ts",
+      "size": 5069,
+      "sha256": "316412caa36fa94f04cb560670947937719764d39256bba5474a0970c9932cd4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/src/invariant.ts",
+      "size": 1338,
+      "sha256": "9a7de86c1bca5948a546bf6cb166cd55f332e62e1303d6aaf3ed4b185f900c72"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/src/loopback-hostname.ts",
+      "size": 771,
+      "sha256": "4c21ef048250d543659c29a4876e820e90bdeb452f424dfbdbc19f3b500efa62"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/src/rpc-host.ts",
+      "size": 10269,
+      "sha256": "78e74bdc31d42754d0012b0ed2fa4dd25af5c1ddcedf1679c519d4a798f54b0a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/src/rpc-schema.ts",
+      "size": 1807,
+      "sha256": "4224e854bb62b0c195c5a401683322fdc69cadf2a0cf27abd3fb7690ee35ffb2"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/src/rpc.ts",
+      "size": 9834,
+      "sha256": "fec2a8fb50676de012b4e3f31180a60dc93c39c994f768a9af405b2d04f54ac0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/tsconfig.client.json",
+      "size": 1104,
+      "sha256": "33d186983783c003773d834aa9de72978ca9905f3ffdd217d613486db289c713"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/tsconfig.host.json",
+      "size": 794,
+      "sha256": "9723e6738f4c10f1a83c2b7fdd7290f32cca61ab05d96536c00733e31305c2c3"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/tsconfig.json",
+      "size": 142,
+      "sha256": "ad1b25d36ea100440140e543e2a2af188178934da74eadce1b27ef14e91b335e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/connection/tsdown.config.ts",
+      "size": 168,
+      "sha256": "28e6325f802680ff8692ecdd39afdb26cf3a5f6c37704f94f0a2040e786e103b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/README.md",
+      "size": 6158,
+      "sha256": "982d1e742fdef79a4ae08a86ec4b1ff15ab5b195c6eee043664cdd6820c02f2b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/README.zh.md",
+      "size": 5782,
+      "sha256": "ffd3110c982a2b72172612bdcd5463f3699fc0095ae3439c7b2cc3e8f47c5772"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/client.js",
+      "size": 336986,
+      "sha256": "1bab5e65331c20075bcd7a11a10992969711e126faa8e524357d2ef742e1abb5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/index.js",
+      "size": 1384,
+      "sha256": "e5501494ca38992feb9e3eea91667870ea346a8b70eee7b9954402f404a9b921"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/invariant.js",
+      "size": 693,
+      "sha256": "8e6c9e8954216f80b133dbd75cf2fb8f3a1195c81883e18036064283ff1474bc"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/chat-settings.d.ts",
+      "size": 1176,
+      "sha256": "8422ebebeec9dd80a428cbf044f862538ffac370c35365a6e9f90d80caa9cd7f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/apply.d.ts",
+      "size": 426,
+      "sha256": "1de4bdf008a4c9eda6ad69e836e89471808a4dea27bdb12780a4b6dfd6e91fc8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/ApprovalCommand.d.ts",
+      "size": 977,
+      "sha256": "817e0055a679203e7ec2602dd2484f5dbf2ff614381012e67d0c96a988e83e0a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/AssistantMarkdown.d.ts",
+      "size": 1410,
+      "sha256": "1e0d284bad8f1d70bb8b9651992d6eb463c1a74fba7e536d06fea9257fb69f55"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/AssistantNodeView.d.ts",
+      "size": 437,
+      "sha256": "fc28af6bbfb06d7a60673db86629e606be14335f94c04a24061efa922c32cecc"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/ChatNodeSeat.d.ts",
+      "size": 962,
+      "sha256": "5b2b32f7c7834eae0228224f8354354685e40812f5312450f90fd98662f1014f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/ChatView.d.ts",
+      "size": 502,
+      "sha256": "57cd23c9fbe7479e1bf2b205d38d12d1ebc46068d1ac47edd47dc9741c57a465"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/CommandNodeView.d.ts",
+      "size": 790,
+      "sha256": "bed9df90df2bad0829c8bbe76d750c20d891e88ce828357f1cbd10f6865d587b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/CompactionCommandCard.d.ts",
+      "size": 466,
+      "sha256": "c657aaad4fcb8641ade42c629acb9c418f72062760c1619f9dad3559f98ef946"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/CompactionItem.d.ts",
+      "size": 918,
+      "sha256": "02c2969d9412d20139ab94124b0f7050c1a35054d5ccff81f714652d1ef64502"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/ContextBody.d.ts",
+      "size": 5515,
+      "sha256": "596ec6d62045462c23d2dfe8eee8cc60ed8904c197b743f079d0e1ffeb384c30"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/ContextInjectionRow.d.ts",
+      "size": 1451,
+      "sha256": "66d53fa4f0ed2934952923088acc389115d78312cb1b81b1b4142dc40969054f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/GenericCommandCard.d.ts",
+      "size": 573,
+      "sha256": "4696825f26380adab1e668f32a348f73c2fa66b9d60a882c1bd539647d880589"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/MessageIconActions.d.ts",
+      "size": 1908,
+      "sha256": "a956d4ab73a2d150c914719a7905c68506b557251e8f9078d10b5161d0706f44"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/MessageItem.d.ts",
+      "size": 2845,
+      "sha256": "5650943a97f8979c3d81d95cdb1e9d541f4ae4f43e6cdc62abcff324098fc9fe"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/ReasoningRow.d.ts",
+      "size": 583,
+      "sha256": "0bff0d0bf0e485d6602ffd0014281039be1736c3afc0556cec1363631b755e57"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/StatsLine.d.ts",
+      "size": 3073,
+      "sha256": "bec91eb35db81f5816a79c30cfd621813ebfbb36b04a04d7b66481682738e5c7"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/SystemPromptRow.d.ts",
+      "size": 1008,
+      "sha256": "dd0f68248699535a5a4124cd9686678fe7a2fc16a83f40726d7eccbd6f557a86"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/TurnNavigator.d.ts",
+      "size": 1213,
+      "sha256": "2d025883a44374fd30e6c6173d587ecbe85ede2843eab911c8098da53f540966"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/TurnProcessNodeView.d.ts",
+      "size": 342,
+      "sha256": "2f001316eef6556ba81fcfe26ca4e9fb3c1deedfb04e875146bb1571b02050c7"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/TurnTailNodeView.d.ts",
+      "size": 657,
+      "sha256": "d2f40ecae1512f2361ae3709def6cde668cf5f734d49ea5a0cf36d09ac79b339"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/TurnUsageDisclosure.d.ts",
+      "size": 466,
+      "sha256": "ec660685473d390545ffffeff26cb50c1bea80c45a7d12e547a685e7cad5f8de"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/message-chrome.d.ts",
+      "size": 2437,
+      "sha256": "7427635559fa099e21b87c1c0f2d8fe0348cf507d0f92dd324330331efc655db"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/register-node-renderers.d.ts",
+      "size": 311,
+      "sha256": "f808cb70006f0662fef5c6384cfa53455787d361725b0c2904fdbed07690aef7"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/searchable-hidden.d.ts",
+      "size": 448,
+      "sha256": "ced33fb03cdbd60aa977e868a5b71a3541cfd8090cc8d71614862fa2d31016c4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/token-format.d.ts",
+      "size": 1230,
+      "sha256": "eb2100f995e45a7ac1471313673c25979ff52e7806067f2abb42412fb0980155"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/turn-assistant.d.ts",
+      "size": 335,
+      "sha256": "eecb9fe95f9f83c1c31c32bf59a2a9a8df2c5c72106613063f69dc7cc69ccf1a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/use-calendar-day.d.ts",
+      "size": 249,
+      "sha256": "8827fc890ffa5f825d2138ca2e194ee7b9c06036420b3d4b3408e6cfb85bde0d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/chat/use-throttled-visual-update.d.ts",
+      "size": 467,
+      "sha256": "0499e518f27b2ff21d6be5e525f65d795276e87f1a13b0ad0932d862445b1f8c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/contract/assistant-content.d.ts",
+      "size": 432,
+      "sha256": "0d0b6231a6794176727b532aee26f6e2a0630c1c2a9c004eb3fbca9a03cba3e4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/contract/chat-nodes.d.ts",
+      "size": 4851,
+      "sha256": "b967cc7a0a6750b3e49e54a5b256f6c6e6b05ac62dc9bdb995d41d23506c3273"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/contract/slots.d.ts",
+      "size": 8702,
+      "sha256": "0e3c7c45368f35201bad64bbe9d36e0124bdd76769604afe0957f2b03364eda3"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/contract/snapshot.d.ts",
+      "size": 3478,
+      "sha256": "cc6a2abc029eef8b9beb105a00f29c9aea23c70eb5e7d37e57f831120a5390de"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/contract/store.d.ts",
+      "size": 815,
+      "sha256": "bfd01a86f9f766d67f74db9344a5f682cc3cb6a7f68117d5847da1185ac527f6"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/contract/turn-metrics.d.ts",
+      "size": 1750,
+      "sha256": "3d5b3316a4ba6199330d4f563b0447c612d3d0ba4e80c9b533afac3786cc098b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/contract/turn-process.d.ts",
+      "size": 2437,
+      "sha256": "e4aac276ceadbebf5b056c4c9b73a8b4b8be57c118af7a1899b29ba8cb547404"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/conversation-nodes/assistant.d.ts",
+      "size": 1577,
+      "sha256": "cf096971f8bbda088f75b279d0f2c3846cc5162e763310b38ff369f52f998779"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/conversation-nodes/chat-snapshot-builder.d.ts",
+      "size": 2070,
+      "sha256": "0387ef06b621aa4c790bccf64b84c7527a1082c6339fe516801b70974c6e8590"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/conversation-nodes/command.d.ts",
+      "size": 2509,
+      "sha256": "80fb8b0fc52baba1340558ee93622338ab0aebf3ae0e1313c626225422e37a03"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/conversation-nodes/common.d.ts",
+      "size": 1966,
+      "sha256": "40a2a24d5e00af969915decfcd813f39620734d77d14d022e4679e5ba110eee9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/conversation-nodes/compaction.d.ts",
+      "size": 946,
+      "sha256": "9bdcc61699340c64d00c8a8cf0a831cdba941d10d574afced20ac8a203acc95f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/conversation-nodes/event-projection.d.ts",
+      "size": 2511,
+      "sha256": "2802bb56813e5fd18de264c80d9cd4ed3b3847ca72b00f1821c4f9b1211e2d8c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/conversation-nodes/fallback.d.ts",
+      "size": 801,
+      "sha256": "b78e4559dff567ab4b9e948ae8409fe6978886cba76ca1ae02d2d65f633803b3"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/conversation-nodes/inbox.d.ts",
+      "size": 919,
+      "sha256": "a377929a6b4017ad831d2c1bf99097d483d823297a46575bbc3536b6ffe0656c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/conversation-nodes/message.d.ts",
+      "size": 1548,
+      "sha256": "3af15cf6bcc858ebba63766690d40626d3088e21035bdf08a06274311a3f7b73"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/conversation-nodes/partial.d.ts",
+      "size": 1430,
+      "sha256": "46f688a07e12a43b9bc5bef83ada444713cd39256eee427a70f5a38981422dda"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/conversation-nodes/register.d.ts",
+      "size": 307,
+      "sha256": "b241fcf1256fc9e01e3e0639406f2cd86ea4b25321e8f08a118f812042f11b8b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/conversation-nodes/request-prompt.d.ts",
+      "size": 1235,
+      "sha256": "a027032e1fcfd694775e6a0cc2d2353ae2d461a4034350cddf1e5adecf135626"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/conversation-nodes/retry.d.ts",
+      "size": 959,
+      "sha256": "42a457d1bfac759967032f669faa18cc52da7e12f9b8634b7557f731bbe020a3"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/conversation-nodes/tool.d.ts",
+      "size": 964,
+      "sha256": "9200bd4ddfb8251206f97688327b1f4cbb585148ae1c47c6d230c7e259c975d8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/conversation-nodes/turn-error.d.ts",
+      "size": 1164,
+      "sha256": "284194e7704f3076b10ad5f08ad5756df02237271bb8c729781f4c55b122d5a1"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/conversation-nodes/turn-max-tokens.d.ts",
+      "size": 949,
+      "sha256": "2ff3cd8acf716cfcc4b8aa3b3915d3d2a31986cf68c5f8f2b487afc1b6d2c967"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/conversation-nodes/turn-navigation.d.ts",
+      "size": 1006,
+      "sha256": "8f22de61c2311c80a24d083dfb09cb3c7675a249add171655fecdf347c4dc7d4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/conversation-nodes/turn-process.d.ts",
+      "size": 1403,
+      "sha256": "03c1c465110aa6a1ff3cf032fea48c14482acf114c188b2856aa1aaff851381e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/conversation-nodes/turn-tail.d.ts",
+      "size": 1160,
+      "sha256": "2a0d0a8b76cf0e32b54eb61669685e0556568b81c4d06edc968ea881c0523782"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/details/DetailsPanel.d.ts",
+      "size": 316,
+      "sha256": "a05469b309c928f750cd4d43706a65e9a0dcc8271589f01ad515fda77737315f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/details/tool-node-reader.d.ts",
+      "size": 486,
+      "sha256": "6c4a5e3dc0aa406ae454e9b99470b0a31e601be516eefc59478e32f46cf0ccbf"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/index.d.ts",
+      "size": 3215,
+      "sha256": "fa1c8c4f02de38bb4cb2a3d46bd3587a9199dd9cd609a42710154c2c3f7a1e66"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/locale.d.ts",
+      "size": 8408,
+      "sha256": "694eb67fbe191820f196b73c181ab60648bf9c0b10142485d6f9bfa11ecc1e40"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/markdown-labels.d.ts",
+      "size": 493,
+      "sha256": "6dde73e8b93b8d6531141a9c53408d01889ca1ad41d96cff8838e8c51a415556"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/model/conversation-context.d.ts",
+      "size": 1276,
+      "sha256": "e1cdd0e5be4dc1e92adbe6ced1af3165999cac87a2524fd39357a7cf56c4fb56"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/model/steering-history.d.ts",
+      "size": 1038,
+      "sha256": "06072cbbe8c8dc599529fb4f2ff90b82ce0e2a9f6d7b70740eaa601ece415b42"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/model/tool-call-tree.d.ts",
+      "size": 2076,
+      "sha256": "f369966cef72d18fcbea2749f6c56f969b0f45e825bdb050948e381cb7aa3dd2"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/settings/TranscriptViewRow.d.ts",
+      "size": 1177,
+      "sha256": "010d8abb8d7bb8866bea6c3510f271fe85b3fb0872ae987c777e16cbcfee8dbc"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/stores.d.ts",
+      "size": 1119,
+      "sha256": "05e56f9e2037ff5d52777a198e608ebb71053c2d0312f081fb684685ef64a43e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/client/transcript-view.d.ts",
+      "size": 1015,
+      "sha256": "f9e6d5dd30cee34dc7391003550d4becea30049d156e16cab74aee743eafe004"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/index.d.ts",
+      "size": 450,
+      "sha256": "e98c2d5f122f39bd4328b1299da678c3fe3b5ab3043093d60518a3896ab77219"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/lib/types/invariant.d.ts",
+      "size": 598,
+      "sha256": "586621d57ee4ff6aca7ce05f8a62fd29909638465ba2b9193ac65cf3ad66f42a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/package.json",
+      "size": 4560,
+      "sha256": "dd41e26111d37439a658e03eb637a21c68dc859f2b89f23fcc8758ec5ef1eb17"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/chat-settings.ts",
+      "size": 1220,
+      "sha256": "bf61345eff34b74c5af1d6d020a83bdc5c2c811e41abb93cd6faba59ae4512b0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/apply.ts",
+      "size": 7243,
+      "sha256": "303cab9f91db4bd1c6fe999f0bf062040b458de67abf48bcd92871f622e618d5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/ApprovalCommand.tsx",
+      "size": 1593,
+      "sha256": "b12d9973dd751be1a3f8df31011655805902b11a891734b974179c31beec28f8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/AssistantMarkdown.module.css",
+      "size": 3001,
+      "sha256": "aeea5023aa29e1c473e05850258c1ceadd7be9feae4bc82a3456eeb621d31209"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/AssistantMarkdown.tsx",
+      "size": 4864,
+      "sha256": "18d8e4d9b1f7a61f0f7f9e6f02245643314f782f4d6563e663640c41e380af99"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/AssistantNodeView.tsx",
+      "size": 1728,
+      "sha256": "315e5112b78a3da86417f55778cf26a204acd0eee984a762dcc87bd900f2e718"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/ChatNodeSeat.tsx",
+      "size": 9087,
+      "sha256": "fe3910addd2493d1fd9e4e31fc149fc25d5cc54bee1b5ad4d43b6bd24cee65d8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/ChatView.module.css",
+      "size": 6546,
+      "sha256": "b406cda576ee89c8be8894c4f429ef9d6008ab236849284eaa5563f06a4f248b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/ChatView.tsx",
+      "size": 30617,
+      "sha256": "5be2a09c23f2b223330b51fbc9fab3ebe2a15d8cff6a7c20d68d72c728867e0a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/CommandNodeView.tsx",
+      "size": 1475,
+      "sha256": "d6a6139993ef23d1d85a9457e64936f5522e86a72c2581203904a812a17b6dde"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/CompactionCommandCard.tsx",
+      "size": 1024,
+      "sha256": "4dc3650ef3abfc42350868f16f90ea1d668ac534a23bab9ffff52d0845716cbd"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/CompactionItem.tsx",
+      "size": 2894,
+      "sha256": "6db77d2baa83d06e271b9962b2fd5326bf397efa1f89b9f8538d8d9e4cb98549"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/ContextBody.module.css",
+      "size": 2769,
+      "sha256": "b3838bf9cf38af53b31fd6333b4766ad063024d9a59cd636a38e3e0e07d7bf61"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/ContextBody.tsx",
+      "size": 23194,
+      "sha256": "4f5f29eb0bee911a017f5f25647f1a8806d7ecdbe581250639d52ed57f87282d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/ContextInjectionRow.module.css",
+      "size": 1792,
+      "sha256": "233b9e4d400343d4aadd91b6977fd9108c020168916acdf4996adf8774eb791f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/ContextInjectionRow.tsx",
+      "size": 3231,
+      "sha256": "d00c839d17e7fbbc313d09623a281827b9246843cd47ed5855138562d2b95a45"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/GenericCommandCard.module.css",
+      "size": 1654,
+      "sha256": "93f32ad2994c877c4874ac25effc712557e553ca0f8cbbd11548ff0ecc6aa320"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/GenericCommandCard.tsx",
+      "size": 2779,
+      "sha256": "fd58bde0b6426f1ff439524db734e5c703438fb76a9e45d1ddb781df5130869a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/MessageIconActions.module.css",
+      "size": 2608,
+      "sha256": "5dbcb48f1d20775954bb0625eafd6d9727791fb0f583e8c75cc9e7f27f675265"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/MessageIconActions.tsx",
+      "size": 5888,
+      "sha256": "ce84579bdebb5cd2d1c07a25928787bd31a2cdf4cbcff9db5fac6b1cba257bec"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/MessageItem.module.css",
+      "size": 7365,
+      "sha256": "9a1c136d9954580123d5004bd96ae52968e739836a49b8594bd6df333e0beda8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/MessageItem.tsx",
+      "size": 12131,
+      "sha256": "20de6aba14a943548862685fd6b4668df59d47dc010df84bda0ab22e1f9769b5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/ReasoningRow.module.css",
+      "size": 1855,
+      "sha256": "e5156bb5c5a3cccf72e5baebf8b6b9d412e8898fd6889cebfa748c2ea52d7720"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/ReasoningRow.tsx",
+      "size": 2594,
+      "sha256": "57656f5cdf1b3924d365a052ee0b4ad14e8bd18deaf049fe517d20bb089431c5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/StatsLine.module.css",
+      "size": 883,
+      "sha256": "bbb45f3b391b72a5abd2377ac336ae01621fb0ba0d95e4286c68a9da4f98ccb6"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/StatsLine.tsx",
+      "size": 8386,
+      "sha256": "081abf35c2ca85b4adaf19b5babe21b7dc9420d89f935333a135c0c9c63e99bb"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/SystemPromptRow.tsx",
+      "size": 1683,
+      "sha256": "7ff176c14d623384a929f2906c456ce4160338f1aceee6a3101318e634fb89c5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/TurnNavigator.module.css",
+      "size": 5108,
+      "sha256": "fab231e483b4ce4699b005a6b82de84845b59ed9db6a9d9fc8f845c93d7e3085"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/TurnNavigator.tsx",
+      "size": 5936,
+      "sha256": "aeccf562db7ac095c39ba620c3a846a742c03e2f5a41488246d342c655854dc9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/TurnProcessNodeView.module.css",
+      "size": 832,
+      "sha256": "0b4ebfc46b13c335db75c5b242fcd05b4e0e9caa90a41b4eb7b03ce47351396a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/TurnProcessNodeView.tsx",
+      "size": 2064,
+      "sha256": "d397f1e92f76585fa49b924b3d43d829ad503a4ffa821660234d4b51e5cc743f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/TurnTailNodeView.module.css",
+      "size": 185,
+      "sha256": "700e66ff53afe08ccb480da4844a40df1aa0fb28f724007c9fbe3e8bd5bdb709"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/TurnTailNodeView.tsx",
+      "size": 2595,
+      "sha256": "27f4e55b63781ad92d33efe03a0415298cbc2c4a533020d8ad6a05e0d4a3cbbc"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/TurnUsageDisclosure.module.css",
+      "size": 1853,
+      "sha256": "3530c173c5102a3391ac62f0fe86fd2c16329969122abbcd132da0c3058d39e2"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/TurnUsageDisclosure.tsx",
+      "size": 3249,
+      "sha256": "da3de19e2c4ad79cc377d6e34a1adb45f71c9e6dccc0b337a1a8f1cfff1dc141"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/accessibility.module.css",
+      "size": 137,
+      "sha256": "57cfa9a890cb754cbd2cf9ade7d7379873620b7ee86cb8f11f0177065065788d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/message-chrome.ts",
+      "size": 3658,
+      "sha256": "d839c12a538c4ec83e3fcfa12c41d908d8a6185f77fd78e9e5000c6262735610"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/register-node-renderers.ts",
+      "size": 3365,
+      "sha256": "b079162083c866e4c5826e6893ef0b9b4cbbefb4392013369aeed86e19f616cf"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/searchable-hidden.ts",
+      "size": 1047,
+      "sha256": "3892ee496505fc086f33343f9d7b40034dcc966edf3586f2c193cf5e64115055"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/token-format.ts",
+      "size": 3854,
+      "sha256": "143a024cbec7ad51a8e0b15db5ea68a6c994bd584b6530b8ce3fb9c5c9e8646f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/turn-assistant.ts",
+      "size": 371,
+      "sha256": "f510f118673a53b48651cae06b9f44c765192a0e5cb1187e6945096ad36fa9b3"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/use-calendar-day.ts",
+      "size": 975,
+      "sha256": "7add01dcf998cb7b00b85c9f71679f33954c84210beeadb28d371e22410a63f7"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/chat/use-throttled-visual-update.ts",
+      "size": 1345,
+      "sha256": "503b5698497c4d72044fa509a553f6ee50d22f8a0ed01aa7827feb45b263f395"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/contract/assistant-content.ts",
+      "size": 577,
+      "sha256": "9070d0922d58e5304aedcc53a910a4a3352bdddb1a1e4c094c2944137b12f103"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/contract/chat-nodes.ts",
+      "size": 4707,
+      "sha256": "3a302c5b370e9173aa42c29cfeda96a80a078c5d105a6e3e4e2fae45d3637af5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/contract/slots.ts",
+      "size": 8089,
+      "sha256": "ab029b5f4bded4bf9d812b8c050abef2f859657ac69ef81ff909e79852e65f55"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/contract/snapshot.ts",
+      "size": 3872,
+      "sha256": "6176d53c4ca99044af84810640adc05102cd50dfaf0cf67c7e717b3b61e96dea"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/contract/store.ts",
+      "size": 759,
+      "sha256": "6ad4760bdfc49fe7e83260a76d2b83201ab3b86ff18ebf3d4dc20933609c1328"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/contract/turn-metrics.ts",
+      "size": 3759,
+      "sha256": "e9ad6b26b2cc5a0895b6b3a37c3ba201f14e46d4ba1459c2ecddb5035cb210e4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/contract/turn-process.ts",
+      "size": 3673,
+      "sha256": "76225bae37843a5e5c4f77ad269d18c1986adbb6f07b65887d0db272c8e6456c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/conversation-nodes/assistant.ts",
+      "size": 16153,
+      "sha256": "47bacfeb99b9156110523e8c22441963b2b411b3f74fb210460ee4844809b8ee"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/conversation-nodes/chat-snapshot-builder.ts",
+      "size": 27799,
+      "sha256": "047d8e07c05658cbe95a5663a0c72aae87f0b8f6fee8178017f1d2ab64efc6b9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/conversation-nodes/command.ts",
+      "size": 8543,
+      "sha256": "10d4dbb3b636a51f633fda3f4f084dd8dbc4152fec3323b8c7a54e2bb5c27005"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/conversation-nodes/common.ts",
+      "size": 2298,
+      "sha256": "9f9bb2cefd6c6f178a2a419cc21f8086985b8c5f76370f938e6ff77ee57dfba0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/conversation-nodes/compaction.ts",
+      "size": 2617,
+      "sha256": "2e2824b608ab5ca28ddb9a9809c80a8b0f8daaf391420ed1edfc5e04effcc8b7"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/conversation-nodes/event-projection.ts",
+      "size": 6407,
+      "sha256": "33debefbd6c574b33eddcb9996361ce8865516dfab54adeea579142369505b5d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/conversation-nodes/fallback.ts",
+      "size": 1592,
+      "sha256": "affafa60284bb6d0744e1554eea20a040c404afdbc4e45376c109eed521b7fd4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/conversation-nodes/inbox.ts",
+      "size": 2430,
+      "sha256": "7870d65e4b6d12f37d734f4e4da112ffee49ba9fddd654cfe988a2571c30eea1"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/conversation-nodes/message.ts",
+      "size": 3492,
+      "sha256": "1ce300633f4a3efa0319eaf8e0d22d2b5971fde1c332af776976c169b7c634d4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/conversation-nodes/partial.ts",
+      "size": 3653,
+      "sha256": "60de327e4895d03aba98894d100c20b9c6e3d52daf26971274e7e114d2d91281"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/conversation-nodes/register.ts",
+      "size": 1736,
+      "sha256": "16b0c4ab730a6292cb2301a281eedfe5631fbcdd4abad1596857e7857b305548"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/conversation-nodes/request-prompt.ts",
+      "size": 4298,
+      "sha256": "57d33481c736a2c052d275e17f56f9d1fbddcdd15235805a8d75b300a7c4e3f4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/conversation-nodes/retry.ts",
+      "size": 3811,
+      "sha256": "7f193dc40cd764f0730afce1317443cffdc31cc6f2f02717cd12aba966b38f0a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/conversation-nodes/tool.ts",
+      "size": 10630,
+      "sha256": "9f1aecc948dc8921587e51222cef70005c0ed5aa2c2cc1dab977e77bf45a52e9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/conversation-nodes/turn-error.ts",
+      "size": 3513,
+      "sha256": "f96f0c5c849eb58a78129a96f2d0b4483d6fffd70ca37cb192467a4bc55012dc"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/conversation-nodes/turn-max-tokens.ts",
+      "size": 3174,
+      "sha256": "b2e5683a320193daccf2fe7881e220283286d727818f8a4c5a446a36c460868a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/conversation-nodes/turn-navigation.ts",
+      "size": 2763,
+      "sha256": "0cf18c2e85c020f8936b1134e765de174cc6c473d89e641155a9e2bac1f77c51"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/conversation-nodes/turn-process.ts",
+      "size": 10944,
+      "sha256": "8245030df5b0cf814b6796735bcd1baee4cafb63b0a00d07486f7e25b3f5ac90"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/conversation-nodes/turn-tail.ts",
+      "size": 8979,
+      "sha256": "8e61d90b0a3a0db3be3df936bfaa08656342668fa2117deb07d67a68479f8e0e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/details/DetailsPanel.module.css",
+      "size": 1974,
+      "sha256": "7fe3db8056db1cd9e30e92875b0f5034834102952fb92c2fd764b4487c2066c1"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/details/DetailsPanel.tsx",
+      "size": 4804,
+      "sha256": "31315b338b3cec720504b84fbb3b014e5db8bc935a8b79d0aca7c36568a8289e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/details/tool-node-reader.ts",
+      "size": 1176,
+      "sha256": "e19be25dec046feb61451e5c94b1e0947cc9df0530acf4b40aff98a57a9be88f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/index.ts",
+      "size": 3184,
+      "sha256": "1b713a0979fea076df905595135bbf65598f5a3a6bb3865043c7c6b87b2acaab"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/locale.ts",
+      "size": 11131,
+      "sha256": "05bb689c0de48d6f95d4ef49fbc84e8f92bcb6145f1248c797b5003e74920ebc"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/markdown-labels.ts",
+      "size": 560,
+      "sha256": "01002e23c037e69f06d84208583a72657ddfb0daa90db2d3047a6fce2583261d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/model/conversation-context.ts",
+      "size": 1190,
+      "sha256": "b45062708fe7667f89fb3aff0f1fba622a224238713f4d647a1de5f354f54b51"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/model/steering-history.ts",
+      "size": 2307,
+      "sha256": "27b7ea36ab8f69c53dfa3a2b885db2748b44319c458a051fcfafd37828885c8c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/model/tool-call-tree.ts",
+      "size": 7361,
+      "sha256": "1734d65e47eb69ccbc4e9cb821baf0f71177359de4c73f7865e43c104247bfba"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/settings/TranscriptViewRow.module.css",
+      "size": 974,
+      "sha256": "42e03ff9255e7e8624d39beff53a19fc17a650a0bc5e6b35d9e6c4d0f0ce54ad"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/settings/TranscriptViewRow.tsx",
+      "size": 2669,
+      "sha256": "8723aad7c92dabfda79d45cedcbba4fefc2159be0bfd98ce7fe8ec5e24f4c0cf"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/stores.ts",
+      "size": 1810,
+      "sha256": "99d4f93163c7328073c9e42fae5c023b88ed5112bbf518a4b16f461bf197e937"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/client/transcript-view.ts",
+      "size": 1450,
+      "sha256": "0734e94bb9c43a60938b93fd8aeb2e6578454d3991630ce9f57fb87e3cc73868"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/css-modules.d.ts",
+      "size": 123,
+      "sha256": "e28410d74a0d763364c04fa690c2ca2202ad3019c74f8f5205e8dc6cba69c02f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/index.ts",
+      "size": 726,
+      "sha256": "7a57c9c1b39ffa8c7d434e99b5c6accc2b48dd77db6db063eddd06fd0acb4df9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/src/invariant.ts",
+      "size": 877,
+      "sha256": "fc595152fcd7130082ecaabd4418c07c2f17658703a986d0f1ca26cdc4c7e9a7"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/tsconfig.json",
+      "size": 1620,
+      "sha256": "d6b2ed1e8a0535199559f47f8b288198de3b1a0915b4c6c308a0506e248d797a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-chat/tsdown.config.ts",
+      "size": 165,
+      "sha256": "7662b8d94421a743f4e7e08d0a4f45d273f3e775287797ed16eaa7702d8bb26b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/README.md",
+      "size": 5928,
+      "sha256": "ad31d84b601408f76982959338db4947eb3a3c0750b74f2497dcff7ea0003920"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/README.zh.md",
+      "size": 5513,
+      "sha256": "2300e0db0bf1c36488b63429f43c7c58e0301c3120388dea50200f7197518caa"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/lib/client.js",
+      "size": 19777,
+      "sha256": "a22f773681581900974d6cfc651a0b58904d0155de6bf6320c57ae6d68a3c629"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/lib/index.js",
+      "size": 181,
+      "sha256": "be323c589cda4dbb7714df563ebb66f581a3d37ed2ab6859fed85fcebf970aea"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/lib/invariant.js",
+      "size": 1064,
+      "sha256": "762f7a77fc72287e8806411b1b27646a2430462ccb33bd2e5f4753d6a4269fae"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/lib/types/client/SidebarRoot.d.ts",
+      "size": 461,
+      "sha256": "f40f91033032cf0f7ab8554b591d377e48bc34452d9ab2e02fb7b9662a3ead9d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/lib/types/client/contract/slots.d.ts",
+      "size": 5761,
+      "sha256": "f9df42468ce2c41173b01c2a7256445f364746e3c94a4f1341bbd726ced0af9b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/lib/types/client/index.d.ts",
+      "size": 939,
+      "sha256": "2274d30d7225587c315dd96c43652ffd21113852b1e7022135b2596a6cdd01c8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/lib/types/client/locales.d.ts",
+      "size": 752,
+      "sha256": "83544df3702e01824d9d8c379350548b584e9fdf1c797419b8b211089b88ee16"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/lib/types/index.d.ts",
+      "size": 175,
+      "sha256": "c907d47c2d72978e204e064d407b4a25a5d5d5ff768d1a1b00af8d5338c1580f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/lib/types/invariant.d.ts",
+      "size": 703,
+      "sha256": "81846d83523d9551e6081688d239f150811e2335160b81ab044c87ea84762745"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/package.json",
+      "size": 2637,
+      "sha256": "c88e4c67d5f5416cb67d594ce34a503a5e5fde401bf9705bf852763a12e4e6e4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/src/client/SidebarRoot.module.css",
+      "size": 10050,
+      "sha256": "0368d9aca9f327c83a3306808dff4eb869ce5f25a61da4e20a70babcfe677d91"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/src/client/SidebarRoot.tsx",
+      "size": 9325,
+      "sha256": "1267e735c7a4e8c775a850c7f722d5f217a0fd331f084868c3e7567a001c966b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/src/client/contract/slots.ts",
+      "size": 5515,
+      "sha256": "debc2f4b88985dd67a77eab788eaace9b89248d0caaf53dcd1f81f23943d0e91"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/src/client/index.ts",
+      "size": 2945,
+      "sha256": "05b0ba06b7553e4b3a86d79a8ea7cd9bbb7fff0e87a741eaf9152a74ac394613"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/src/client/locales.ts",
+      "size": 850,
+      "sha256": "4b4e6aef90b23830e590175617143499ef2ace22efcae30a24b6c8ea48fddea4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/src/css-modules.d.ts",
+      "size": 123,
+      "sha256": "e28410d74a0d763364c04fa690c2ca2202ad3019c74f8f5205e8dc6cba69c02f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/src/index.ts",
+      "size": 135,
+      "sha256": "5a683e2d5b799d6f7387bb2e1e527d95e5860e077b2030c232f1209092bdd95c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/src/invariant.ts",
+      "size": 1240,
+      "sha256": "fe00e3d164027bd75e8623176ab18804a5051d0c0dd3af258cc9b13cda532619"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/tsconfig.json",
+      "size": 636,
+      "sha256": "3072bb2885f22487b69ea8bdfa8b19de799d01298446ce8611b0b10b81b13a8b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-sidebar/tsdown.config.ts",
+      "size": 168,
+      "sha256": "bd7720ab419e02e4acdb47e7c7a94d9776b8f77ada9e1b15a73df69f4c84ffb5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/README.md",
+      "size": 8383,
+      "sha256": "847713be0f44b30500520100b27b099b2152a58721a5746ff9c25ea469f345d2"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/README.zh.md",
+      "size": 7834,
+      "sha256": "00e089ae580d627f89d92ab375d4ef34705750d2b23ad03140c5ca7ff36961c6"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/lib/client.js",
+      "size": 129246,
+      "sha256": "00f66954909d1a0ee9badcdb36bef56b73459158da1ad3ca230792f2c084b7b0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/lib/index.js",
+      "size": 453,
+      "sha256": "e6cdc4b725585354102a5c4598c9d8c79d6abac62d7979c09919821716370438"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/lib/invariant.js",
+      "size": 1071,
+      "sha256": "476ae409c372076bd7e7981541e01a4a980cbab335d0fcb058184105215b1dc6"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/lib/types/client/WorkspaceBrowser.d.ts",
+      "size": 699,
+      "sha256": "5b57c425b01ac34f6ae6f5ab914311a2003921d3be9991924b1ff140b59768b2"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/lib/types/client/WorkspacePicker.d.ts",
+      "size": 3485,
+      "sha256": "54545517f4959129d726e0d2b187cf1470b07e99c898819964701290f882cf53"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/lib/types/client/contract/slots.d.ts",
+      "size": 9414,
+      "sha256": "9632ff3b41b29a00ebb3c2ffd9c791fe9c8775a9beef080465488b24507d03f8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/lib/types/client/index.d.ts",
+      "size": 2362,
+      "sha256": "07cd8bde92269fa0c3a0fa3a7cd544c48e3abc2252593b4b205786580c00b46d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/lib/types/client/locales.d.ts",
+      "size": 4617,
+      "sha256": "a34c552d48e8fc69141c144d0dff2950d1bda792d22d1b0a0566b0ab5969f437"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/lib/types/client/navigation.d.ts",
+      "size": 3788,
+      "sha256": "4d6b78d6c95762cea716014ab849529e3b7cf850e851290e7fb4d49770965deb"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/lib/types/client/rows/Rows.d.ts",
+      "size": 5033,
+      "sha256": "fa2b8af5a7198f984050d56be90797c5f5e56868b6d795bb8b9809c0d83fd3bb"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/lib/types/client/rows/WorkspaceBrowser.d.ts",
+      "size": 735,
+      "sha256": "39c7844fb02ad5722730b68e99261c857bbb6e392b02288ce2e23b95e9547a98"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/lib/types/client/stores.d.ts",
+      "size": 2481,
+      "sha256": "a013da9b651c5bac5daf1010dc97a8faefad6e85c963e93dbb9be6b39337770c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/lib/types/client/subagent-lineage.d.ts",
+      "size": 867,
+      "sha256": "37f69c71cb6001fcca41437450936474341bb114b163bfa8b7c05bf134a0d54f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/lib/types/client/tree.d.ts",
+      "size": 7237,
+      "sha256": "b1efb0ca4599bfdc436105fce314a0169ae671362732b888fec0e546fd88aa62"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/lib/types/index.d.ts",
+      "size": 452,
+      "sha256": "e8a5b090f2ea3c5f1c1c0cd4cc4e6625f8229d746330f4ab42d3f60842ca002b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/lib/types/invariant.d.ts",
+      "size": 709,
+      "sha256": "f073151f253ea9f2e87f7a0509c52f9a4fc57477849de735cf3dafa63e428e7a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/package.json",
+      "size": 3538,
+      "sha256": "7b651ada5c67cea1b7b7233360316b7922bae86e7f0b7e032c571e31d2be9fac"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/src/client/WorkspacePicker.module.css",
+      "size": 408,
+      "sha256": "8b9252a27e4163be3c9b32b2ec30a750477e83d09b5d2a05af3346b628503db4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/src/client/WorkspacePicker.tsx",
+      "size": 10190,
+      "sha256": "465952b8488857e437739b72585295d28535e3cd7f593c2d02aaf3ad14fcfab5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/src/client/contract/slots.ts",
+      "size": 9286,
+      "sha256": "552881bb2d24a0223e2d83eb8097e232550fbf8c9f5d28707a3b043d6f9309c6"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/src/client/index.ts",
+      "size": 9125,
+      "sha256": "698172eb3fd61eb6ede2d000cc03dcd03a702a01bd5fddc3232f0621badffaa0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/src/client/locales.ts",
+      "size": 6039,
+      "sha256": "cbb870e07e797e57b1a59e81f0fc2a3bf7e8152a31b0dcf1b4b37e48cedfa4e3"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/src/client/navigation.ts",
+      "size": 8561,
+      "sha256": "b1bfbc87ae58c988808f23896b861dac6547ebb5622aee782300e7533f4f57f5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/src/client/rows/Rows.module.css",
+      "size": 6799,
+      "sha256": "a37b4d849e8eeb6c06f8e19cb37002c2d20e9dc0a3cd800bf9ef2894252a5c8e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/src/client/rows/Rows.tsx",
+      "size": 19707,
+      "sha256": "0111fb395acc00f86e490bf54531c638ea7c643b9faeaf1e2fc1aa5ee0658af6"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/src/client/rows/WorkspaceBrowser.module.css",
+      "size": 10742,
+      "sha256": "2ce1fc5b408e602840918adca47e8f6bd4342a5c4baf03a694a41ca274da7541"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/src/client/rows/WorkspaceBrowser.tsx",
+      "size": 59601,
+      "sha256": "bd2d107b46a8a0e3ffb87a27d04ceab0d1205182f1181a781abed36fbf8f454f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/src/client/stores.ts",
+      "size": 3877,
+      "sha256": "e6e8b3c35743098a656086cf2198b99958615b3a2fd9ffa997bded92861fb86a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/src/client/subagent-lineage.ts",
+      "size": 1692,
+      "sha256": "04f76a4e6f7498f97c0447c1a55b85bf8570c6e6631482e3c4294bc44e65aa30"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/src/client/tree.ts",
+      "size": 17761,
+      "sha256": "b77331487c9015190ccc61c7900b20867046cc898ae7aeecbac98608331a6f15"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/src/css-modules.d.ts",
+      "size": 123,
+      "sha256": "e28410d74a0d763364c04fa690c2ca2202ad3019c74f8f5205e8dc6cba69c02f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/src/index.ts",
+      "size": 412,
+      "sha256": "7a4f9356cd158169c0e87d92eee6871ca6b1527851fb905a9c5ab8d9e87cd864"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/src/invariant.ts",
+      "size": 1247,
+      "sha256": "a71023769dbbb8db3fe2a918ea6a7710d9db0f584cf5a1ac4f402f13bffc5335"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/tsconfig.json",
+      "size": 1037,
+      "sha256": "ead0bda158f920c0a97624f1a42c966efdee84656b77c2aed33925d78780baab"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-workspace/tsdown.config.ts",
+      "size": 170,
+      "sha256": "72cc5f60fa88057401e08fb8608e98aec12da4bb3e88239b2e8684ff74164007"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/README.md",
+      "size": 9306,
+      "sha256": "187b3098a21572c5bac2ab4c3e7ac587b022fbacf0c3f8a23ea8460640f46ea9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/README.zh.md",
+      "size": 8629,
+      "sha256": "43e3d8ee4305c756a8d2fba35488e9b9480e8f0b4b3e4a31324086e6dc28ed8a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/client.js",
+      "size": 611788,
+      "sha256": "e06378f3667615180f54860ebd67a2075ca323e72cd85d1afccbcdd6f5a3d51f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/index.js",
+      "size": 1514,
+      "sha256": "eef46c73e65c2fa3c28808b6cf1337aaad60806605b92e7d3d24ab3b5cd02c2a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/invariant.js",
+      "size": 942,
+      "sha256": "69cea730e6f0e482fa62b48218bfa593ba1cf89d15767645534b2b8ce2cea0b9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/apply.d.ts",
+      "size": 677,
+      "sha256": "1d402d832cf7330863f5feb82b2a7219de948ee383c83a6c2fc356381c33f20f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/AssistantMarkdown.d.ts",
+      "size": 1167,
+      "sha256": "241d1a431f31f7d77caa6dbff398fa7ad372207a525c004e48a99642e625d12a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/AssistantNodeView.d.ts",
+      "size": 424,
+      "sha256": "43d214ecb22df6b1b601f0d699adb59ffa74c7b5cd24d577ff80f261504d5c2b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/ChatNodeSeat.d.ts",
+      "size": 1005,
+      "sha256": "8079183f32c167972cc64d7f7cc635368cc7b363ae4e969657dc452762e93a51"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/ChatView.d.ts",
+      "size": 468,
+      "sha256": "b99a8b9b592ed5cee167441a78f9d50c2435a8c465c04a5aba8c0caa2ad3fa16"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/CommandNodeView.d.ts",
+      "size": 790,
+      "sha256": "bed9df90df2bad0829c8bbe76d750c20d891e88ce828357f1cbd10f6865d587b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/CompactionCommandCard.d.ts",
+      "size": 466,
+      "sha256": "c657aaad4fcb8641ade42c629acb9c418f72062760c1619f9dad3559f98ef946"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/CompactionItem.d.ts",
+      "size": 932,
+      "sha256": "b2704cedd51052547b0b16b01a6288a1cf77e124ee52a563e6d126b366f7a658"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/ContextBody.d.ts",
+      "size": 5460,
+      "sha256": "5389e40213b40c867065ece23bf65b73d8f9ae44a33bafe0e52944ec93527ace"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/ContextInjectionRow.d.ts",
+      "size": 1466,
+      "sha256": "1fd594fe5e9b37e281f5cc703304be05a8d009947e6814d7dd8769153607029d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/GenericCommandCard.d.ts",
+      "size": 573,
+      "sha256": "4696825f26380adab1e668f32a348f73c2fa66b9d60a882c1bd539647d880589"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/MessageIconActions.d.ts",
+      "size": 1908,
+      "sha256": "a956d4ab73a2d150c914719a7905c68506b557251e8f9078d10b5161d0706f44"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/MessageItem.d.ts",
+      "size": 2890,
+      "sha256": "fafc90f41f0ee48490ac34b4e31f81ad74fa18f97ec09855580d22134be5e3f5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/ReasoningRow.d.ts",
+      "size": 583,
+      "sha256": "0bff0d0bf0e485d6602ffd0014281039be1736c3afc0556cec1363631b755e57"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/StatsLine.d.ts",
+      "size": 4204,
+      "sha256": "099fd21dc1ada4672fb12fc3baafddab8378d8de6987f23f221aad665754c0e5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/TurnTailNodeView.d.ts",
+      "size": 660,
+      "sha256": "d154c1d6d7f1ef36c88a9434c50dee7523a513155fb0c8f256620e0204f90d5d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/message-chrome.d.ts",
+      "size": 2437,
+      "sha256": "7427635559fa099e21b87c1c0f2d8fe0348cf507d0f92dd324330331efc655db"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/register-node-renderers.d.ts",
+      "size": 311,
+      "sha256": "f808cb70006f0662fef5c6384cfa53455787d361725b0c2904fdbed07690aef7"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/tool-node-reader.d.ts",
+      "size": 907,
+      "sha256": "614cec97835f4851fcf58e74b7ce723f6a384ffa55ea751a80b6d9935696db96"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/turn-assistant.d.ts",
+      "size": 350,
+      "sha256": "daed04f212b7efbfc8269b65ed2a5707b9cb5d66d13f7b3f000d28bb9cea9d77"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/turn-metrics.d.ts",
+      "size": 1775,
+      "sha256": "be1ddd9289cf880e59f7d0a1007bb57a319dcdbdb6e019ca06fce59f83be53bd"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/use-calendar-day.d.ts",
+      "size": 249,
+      "sha256": "8827fc890ffa5f825d2138ca2e194ee7b9c06036420b3d4b3408e6cfb85bde0d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/chat/use-throttled-visual-update.d.ts",
+      "size": 467,
+      "sha256": "0499e518f27b2ff21d6be5e525f65d795276e87f1a13b0ad0932d862445b1f8c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/context-occupancy.d.ts",
+      "size": 643,
+      "sha256": "ab6776563fe682c50340337f01765d5a11ab6beed948f82397d1865ca7f104fd"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/contract/chat-nodes.d.ts",
+      "size": 2950,
+      "sha256": "2f66e300d919fc059321abbda6c6bb28b18738e9d0acc0d165bf09b43a660fa1"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/contract/composer-blocks.d.ts",
+      "size": 1118,
+      "sha256": "90e3954814f00bf946249db9af159dfc787d9009838a32a0d20a3b0bbfd25dbd"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/contract/composer-submission.d.ts",
+      "size": 523,
+      "sha256": "03798c9299612624c87534061987935a1473bad48d2fe1dbb0f024c71233e125"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/contract/context-provenance.d.ts",
+      "size": 1407,
+      "sha256": "58de0179a6f2681399310b26da9ff273d78baa9ea2bbdd719b31b0176a04a449"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/contract/conversation.d.ts",
+      "size": 10722,
+      "sha256": "8374d771808594fe0d0cf0fd1d03636ab3356111e8fcc8553887b422873996a9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/contract/input.d.ts",
+      "size": 18642,
+      "sha256": "50903fc4089b3fa0933210a4292706315738d91ae67fe563727f5b524604dc3a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/contract/queue.d.ts",
+      "size": 620,
+      "sha256": "06e11514e87befa1fb42e597dfae13c51e7a10c598f17f62b7ae60ce09ef2b1d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/contract/records.d.ts",
+      "size": 10855,
+      "sha256": "9ac0b217d4f100655568d8d492b89d3f4b974f6d8016f24e1c8ffa5d1b8f029a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/contract/request-inspection.d.ts",
+      "size": 4903,
+      "sha256": "0485c5e46dca81e56bed5ca8cc72c67fdfe294f7e0e0d794dd5d08b52379623e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/contract/slots.d.ts",
+      "size": 19282,
+      "sha256": "565a970b9419ecbbcf0725c1ae938ce9ba43ee4584d179bd2d39d8099b9f41c6"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/contract/snapshot.d.ts",
+      "size": 1202,
+      "sha256": "ddf263b06e1708d941238a2092cc7a8e51457bfc9b0d8dea37a6c4f902860a06"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/contract/views.d.ts",
+      "size": 1021,
+      "sha256": "48c1c3432fcb6ff24497fdb0432747f8dfba0e4eaedd3a759d8e027cf782284d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation/assembler.d.ts",
+      "size": 4566,
+      "sha256": "2c8c479212d553b72495396ce0f5c957422a15eb20a645d456a27c0ff7d4f42e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation/assembly.d.ts",
+      "size": 4303,
+      "sha256": "cd4da0812065433bb5fce83dd6a57bbc21693a25add69824732e5bf01667a18b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation/definition-registry.d.ts",
+      "size": 1479,
+      "sha256": "ca06f4b70b33950ff130dfedde82858a89e41fd477728120db9d633273179ffd"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation/event-registry.d.ts",
+      "size": 1106,
+      "sha256": "97cd0d02f0f33677a567ed49bc7ade0d15b3658159be36925a21f611e63cdd12"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation/historical-images.d.ts",
+      "size": 2294,
+      "sha256": "8e69b294e7587a3762f0bdc5fd645191cc0b28a2ea3baf253feb3d35f58df487"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation/location-index.d.ts",
+      "size": 3021,
+      "sha256": "4789b5a2c4e16ae77b1766e7355f862951015d88095a91a5c001bfbb4eeb9a31"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation/view-registry.d.ts",
+      "size": 640,
+      "sha256": "72cba14562be2d80b390e80690b10fde6c4d6b953e04aefef5336bdd9356e329"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation-nodes/assistant.d.ts",
+      "size": 1499,
+      "sha256": "f23b637255504ba77e23f4aec4ea09a3de72880a9b6bccfda196fa70c80a3369"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation-nodes/chat-snapshot-builder.d.ts",
+      "size": 1382,
+      "sha256": "e913a0ac01d0a6b42ee877691577b75a3d970d335f580526d1ded659be7f9593"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation-nodes/command.d.ts",
+      "size": 2550,
+      "sha256": "72023a71ce48558ecc14af54f46defbd5d8e853e8044648f89f6affd2b7efead"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation-nodes/common.d.ts",
+      "size": 1923,
+      "sha256": "45e05e2e589348ba94909b437fbf588a4f49ef1f09016227ed72c521e5d1ef4f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation-nodes/compaction.d.ts",
+      "size": 912,
+      "sha256": "3e041a8cc6a4e5e4ee4ce1c15b486995638dce29fddfeab4e766f48fc40958f3"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation-nodes/fallback.d.ts",
+      "size": 767,
+      "sha256": "190261c9d7d5c011a2e89b2d0ac9b7f9e04c7d8eae1c4b654e9d60ae31905cba"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation-nodes/inbox.d.ts",
+      "size": 911,
+      "sha256": "cd31e9e4417c9559c2b8671a91bfa26bdbc9ff29b598946a8ce87ce6f54999f6"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation-nodes/message.d.ts",
+      "size": 1514,
+      "sha256": "65ef9c6a74fd2a2e436797e830ebb0e0513783901da16b91a5f08bb98911b763"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation-nodes/register.d.ts",
+      "size": 307,
+      "sha256": "b241fcf1256fc9e01e3e0639406f2cd86ea4b25321e8f08a118f812042f11b8b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation-nodes/retry.d.ts",
+      "size": 989,
+      "sha256": "08649f68045a702bca26837d9c1543ab81e79e758dfa3022660a9ba9d2398f1b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation-nodes/tool.d.ts",
+      "size": 993,
+      "sha256": "1f8e62889e3cfee28284ed6b6f3575f364bc668da7593b36b40bf5af07fb594b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation-nodes/turn-error.d.ts",
+      "size": 1130,
+      "sha256": "df1d6d6e3c19fc7d63273ec104ccce9d116466ff08758c3c41427d711c4f007e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation-nodes/turn-max-tokens.d.ts",
+      "size": 915,
+      "sha256": "4a0db2592322d5bd5b557fb4bc635c27667a2e3c5b2b127aa043f12c6c0c16d3"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/conversation-nodes/turn-tail.d.ts",
+      "size": 1165,
+      "sha256": "11999fe2c7bfe7c0e23bc18caee66bce2ae6c8ea9de03f8fcc255be2fb12c36e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/image-labels.d.ts",
+      "size": 1128,
+      "sha256": "07d06fb1e23c5bbb82381b19693bfacf8ab1c70eb946317ccce7e44ecb6c506e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/index.d.ts",
+      "size": 4329,
+      "sha256": "89cfc45f3dafa6d7f9511d1828cf27ef8a5dd62575c5d76afc6e357f318ea2f0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/input/blocks.d.ts",
+      "size": 1360,
+      "sha256": "5b7b8fe28a7f9e65fe05a368153186d815ffd6c4f0705a514fdb8b93cece10de"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/input/contract.d.ts",
+      "size": 15864,
+      "sha256": "55f068442d272910272adf5f5d0cb7f760fb774b69497d366332ea18ee28db90"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/input/decorations.d.ts",
+      "size": 1474,
+      "sha256": "2830a98a8d361bbc5cb0f1e6a389c97829672705de5d64e23c40b3275704c8c4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/input/editor/ComposerContentEditable.d.ts",
+      "size": 842,
+      "sha256": "c58017f01c710df481fa7b24eb223195c2f6a2ea67d97cf470d91cf1565f163f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/input/editor/DecoratorPortals.d.ts",
+      "size": 547,
+      "sha256": "9ab58b2481e3884a696e18f9cb86ad7194ee3548b87ab8064943926f21ffce30"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/input/editor/ReferenceChip.d.ts",
+      "size": 789,
+      "sha256": "2c0b6364788dbd39bbd3cb7964bb580081069b5fb790602ed2beb3b908703eec"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/input/editor/chip-node.d.ts",
+      "size": 4748,
+      "sha256": "bd08a690aad13fb5d66051135e15fc6f036a8d7739c42c03f808dc4ccc5e8d75"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/input/editor/claim-decor.d.ts",
+      "size": 1059,
+      "sha256": "189f512aa6fc1709d347b2b636920f314e2f3aaeb0ef243b01df3b70336c8360"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/input/editor/keymap.d.ts",
+      "size": 2152,
+      "sha256": "9894208d7b9f4a9c94082df79afe382a099092bcbbb07469609f3e72c7c54ac7"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/input/editor/projection.d.ts",
+      "size": 4499,
+      "sha256": "287bb6db2e54f7e80c5a89e6d29461abd758c28b6c8e95bddc5f87de7254776d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/input/editor/span-map.d.ts",
+      "size": 1687,
+      "sha256": "400ede21042712d79dc9a962242e249b5434f34917cc844c0ce580e1e30aa8df"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/input/editor/text-ref.d.ts",
+      "size": 3081,
+      "sha256": "eff68dfbb793e767326b2d8be2546fdcfe0b78925984de5804569fc002be7dc2"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/input/facade.d.ts",
+      "size": 15290,
+      "sha256": "ebedbe9cfe755034b7d1e7b7611f41d25f6c58ea20ef212cad486fc2f7677f89"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/input/hub.d.ts",
+      "size": 4379,
+      "sha256": "a47ce8fd10c4dd6b9574db2352c6bd1343c439efea398d55480e55768df62c6d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/input/machine.d.ts",
+      "size": 1998,
+      "sha256": "6be09ccb6b6ada0eb3306d4210c0069cf7cf6859db6e9914e34be4d2a03d7e2e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/input/queue-store.d.ts",
+      "size": 1102,
+      "sha256": "3bb30d8c5dab686991644133b0be500d0d0a1572800411d56e073750a82733d0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/input/submission-policy.d.ts",
+      "size": 2378,
+      "sha256": "1adaa65cea088c76e5efba3615d5e54d52716c879bc9dad6f44d136bcc4e5280"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/locales.d.ts",
+      "size": 9563,
+      "sha256": "7f9b288f8c6873c840a79e76f4a435d9549e4e2aca8dc9c1e76fb88a179e8341"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/queue/QueueDock.d.ts",
+      "size": 1186,
+      "sha256": "800db044bf5798447590ec38c3dd0fcd52dec22c59130a3ad2bb399a6de8a32f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/queue/store.d.ts",
+      "size": 1035,
+      "sha256": "9caa6809a5e0e9442502ad1fbce3323ff0ed3b3172a062c91e632ea5ba679eb4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/reference/ReferenceIcon.d.ts",
+      "size": 686,
+      "sha256": "e58d4515bdc9bd0a302fec3e84caf3c11d844f1b52108b5e1be86f88e6d4bb0d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/service.d.ts",
+      "size": 7888,
+      "sha256": "3b8411d33c3748226889fba51cae677d27b7de8e9602ce627936d59e5ba81f5f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/settings/EnterBehaviorRow.d.ts",
+      "size": 1072,
+      "sha256": "b25c14bf8b8dae51d89bbdc5e08431c92c241d125e0262ac9c11df67295c7c4a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/skeleton/ApprovalPanel.d.ts",
+      "size": 870,
+      "sha256": "da98eee56435619efa45fc70318570729f9194fc2d57aaa65fd0bbf1381f7020"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/skeleton/ComposerCommandAction.d.ts",
+      "size": 406,
+      "sha256": "f6acea5fcc312ccc42a85e007d241ed1744849bb2207557a320ecf86921a1a57"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/skeleton/ContextMeter.d.ts",
+      "size": 788,
+      "sha256": "77c5076b39b47c19fae40db889c64ac67e0e7c5cfb612fcb0b39ee4dcc31fc15"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/skeleton/ConversationRoot.d.ts",
+      "size": 497,
+      "sha256": "d445d3b19b43f6999ca4f15b46a757a132c8af8171c2874248a65d7970414f24"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/skeleton/ConversationSession.d.ts",
+      "size": 1553,
+      "sha256": "d5699b30f5fe82341957a0bb14b4d40e7b7d2dc1517846642d14bcbd4cd8c4e9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/skeleton/DetailsPanel.d.ts",
+      "size": 414,
+      "sha256": "7718d9e7f8d7eeafc2f5d1b9cf572e66966c3808b2ccd22741ad4a19019afec7"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/skeleton/EmptyHero.d.ts",
+      "size": 2554,
+      "sha256": "37521f632a1e37df79b99fcc935b59ccc805ac9cb4a8f8001203d979a8e29b87"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/skeleton/InputBar.d.ts",
+      "size": 1614,
+      "sha256": "b140f707ae75c6a399c226e53a8d92e15e42375b71bd33c38bb2aca8e0e5fa9e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/skeleton/PermissionSelect.d.ts",
+      "size": 756,
+      "sha256": "2bc9816fce88a5e10436993b33a97070700c29114aff41e73de10105d8bd697d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/skeleton/TodoPanel.d.ts",
+      "size": 1072,
+      "sha256": "822fc9f7bfdf3fb5b6ab8be3528c1dac0fe529372033a34bb8ff5c7bb3a01bb5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/skeleton/safari.d.ts",
+      "size": 908,
+      "sha256": "6d6c7dde559be6b6e6e470fe1b10b75001913cdf61de06f3e7cb536bbd582871"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/client/stores.d.ts",
+      "size": 848,
+      "sha256": "51e69e756cab2047043d561043c13a4e124133760b12843c8fc0d8abab3d58e7"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/index.d.ts",
+      "size": 563,
+      "sha256": "3463fb4cf7602c37d2b0763b7541008e60373a8b7b2818055b32fb164dcc02de"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/invariant.d.ts",
+      "size": 718,
+      "sha256": "c0bf35304bd259737ae4ef2931d13ca48f5258263033a967b3b735dcbc25a206"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/lib/types/submission-settings.d.ts",
+      "size": 1263,
+      "sha256": "f7b5e53b48ba416f922217ce9b1ea605705edf2c688816b00cadfabf1cca81e3"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/package.json",
+      "size": 4908,
+      "sha256": "7c5e9f7be84c9385cd2722333c11bff6b04286eebeda305f282c7d364ad6df09"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/apply.ts",
+      "size": 14262,
+      "sha256": "2f750261ee526287d242d59694bb25577365477f15111064084d639f0f295c8f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/context-occupancy.ts",
+      "size": 905,
+      "sha256": "00f785594ab5a5fa75e10d0f9ddad781d49d0d550b8ecac12604010e275a80a8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/contract/composer-blocks.ts",
+      "size": 1031,
+      "sha256": "911770f822c495d3210c595d45ae4b42551aaaa51ff22bb95b060cd1da7cb454"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/contract/composer-submission.ts",
+      "size": 474,
+      "sha256": "fe98da79d5832de1cbc2e5706c5cc0b70c4d9b89442082e9931fc2f8be15ee12"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/contract/context-provenance.ts",
+      "size": 1340,
+      "sha256": "1b74f85bfd450d8e64be8bd7e94a5a3ef5f6d9dfc3a1ebf6a5c2df3a4780a957"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/contract/conversation.ts",
+      "size": 10654,
+      "sha256": "a4070f8e07fa69cea35c55f8048b92c5ad8dac2d641cbf8e94d714f95546359c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/contract/input.ts",
+      "size": 17921,
+      "sha256": "137269ebf2fee45e18ea776e686c2b49dadb903b0660ed46f3fdc6ff75c347e2"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/contract/queue.ts",
+      "size": 584,
+      "sha256": "5eefd3c3f84bb6afd257f9865d110eb62f408901ce47706dd2114e045b8bdfa6"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/contract/records.ts",
+      "size": 10537,
+      "sha256": "734410ef2b954e6ab57b2e19242a19c861c52a3685144aa71ccb7dea692d914e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/contract/request-inspection.ts",
+      "size": 5681,
+      "sha256": "67982c09110ce1bbd7c93f54724205096782208e8da686d3d3e7c1f40e7f3c5a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/contract/slots.ts",
+      "size": 17882,
+      "sha256": "086ea89a114ac6b211637d1d0d260a879594a6970bd16d76542e0b67eddffc7f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/contract/snapshot.ts",
+      "size": 1427,
+      "sha256": "91701b80f55d59b9acddee8a9454746e876ef4779c05b4f9054a5bcadbae515a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/contract/views.ts",
+      "size": 955,
+      "sha256": "c988de1f667043ada70d8d2d7c7cd89751d08ddff9754bdc3810d340b3b971df"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/conversation/assembler.ts",
+      "size": 31376,
+      "sha256": "6acb3d5c0beaa716bc745c07d954f0c1adf437dbecd9b3370acf3b03570c5be8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/conversation/assembly.ts",
+      "size": 10127,
+      "sha256": "30e50a9d47a84c869a17bff589c0eecba56a57b603780a0f2afa55fcbe0e93c3"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/conversation/definition-registry.ts",
+      "size": 2268,
+      "sha256": "af83ece4e166278c5238b30bd19906f8abd1e813c44eb8fe7403be90fe7fa561"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/conversation/event-registry.ts",
+      "size": 2321,
+      "sha256": "95d1672d9720b7294a1389a550493d4ba2b69a804a7d44fc6904e404b8854d76"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/conversation/historical-images.ts",
+      "size": 7287,
+      "sha256": "d1f8fda3948bd123033790ee8555d367bab3aa3b511b02a144989b2bf3dfdda9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/conversation/location-index.ts",
+      "size": 20740,
+      "sha256": "4dd44ef575907bf59d959396d30610ce53d1572c2e66859a9c9ea4fee7c9cf13"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/conversation/view-registry.ts",
+      "size": 823,
+      "sha256": "b65588acd518aa81cf6d96967f160600631257cbd10f87322b5ca1b7cee1d291"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/image-labels.ts",
+      "size": 2344,
+      "sha256": "bf6f3d21de8857e2f12c918e96894c6119b067aea466541694862fb2fcfb6548"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/index.ts",
+      "size": 4313,
+      "sha256": "5bf294fd182a1b42bd9c4515f215261c8ec7d2e0415a5832c9b7384318780867"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/input/blocks.ts",
+      "size": 1825,
+      "sha256": "270ed3eea51aa4e73932e905d2cfabe94d85e8e4f1d0870f3ae7cc08b917126c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/input/decorations.ts",
+      "size": 2546,
+      "sha256": "14f18b6bea325e40733340e06b03da49394c145afcf07a1889907c85b69497d0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/input/editor/ComposerContentEditable.tsx",
+      "size": 1965,
+      "sha256": "1a2a70d24d48b04e13057c40b3cec916c5f3a81c71b8c5a6006b83861b972cd8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/input/editor/DecoratorPortals.tsx",
+      "size": 1502,
+      "sha256": "eff2df39693b18afeb7df6af47c440841b05304178255ea28f1e8359f4230b7f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/input/editor/ReferenceChip.module.css",
+      "size": 909,
+      "sha256": "99c3b628bbd7c24c0a3a380295a32731bc9f3ee74e2bc1c56c5a72b59dbef604"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/input/editor/ReferenceChip.tsx",
+      "size": 1416,
+      "sha256": "23ae4dd959d60c590fc2e40d02475568cd03dc6e9c6d0d49cb64bdf10bfe1ef5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/input/editor/chip-node.tsx",
+      "size": 6588,
+      "sha256": "3d5b0a01d6caccb5e20b2008901ba1b0bac34b3955a2ae0f0a106ffe3148a410"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/input/editor/claim-decor.ts",
+      "size": 2774,
+      "sha256": "22a09b89fcca2ecdca3b5f79e9bb13989d6d051d02d8ea31608ef8dfa749dc2c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/input/editor/composer-editor.module.css",
+      "size": 602,
+      "sha256": "760020990fc0b552568df32a829670399360f2a64200a16fc930b3ca19f94f81"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/input/editor/keymap.ts",
+      "size": 7020,
+      "sha256": "5b0f1a557e10210e0c0972c6dfec820782aadc0638308c238fdbd5b4359b1bea"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/input/editor/projection.ts",
+      "size": 9520,
+      "sha256": "c4d1ba47b3764d24883c099f64bcb7774dd3bb4720275b2fd58a49587f8f2841"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/input/editor/span-map.ts",
+      "size": 5260,
+      "sha256": "b738bbd5d09857e1be6ca9273db3e94ff2d320605df3b662f04c9007c91dd7e7"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/input/editor/text-ref.ts",
+      "size": 4481,
+      "sha256": "b40be00e072b2bb51c56e9f8533271387ee96cc8e2c1c35ca10661db4996b2a2"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/input/facade.ts",
+      "size": 38544,
+      "sha256": "610faf95a5c51435bc4a061983dd16db998fc0879ac166fad41d86ca4a19c25c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/input/hub.ts",
+      "size": 10192,
+      "sha256": "c21bcbcd7cbe1e63d65c790dd50aa360d6a8f78b6e5795b6db65c1b29fca63c5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/input/machine.ts",
+      "size": 9134,
+      "sha256": "cb3cbc9a106f0b67ff38ab42830422f5234aab555bf20000ef5201b25331c9f4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/input/queue-store.ts",
+      "size": 1165,
+      "sha256": "7bd11ce61cff491a7a1f5ff122bcedf90197ba23848f72d359ca1eee64464174"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/input/submission-policy.ts",
+      "size": 3226,
+      "sha256": "b75f74c6db3d7d7be4dd9a467ac8996b40b300ba670c9e01c7183102695015cd"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/locales.ts",
+      "size": 14751,
+      "sha256": "6214dc773c978978171b347fd8dafe787efeca5921a9d574e3684b3a3a8d757a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/queue/QueueDock.module.css",
+      "size": 3982,
+      "sha256": "80d0142dec237c9824c5904f0b5b8b4895281eef7a593f270d55a6f2a7b0df85"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/queue/QueueDock.tsx",
+      "size": 9963,
+      "sha256": "aee5026896cb6101cee3da5b5c1e2508a307ed220e9587b06638167dcb874897"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/service.ts",
+      "size": 17061,
+      "sha256": "4db679971dce6b9faabdda78af450ad401395b376fb03ceca1dee27528235b02"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/settings/EnterBehaviorRow.module.css",
+      "size": 975,
+      "sha256": "73f0c41a6aef04bcc41249025040434d7de470c624f8eb4fd22b4f9b5630573f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/settings/EnterBehaviorRow.tsx",
+      "size": 2600,
+      "sha256": "832f0df7f99049f594cf77de382b8d6fcb3bcd84447effb95239cb1f4b023e74"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/skeleton/ContextMeter.module.css",
+      "size": 2747,
+      "sha256": "234c588e592d0b3ffecfdb14eae377507082f3faa328330d2d9a9c111f0f95d0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/skeleton/ContextMeter.tsx",
+      "size": 7042,
+      "sha256": "3089297d16be5ff1606093770e84d91ca244261ff8685d92d96c59acda61cb45"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/skeleton/ConversationRoot.module.css",
+      "size": 15500,
+      "sha256": "bd1e0619e914870b5db52d9bb785a0e5c94de0a93a6510b7d027d42400008669"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/skeleton/ConversationRoot.tsx",
+      "size": 19194,
+      "sha256": "65f8648a1775911d4e04b67cc790d2365e1a06f842eb4d08970e6fa90f2f6351"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/skeleton/ConversationSession.tsx",
+      "size": 8084,
+      "sha256": "6dfe13eb89508dc595b6c9611a2ede162ea87875e44331c39895f112ae8ae328"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/skeleton/EmptyHero.tsx",
+      "size": 4976,
+      "sha256": "59187af6c3e0a7a2332fd5bfc98c0b91ad3885c1e131b0a30fa492a4051637b5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/skeleton/HeroShell.module.css",
+      "size": 4749,
+      "sha256": "f5978323c9dbafa3536eb6e2bd3c8ac19902de702a8a3df49108bb6ad3f68b06"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/skeleton/InputBar.module.css",
+      "size": 11034,
+      "sha256": "2845aeef4b79d705ecf42b07cd92fe14ee220b2d436e1b0ab8c983e9ccd6a0b5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/skeleton/InputBar.tsx",
+      "size": 28678,
+      "sha256": "66df0d9b0bd1219e47dab991ca95e987c9798e9da354ff3228adbe4c4264b328"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/skeleton/PermissionSelect.module.css",
+      "size": 1900,
+      "sha256": "b91d279f880a3cdb021971e733c9f645fb44abc55d115c39ce01f6871ebf10bc"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/skeleton/PermissionSelect.tsx",
+      "size": 8802,
+      "sha256": "59e91358f15d04f18309d9a31a4af222dcd19ff1bbca61f530c2c7935dff4522"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/skeleton/TodoPanel.module.css",
+      "size": 2911,
+      "sha256": "75dd32c7926297d622cc6a6813c5112aadd02e2d3d293c0206e14be07d99cd24"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/skeleton/TodoPanel.tsx",
+      "size": 6344,
+      "sha256": "1d1e9d87c12b505fc8bc2bdf9973fc349fb80b9385419e0247420ecdb1fc2f4a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/skeleton/safari.ts",
+      "size": 1728,
+      "sha256": "6fa60fb7d6050218d95d5a9944021aaa52d4803ce290cae9f886e01bb6440c61"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/client/stores.ts",
+      "size": 1264,
+      "sha256": "e09b8a8645edf33cd23f992f323c0c7f08890847d6b7d44b9008d77cecffd2e3"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/css-modules.d.ts",
+      "size": 123,
+      "sha256": "e28410d74a0d763364c04fa690c2ca2202ad3019c74f8f5205e8dc6cba69c02f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/index.ts",
+      "size": 877,
+      "sha256": "f2cf8b30ade3ae577df5bfa3a79995aeeebb5762e30a2a1675fad433837d0f7a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/invariant.ts",
+      "size": 1116,
+      "sha256": "4e609c3d9c1a34a738e1bf2d8e3d050c229d9b1c3977eb5dccfe368f32c9d5a9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/src/submission-settings.ts",
+      "size": 1292,
+      "sha256": "3f01ef83124ae33dd54b8f1e057818ea6ba8b971a558209ab7c34344273ae5a3"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/tsconfig.json",
+      "size": 1676,
+      "sha256": "e3c38d3f509e9637fb0429b54a86ff0459af2c4722b5b008a5fd71a98d2a84f6"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-conversation/tsdown.config.ts",
+      "size": 173,
+      "sha256": "ab0def62cb4f2bd3368ea99dccc8f268033f5081991464f741659fb740506f14"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/README.md",
+      "size": 7335,
+      "sha256": "1ffbcbbca06e2f24ab84d7cc9474d4e112e285bb4a9a25beba381cdd20ebe947"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/README.zh.md",
+      "size": 6568,
+      "sha256": "c135d911ca9eae2cfc978fe84132d1720720884acc6deb0ff4b06cc7dc5b849a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/lib/client.js",
+      "size": 84239,
+      "sha256": "03803f8c798c944b4d4d737a8fff03077d386a002c6c526922ffe0e3b2f4491c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/lib/index.js",
+      "size": 422,
+      "sha256": "dce7253b3bbe793a121b969751a25ebcb2d3eef480bd025a1f20a5ac9890b544"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/lib/invariant.js",
+      "size": 987,
+      "sha256": "26c8c5ceecfd6fac5946e7b89f32a7ec8fa6b1a8c606262be6ac3569669eb780"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/lib/types/client/AgentPresetLabel.d.ts",
+      "size": 1900,
+      "sha256": "04dfde52dca981a09e50d9608d9c5e7d40e1c108749927f83045690ca2505264"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/lib/types/client/AgentPresetRow.d.ts",
+      "size": 1669,
+      "sha256": "e3b3bd08830307ce83e666749fa7186b12d299054d3d7afa16a6b97433fec865"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/lib/types/client/AgentPresetSeat.d.ts",
+      "size": 1947,
+      "sha256": "53d338d6a5b2de79ddebd9c775778f5051fc56dbd619eeb18e8ef2a75edbbe7a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/lib/types/client/AgentPresetSection.d.ts",
+      "size": 3010,
+      "sha256": "fb6624d7e5195af01c3a792565c3bfa7db43454ff3297f21928b09bd88ba6beb"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/lib/types/client/PresetMenu.d.ts",
+      "size": 2043,
+      "sha256": "4fa24fbe03ce1d3fb44337e70745f77dadf2a455456c46125d165d1378be5191"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/lib/types/client/index.d.ts",
+      "size": 1735,
+      "sha256": "28c0ce33b57155dfe06808bd4e7087c3ae022055fe600fe75b86645499e63dce"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/lib/types/client/locales.d.ts",
+      "size": 2472,
+      "sha256": "f3dba35ed44832a7324b13d02e33c5267716d18b96096cde6917ced1c9e8c16b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/lib/types/client/seat-store.d.ts",
+      "size": 4353,
+      "sha256": "76fb875b290e5ce6a626fee78d233ebc64e36d647c1fe38c62cd47ab9dfae01a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/lib/types/client/section-store.d.ts",
+      "size": 8109,
+      "sha256": "6120bd371b8b95d500364a14204fab8988bed3d57a7be1c5cdb6125a3136801b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/lib/types/client/session-switch-store.d.ts",
+      "size": 2357,
+      "sha256": "6a4faf5947edd83e28eabc9edfa6f87526631dd61919d6424eb82b9868463b14"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/lib/types/client/settings-store.d.ts",
+      "size": 6806,
+      "sha256": "b05776cb743faa0690e400501ab5034dbc0326203814cdf3e5039d821b76b96b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/lib/types/index.d.ts",
+      "size": 421,
+      "sha256": "49beb1b9da1a1ecf3d57f43c616f9867c94a6a9332f7eafdde1b9f403c6dac91"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/lib/types/invariant.d.ts",
+      "size": 718,
+      "sha256": "584fc26e3f6f9b3c89c4aa8396f8b616cd1d1eea9d6c03b79ac661b0ca1d9748"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/package.json",
+      "size": 3315,
+      "sha256": "504b7ebe83ecfbba72baa382972313b269c80bb796c1f34497c544588863f862"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/src/client/AgentPresetLabel.module.css",
+      "size": 1458,
+      "sha256": "05620c54f85df019513f825cb07b2d38a114dabf5080ec92c7b49e40d7cf2526"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/src/client/AgentPresetLabel.tsx",
+      "size": 4928,
+      "sha256": "04785a301f77698ee6cb940159a36a294f14d1850794816e216c18a53a1cbb3c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/src/client/AgentPresetRow.module.css",
+      "size": 1031,
+      "sha256": "201624dd534365fe0f583eb548ba1e2a4844dc7bd826097c8c7c20277bbaff85"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/src/client/AgentPresetRow.tsx",
+      "size": 3403,
+      "sha256": "2a5ed3faf5e726a04c3e1f8d4bd4e80fe1fb1fbb6398ac7c9e7422c3ec00043c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/src/client/AgentPresetSeat.module.css",
+      "size": 2448,
+      "sha256": "e71c45a5e2d90ef56cf8f1f7c94f4796e1a300fd2c3e2f1c47228fb5c33af228"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/src/client/AgentPresetSeat.tsx",
+      "size": 8805,
+      "sha256": "929df48ef2ab818b37e882ea241ddd7b379f7ce760eb7dbbeb8f25ee15704192"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/src/client/AgentPresetSection.module.css",
+      "size": 10979,
+      "sha256": "cfe6d192863253ccc04035194c0ddeb85045d42b8acbbae49cf96754c690a2fb"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "size": 19876,
+      "sha256": "212928527f9152277e130d89ff5adb1a2ac2ea482a8581e1924035399641e381"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/src/client/PresetMenu.tsx",
+      "size": 3013,
+      "sha256": "064f9d6cdd111c9a71740630ba28c23dd4aa46579d4cd06928f9e7eb292467c7"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/src/client/index.ts",
+      "size": 11095,
+      "sha256": "7e617d14d691bf8ab00b717d78c995fb401075ad59baca81247068a5dcf8d9b8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/src/client/locales.ts",
+      "size": 9274,
+      "sha256": "5658204db920f16fcbbb8ecdc6c6b56c37d64904b516411dca2bb26f3f448c81"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/src/client/seat-store.ts",
+      "size": 7754,
+      "sha256": "33db95d8125b82f9ab5f8915b75a6eaf6895a182a82225ad53a21c5715aa6f4a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/src/client/section-store.ts",
+      "size": 13387,
+      "sha256": "08e14a705232cd6f6f9037fdc71bc5ad028b414405f58c32030047a1438102a2"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/src/client/session-switch-store.ts",
+      "size": 5134,
+      "sha256": "12700ce00eeedad29e63373b344a960ba3b25f9c4eb0b9e2c7e0b1e0cf43d9d1"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/src/client/settings-store.ts",
+      "size": 10356,
+      "sha256": "c482b7303ccd5532ffe018847a01e21b62966625201a0d1097f084bb83554cc2"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/src/css-modules.d.ts",
+      "size": 99,
+      "sha256": "d4395f8ef04ea16601b9b84979df7de5af4ccfeb7b094c510f1442f3d8d5785a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/src/index.ts",
+      "size": 381,
+      "sha256": "aaebafa4968de2822986a600a280cb775a51918ab44804a44c3f75158b951472"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/src/invariant.ts",
+      "size": 1161,
+      "sha256": "52c7ec55fafbe22292d975a04efa5023a41d958264cd6900df25641fd6935bef"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/tsconfig.json",
+      "size": 1002,
+      "sha256": "6954c2738e09ce97f4f476343d17a8e7c1edca32f1cf30f49b2c2068e0c647f8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-agent-preset/tsdown.config.ts",
+      "size": 173,
+      "sha256": "183473debbd94658080ae64992bfac420e1abeac05795c062dc388dcf760bb93"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/README.md",
+      "size": 9256,
+      "sha256": "879674c149edb569993f7ed35ac7f8f11640c7d214a9d41bd5259aaa3809762d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/README.zh.md",
+      "size": 8813,
+      "sha256": "68f8e94701a9230bcf5d7ad6bb444fea8efb9a1587bfc0b9548e89754167448e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/Button.module.css",
+      "size": 1718,
+      "sha256": "4666bf191abc8b6bcfd4e22355bab0c2f04391b85c2e918bd882a37ff68ef2b9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/ConnectionBanner.module.css",
+      "size": 267,
+      "sha256": "17588efc8567f1bf595e339619b9abf90d6129c048c93854ce58f0fa6a6d87fd"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/DiffBlock.module.css",
+      "size": 2590,
+      "sha256": "d15b18565f6b37c97b3e2910a4b57077a487c3effca2d438651c78f492d7b62f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/DisclosureRow.module.css",
+      "size": 2089,
+      "sha256": "40cdcab1f8821760ba2a59ff859b4c4fb894ea373b27083076c0e4f995373712"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/HoverCard.module.css",
+      "size": 1266,
+      "sha256": "4d8fbf2368bd9f232f09422af94bf3527b4c9715445deaae18cf04fc1306475b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/Input.module.css",
+      "size": 691,
+      "sha256": "790195c01e1416a590e0b0353c5beeab1ae510151b2bd580fdea4ddbd4dca399"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/JsonTree.module.css",
+      "size": 4152,
+      "sha256": "7814c49cc5e2bb8970878d7d382b7a912ea81205da2c18973444efa6e9d7fe32"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/Menu.module.css",
+      "size": 5567,
+      "sha256": "1eee2a9fc186c7f872c466781ffda894d14a3f514cbb3cabd1777397e33405b8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/Modal.module.css",
+      "size": 2143,
+      "sha256": "ebfe5549125cb0e1b1d86858e2f1021d0209c25d590a466be9cd5127097a74dc"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/OnboardingSurface.module.css",
+      "size": 593,
+      "sha256": "82c4cd7e345a8e64d2b4817d15823692fa344f3458852207c0863bf3dd414b56"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/Pill.module.css",
+      "size": 568,
+      "sha256": "c1c39eb6adc0e40326f7a33598a32195b388cb9db2627a9c723c009b44a94dab"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/ReadBlock.module.css",
+      "size": 2502,
+      "sha256": "51c238e23bfd3be92fc788b5b19d82cc0c3144ccec4aa644634073e60e077861"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/RiskConfirmation.module.css",
+      "size": 1177,
+      "sha256": "c4c8e339a9f12ebf21c785cd6217898733f8a053f63d5aee936611fcd319ef27"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/SearchBlock.module.css",
+      "size": 2340,
+      "sha256": "52efb46feb6fadaac29ae52b3d2face1c442eb83cbde93d7163b1d15ac0c4be0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/StateDot.module.css",
+      "size": 1559,
+      "sha256": "44b426f2016989477e5e7702f817057f328f6f46428c07ce0deae10dd8fad3b9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/TerminalBlock.module.css",
+      "size": 6743,
+      "sha256": "87d68654a31d61818ca3f74d886b1ff7c9d95bf18b45d12ff748bc65bba1d403"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/Toast.module.css",
+      "size": 1657,
+      "sha256": "4a83ffc86166375559a74e63bc8b016561a69cd92fadb05f82d874f1e8454e66"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/Tooltip.module.css",
+      "size": 1008,
+      "sha256": "6ee070b9ce1c62eaaddaed1e96be8ff6d59eb4e09df708b219cd4ba3f676ca6b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/WebBlock.module.css",
+      "size": 3013,
+      "sha256": "32949d4516c371dcb7b7de6b7e83499a69a0a26ec5fca4784129e220c920c263"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/index.js",
+      "size": 309970,
+      "sha256": "db036e8774628993d440ab4c04aae9a071d0cc52a278f272523ec16f6e0ffc59"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/invariant.js",
+      "size": 1032,
+      "sha256": "564460a0a9b36857d451b88c1ec500865998d753208cdd4d15b1347d548d0c56"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/markdown/CodeBlock.module.css",
+      "size": 2685,
+      "sha256": "0b2eaf99b9f9555c8c4f4c39ec9ffeb73116019902e0035d38ed6e2c370bb3ff"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/markdown/JsonBlock.module.css",
+      "size": 630,
+      "sha256": "4b97662e09b18c7febf0697f566c57444ed9044c4e3f8432e75968ccce7af72e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/markdown/MarkdownText.module.css",
+      "size": 7401,
+      "sha256": "53e494fa25787ce7a702f0a5a786e60df02f898eb5b6c7e823c7cbba0db8cc62"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/markdown/MessageText.module.css",
+      "size": 337,
+      "sha256": "95d227acaec1b949140345184a127bd53a72621af78c39af818bade0ec99e0a0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/BrandWordmark.d.ts",
+      "size": 770,
+      "sha256": "b57a15935fcfda056aa5d1f0758d7fd947268c909379d4696d9412d6a7e1c614"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/Button.d.ts",
+      "size": 840,
+      "sha256": "ee1b5fba4d9b49be6ec278bb49910eb4e0045a8da825aa356cdd6bac318b3312"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/ComputerUseIcon.d.ts",
+      "size": 449,
+      "sha256": "4e02201ffab03e0324b96380b3f254faad934502a4de3db7b0a165369b69647b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/ConnectionBanner.d.ts",
+      "size": 499,
+      "sha256": "5103df9c7b0f992e74bd64a6a0accd08b42bdec5300a5cf6db2318bc42709705"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/DiffBlock.d.ts",
+      "size": 1715,
+      "sha256": "1e100dda38841dca03f3e17f52f838a26b6614ec00903912bc8488d7b623910f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/DisclosureRow.d.ts",
+      "size": 1365,
+      "sha256": "b5aaef22c5e2780ef8c8dbee6b75467281003da8849f4f04237b0147a928a93e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/FishLogo.d.ts",
+      "size": 446,
+      "sha256": "f80fd5dfe884c80ef615816fd6e81855c9a627c8a8c7dfa403cd55f727708b3d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/FoldToggle.d.ts",
+      "size": 697,
+      "sha256": "59482e793a7a3131780f2b01b99fd213fd4d5388c310588b9b4034745ed974c0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/HoverCard.d.ts",
+      "size": 1189,
+      "sha256": "7bbaf2026ad179120ac1afb78f0b89858007de7f9f262198d6650d21441a670e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/Input.d.ts",
+      "size": 480,
+      "sha256": "aeded30e5830dfa5df230bed1ea940525ff2f2e6587245425ba1595e4d16fbf5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/JsonTree.d.ts",
+      "size": 2019,
+      "sha256": "698e943938f15a0bde82eaa6f866aaa0741b241ecd9d4a121948eaf1029d69c0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/Menu.d.ts",
+      "size": 4305,
+      "sha256": "ef4b0d7c4fdf4b05e04f0a483bbb7098508fe0b034a1b5e484052cee86513d90"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/Modal.d.ts",
+      "size": 1419,
+      "sha256": "a40b3e0e47894f9e10e1d979ca40c62651f8f4754eda1beb603458e7fe12e7e7"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/OnboardingSurface.d.ts",
+      "size": 427,
+      "sha256": "e4dc0735761f506536b999656fb57502237985bdefce9cbef2ca586ce745c892"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/Pill.d.ts",
+      "size": 534,
+      "sha256": "f655291cb61aad6e0820c9b144f18cdf928f0669a25cb3834e2ddf5ed599278d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/ReadBlock.d.ts",
+      "size": 2186,
+      "sha256": "3fd567d4203327389f406f00595fe4658d8ac0e9d685890edfb36e1e83ce1cd9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/ReferenceIcon.d.ts",
+      "size": 686,
+      "sha256": "e58d4515bdc9bd0a302fec3e84caf3c11d844f1b52108b5e1be86f88e6d4bb0d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/RiskConfirmation.d.ts",
+      "size": 807,
+      "sha256": "8b7f0d9ede70207c585889daa9b0f635bf2056d301ab604d513ffca174d305fe"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/SearchBlock.d.ts",
+      "size": 3115,
+      "sha256": "69e8e64d4e1de9c9a510178f57a85c2586314ef91fb12e108d26b5bbcf44ce72"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/StateDot.d.ts",
+      "size": 701,
+      "sha256": "7b5c63f7a221573898db1026cea5a0737a823058c887f0814ceb6ffada554bb6"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/TerminalBlock.d.ts",
+      "size": 2991,
+      "sha256": "0ba46dcb2aee69943627e3542c0b5440b65670e08cafe99df82a6e000dfba203"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/Toast.d.ts",
+      "size": 1688,
+      "sha256": "435df50991e8d3e12e454ad4880b4e0da3cdfaefd0b0cd3e23e528ad205f1e7b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/Tooltip.d.ts",
+      "size": 1798,
+      "sha256": "cbd4389654d4c1a49045aa47aacf677e26b628f2615290dafa22fd67c4c54dfc"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/WebBlock.d.ts",
+      "size": 2689,
+      "sha256": "1ad89d23e7ce1443124dcdbc60c17b929536c2e12e18c630b8ee1d6201e79a70"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/ansi.d.ts",
+      "size": 780,
+      "sha256": "93e8a73b27d3fe48c83446c8d85a0b45a76976a63e0169120d527cb5cbc8f2e4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/clipboard.d.ts",
+      "size": 404,
+      "sha256": "de9419281919828744eb97781e297dbf2af8222a58688448c52339123b190156"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/head-tail-cap.d.ts",
+      "size": 1123,
+      "sha256": "3426674ce41591b391c47d8fe43c64a0f6e112e5bba1add55b75b262ca2ff3f8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/icons/index.d.ts",
+      "size": 12737,
+      "sha256": "225e09265a9e5e8bdb7945d0c1b3764857ebdbd59c5d63b5b805345cc4adc1d6"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/icons/props.d.ts",
+      "size": 424,
+      "sha256": "7bcbcb09b4dbe2d6f72d7c9b06cb5b14833908752f8cf3d2c21f9ab39d48d9a1"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/index.d.ts",
+      "size": 3484,
+      "sha256": "dedbfce7a3c40b613ebd72e7695421f7f59e791e9feede67fb6435ce80ea57c2"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/invariant.d.ts",
+      "size": 712,
+      "sha256": "f07a50f9426612d86361526ee12f0b49ff312fd1b8c25e721e5138d4d2ffdde0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/markdown/CodeBlock.d.ts",
+      "size": 1262,
+      "sha256": "4d366f811a1c714aa16dea13f1baca5fbbd2de7e572cadd588ec96ec182e9da5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/markdown/JsonBlock.d.ts",
+      "size": 415,
+      "sha256": "3830ad817724a014f0014da2d5a6051b888c22d161b36610d2e8851a5bbe9385"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/markdown/MarkdownText.d.ts",
+      "size": 2405,
+      "sha256": "7ffdc62f1a6ab8271cd535dd2df80fa2e922053aa7f1001199dc777a885b12db"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/markdown/MessageText.d.ts",
+      "size": 140,
+      "sha256": "3689cd4f7cd74adb2d402f9e9e5647c7b10ff4377ceb9cd170e5d8796fbb1087"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/markdown/cjkFriendlyStrong.d.ts",
+      "size": 453,
+      "sha256": "0479bc3ba6036ae23364767c46662840a2ddbf88a6649d46842a1e873f7247c5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/markdown/highlight.d.ts",
+      "size": 6823,
+      "sha256": "ad653cc5e3419784af1dd9a64e911bdee18936b0026cdc2189ca7d0dda5facbd"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/markdown/incremental.d.ts",
+      "size": 3459,
+      "sha256": "1b32a5a787bbbb2e2767612e4863a3223239c583b875461478193e4c969b1677"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/markdown/katex.d.ts",
+      "size": 1566,
+      "sha256": "5dc81bddad1b981584a7cf934405b66a3713e36d3717ec39bb314b0b997e421f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/markdown/mathCompatibility.d.ts",
+      "size": 584,
+      "sha256": "1fa6563a699edb7e2febc089d35e19fa0e35797fa3fa09becc13e616d2c7e248"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/markdown/parse.d.ts",
+      "size": 1057,
+      "sha256": "d8dfd2fb0916623b1f1a629a86cf1cdd67e707ba27928caf85120cbdeddc47c5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/markdown/plain-text.d.ts",
+      "size": 1113,
+      "sha256": "6b3e108e0d4de9ba2eb39d1ca66980d2b86d278b8a088c02281b5cb2d6fee703"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/markdown/render.d.ts",
+      "size": 5881,
+      "sha256": "b75268c6b0ae88e7943cbe91e7c49390f06a20233e75be0a90990d6701d6d119"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/pointer-grace.d.ts",
+      "size": 1013,
+      "sha256": "ee12a2e262f9595f52caa9dd07707fe9788bcb2c653fe76fbc566e587f228dbe"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/relative-time.d.ts",
+      "size": 1016,
+      "sha256": "689e094543a3a4086b0be52d1bcd04298af34a8627e58971a02995ac51678750"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/use-copy-feedback.d.ts",
+      "size": 652,
+      "sha256": "bd5da67b7be0a6856d3ac5a3e59d08dc782757e9d017acd8005f461695cbc8cc"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/useAnchoredMaxHeight.d.ts",
+      "size": 637,
+      "sha256": "0d173eed3a3bdfc6883915979b6037312300d55869ef6ea1067916dcd32a4330"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/useAnchoredPosition.d.ts",
+      "size": 1608,
+      "sha256": "8203a0a09752f3e30386273251c6735d29849e0c276fbec42a210bd7cebaa4c4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/useDismissOnOutsidePointer.d.ts",
+      "size": 556,
+      "sha256": "561402c51818c8ec1062cec38148986be056c897e37e3b7307258bc28e605d7c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/types/user-text.d.ts",
+      "size": 1051,
+      "sha256": "a9f634a389ea6e51bd869245c88ece158b3293e363eb2ee71e5dd5eee66309a4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/lib/user-text.module.css",
+      "size": 877,
+      "sha256": "dcec262bed66a6cec5a6b8975a44af8168f42b3c6302d3cf9c0874759808e9eb"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/package.json",
+      "size": 1935,
+      "sha256": "5c1e58285221d84615380183a9356189b53e157185bd078b202ebe0b6d9f5424"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/BrandWordmark.tsx",
+      "size": 16327,
+      "sha256": "6ec19148d54d17bc94f5d636f821b14106adf77d5dd243665f07e0eebdcab2fe"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/Button.module.css",
+      "size": 1718,
+      "sha256": "4666bf191abc8b6bcfd4e22355bab0c2f04391b85c2e918bd882a37ff68ef2b9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/Button.tsx",
+      "size": 1190,
+      "sha256": "5f1db06042fa372c45d777feffaab3b1d0c9395a89fa00b735bd9cbc8a389371"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/ConnectionBanner.module.css",
+      "size": 267,
+      "sha256": "17588efc8567f1bf595e339619b9abf90d6129c048c93854ce58f0fa6a6d87fd"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/ConnectionBanner.tsx",
+      "size": 539,
+      "sha256": "a93667d97877caa91c916003a80fb5244906455177c3fd6c66cd142b083b455d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/DiffBlock.module.css",
+      "size": 2590,
+      "sha256": "d15b18565f6b37c97b3e2910a4b57077a487c3effca2d438651c78f492d7b62f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/DiffBlock.tsx",
+      "size": 7037,
+      "sha256": "c96e7b7b039bb2fe00509b2e0f1838be2523b096590a925534c6a8df2fee2104"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/DisclosureRow.module.css",
+      "size": 2089,
+      "sha256": "40cdcab1f8821760ba2a59ff859b4c4fb894ea373b27083076c0e4f995373712"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/DisclosureRow.tsx",
+      "size": 3256,
+      "sha256": "0c65c0f0f14f9fdaf4dda6aeea6c73bf803c4591d64f53784928aaa559cc9b96"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/FishLogo.tsx",
+      "size": 4067,
+      "sha256": "e25eb7f87e2ea0a2cac0f6c6c49b15809baf8601d84753e5d176b9c9ed800f78"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/FoldToggle.tsx",
+      "size": 866,
+      "sha256": "f848e8c26b75679b2d6c27d08aa7eab844395f408ba29026202bc1ae85334e6a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/HoverCard.module.css",
+      "size": 1266,
+      "sha256": "4d8fbf2368bd9f232f09422af94bf3527b4c9715445deaae18cf04fc1306475b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/HoverCard.tsx",
+      "size": 7657,
+      "sha256": "e4fcb43d12de00d011717b033b496f5f57fb00c297f34e0a2f03206befd03e13"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/Input.module.css",
+      "size": 691,
+      "sha256": "790195c01e1416a590e0b0353c5beeab1ae510151b2bd580fdea4ddbd4dca399"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/Input.tsx",
+      "size": 809,
+      "sha256": "dcb73dad681f3f37975c08ed3aa97922a1f5337548b406806324877a5d398c51"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/JsonTree.module.css",
+      "size": 4152,
+      "sha256": "7814c49cc5e2bb8970878d7d382b7a912ea81205da2c18973444efa6e9d7fe32"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/JsonTree.tsx",
+      "size": 21633,
+      "sha256": "6d8e135712683418244aa6b7313599d2167334c0f947959d614aa9d43d7da710"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/Menu.module.css",
+      "size": 5567,
+      "sha256": "1eee2a9fc186c7f872c466781ffda894d14a3f514cbb3cabd1777397e33405b8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/Menu.tsx",
+      "size": 13198,
+      "sha256": "01f4721581bfb0f130522d3025cacde58bb14f6a6480a9b989bb5926bee2dda6"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/Modal.module.css",
+      "size": 2143,
+      "sha256": "ebfe5549125cb0e1b1d86858e2f1021d0209c25d590a466be9cd5127097a74dc"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/Modal.tsx",
+      "size": 2963,
+      "sha256": "1c2ed7f8b9ef84b892b4f0a69570db2379ecaa07fb46fe71008443e2388a4a53"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/OnboardingSurface.module.css",
+      "size": 593,
+      "sha256": "82c4cd7e345a8e64d2b4817d15823692fa344f3458852207c0863bf3dd414b56"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/OnboardingSurface.tsx",
+      "size": 891,
+      "sha256": "0d062c0d52917f551e20af166aacc8a7454b9ae3674146cd99a0a2720dc99de2"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/Pill.module.css",
+      "size": 568,
+      "sha256": "c1c39eb6adc0e40326f7a33598a32195b388cb9db2627a9c723c009b44a94dab"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/Pill.tsx",
+      "size": 1082,
+      "sha256": "7acf38a1d501cddcdbfcf14b07e9d4d04b45abb25367d596a2f7406c13f6391f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/ReadBlock.module.css",
+      "size": 2502,
+      "sha256": "51c238e23bfd3be92fc788b5b19d82cc0c3144ccec4aa644634073e60e077861"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/ReadBlock.tsx",
+      "size": 5650,
+      "sha256": "ced21fad3b9bff8566a23ae03738525ec07f0b3b07d8b2f9532b3160f434e132"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/ReferenceIcon.tsx",
+      "size": 2041,
+      "sha256": "fd707411d3fb783d410c3377acb61a3cb592c38b3f2958e065c1b76e5088e600"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/RiskConfirmation.module.css",
+      "size": 1177,
+      "sha256": "c4c8e339a9f12ebf21c785cd6217898733f8a053f63d5aee936611fcd319ef27"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "size": 2160,
+      "sha256": "4671735be6dc70b496493f1a8e86da2de344413dea1f58f154185b1fc547d125"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/SearchBlock.module.css",
+      "size": 2340,
+      "sha256": "52efb46feb6fadaac29ae52b3d2face1c442eb83cbde93d7163b1d15ac0c4be0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/SearchBlock.tsx",
+      "size": 11308,
+      "sha256": "e7d3fbd2ee77ab72e4555d3a7bb262b95e1a3021e253feb9c45aa581cb5b36bd"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/StateDot.module.css",
+      "size": 1559,
+      "sha256": "44b426f2016989477e5e7702f817057f328f6f46428c07ce0deae10dd8fad3b9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/StateDot.tsx",
+      "size": 1770,
+      "sha256": "8a1993fa7b49eef2797b1a0ae8105c743c6b7d5a855ef7a5329e579de7e3f5ca"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/TerminalBlock.module.css",
+      "size": 6743,
+      "sha256": "87d68654a31d61818ca3f74d886b1ff7c9d95bf18b45d12ff748bc65bba1d403"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/TerminalBlock.tsx",
+      "size": 11351,
+      "sha256": "2ea38470836213a195b0f59c583148339c34198726240203771dced45c020354"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/Toast.module.css",
+      "size": 1657,
+      "sha256": "4a83ffc86166375559a74e63bc8b016561a69cd92fadb05f82d874f1e8454e66"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/Toast.tsx",
+      "size": 3041,
+      "sha256": "cca7dc4dbffbdbcc38cec374ecaf1d877b64c5447204325f1e13c79e35369d9b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/Tooltip.module.css",
+      "size": 1008,
+      "sha256": "6ee070b9ce1c62eaaddaed1e96be8ff6d59eb4e09df708b219cd4ba3f676ca6b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/Tooltip.tsx",
+      "size": 7414,
+      "sha256": "10f277998fb57f0595fbf7e31a5898cc7e45fd9554033ec17bc863ab7645cde4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/WebBlock.module.css",
+      "size": 3013,
+      "sha256": "32949d4516c371dcb7b7de6b7e83499a69a0a26ec5fca4784129e220c920c263"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/WebBlock.tsx",
+      "size": 7622,
+      "sha256": "b7e3eb23e15f5b8bd904a7e3e0eabb5ba2f8efd277711d79b9975c391a39ec70"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/ansi.ts",
+      "size": 20122,
+      "sha256": "c4cfeb6af5a9631eddb7bc5c6527a892322cee37f142db27e44f284a4eb9fb9b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/clipboard.ts",
+      "size": 1712,
+      "sha256": "f3c5ff3d5ac550adda2366e245d33cf4d91d219bfb8692ef1943866d83748a0f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/css-modules.d.ts",
+      "size": 123,
+      "sha256": "e28410d74a0d763364c04fa690c2ca2202ad3019c74f8f5205e8dc6cba69c02f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/head-tail-cap.ts",
+      "size": 1231,
+      "sha256": "1bede50ddacde225b92dfd8d5cf9621f4e39f7febbfc4363cf3446cab6953eed"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/icons/index.tsx",
+      "size": 116760,
+      "sha256": "e4f8e3ac2ea1081db1150773d0cb72800098c52682fd8e0d0c9b134c708c376a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/icons/props.ts",
+      "size": 377,
+      "sha256": "98d350861746bca58f07d5301a0caff7270035c9331ed5b605e702d7f590f1fb"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/index.ts",
+      "size": 3403,
+      "sha256": "75d2f42e67cf0e960e80fe7f8ee2ee532ea1c9a2093f685bacdb1b881294398d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/invariant.ts",
+      "size": 1169,
+      "sha256": "f606f6d99f93f3eb93bbe9f1834f5067830ef6eb1774d263680a5528ca24e099"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/markdown/CodeBlock.module.css",
+      "size": 2685,
+      "sha256": "0b2eaf99b9f9555c8c4f4c39ec9ffeb73116019902e0035d38ed6e2c370bb3ff"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/markdown/CodeBlock.tsx",
+      "size": 5506,
+      "sha256": "f10ab28bbd53a700ad63c61533884de4248369121b0ef797ef5b6a0e4b9f945e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/markdown/JsonBlock.module.css",
+      "size": 630,
+      "sha256": "4b97662e09b18c7febf0697f566c57444ed9044c4e3f8432e75968ccce7af72e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/markdown/JsonBlock.tsx",
+      "size": 1369,
+      "sha256": "5546bb5eedec61b901370412cc7e8179580227515ba78e645b4ca34aa4e36198"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/markdown/MarkdownText.module.css",
+      "size": 7401,
+      "sha256": "53e494fa25787ce7a702f0a5a786e60df02f898eb5b6c7e823c7cbba0db8cc62"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/markdown/MarkdownText.tsx",
+      "size": 8033,
+      "sha256": "a010144cb093ebcf9b5d1bd1251fdc866f7fefe7fa925d9e2f3f0998930cefe2"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/markdown/MessageText.module.css",
+      "size": 337,
+      "sha256": "95d227acaec1b949140345184a127bd53a72621af78c39af818bade0ec99e0a0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/markdown/MessageText.tsx",
+      "size": 265,
+      "sha256": "3170d64381baaf3f253476beb07b1f783fa49bb32d086969f5dda1515075caea"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/markdown/cjkFriendlyStrong.ts",
+      "size": 2933,
+      "sha256": "bc4adf3183f7d0feea17e3a176e7c4b1db5bdddc29e7fc87261f627ff8a39b53"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/markdown/highlight.ts",
+      "size": 21187,
+      "sha256": "b36ad1539a7ba55c23ff7b15d041b2b3f7848ae0e26438d32cb253f427e5c582"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/markdown/incremental.ts",
+      "size": 5890,
+      "sha256": "2975a332ac74b931a7cb489e2eea28469aa3d9596328d5a474d41379b6c7b640"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/markdown/katex.tsx",
+      "size": 3956,
+      "sha256": "8227e04d29333d2568021ed012143237b457852bce25d82cf394d72b941e74a5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/markdown/mathCompatibility.ts",
+      "size": 11301,
+      "sha256": "5f8cec86fd613fd2f67510e22b0a9d661f4173b3d49fb13fef71b25f4abb652b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/markdown/parse.ts",
+      "size": 1677,
+      "sha256": "6be57559995c4e717d6d704207eb2fec86db9714c2a4bcc5b0c3f6648c8990f0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/markdown/plain-text.ts",
+      "size": 3543,
+      "sha256": "98a63f70ea7d227712915c56de7e9f12fada855d03c2041fcabf9fdcdaf9f878"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/markdown/render.tsx",
+      "size": 24484,
+      "sha256": "f00750c82e7c9a37a87074299c8c5a2cc3a777d4e320702d78544e9550aa4e2a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/pointer-grace.ts",
+      "size": 1534,
+      "sha256": "cba1529e052cf3ea09fd3851990219e2b80d61fa4b3d35da490f28ba9f9965c6"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/relative-time.ts",
+      "size": 1483,
+      "sha256": "a3f20285eb17903464d4b69178046704a0ba7a2618d7cedb532eb6e171bc2c09"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/use-copy-feedback.ts",
+      "size": 1120,
+      "sha256": "14f41a92fe72f87adc4827c2b3c0496657071cd05bbc85435a74e1606c9309f8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/useAnchoredMaxHeight.ts",
+      "size": 1590,
+      "sha256": "f017bd3133a67e7ca0b95aee66d34cac7c95541671b7c082f446f0220b4c5e65"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/useAnchoredPosition.ts",
+      "size": 3626,
+      "sha256": "26ec34ed7433d28c7ae1abc6bee0d2f468ea6bbe067319788e9ef5ed799aacf6"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/useDismissOnOutsidePointer.ts",
+      "size": 1087,
+      "sha256": "ee42494da6a34ea099d24daee25c339bb80a994c4332f396d95fbb90ef3a80bc"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/user-text.module.css",
+      "size": 877,
+      "sha256": "dcec262bed66a6cec5a6b8975a44af8168f42b3c6302d3cf9c0874759808e9eb"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/src/user-text.tsx",
+      "size": 4316,
+      "sha256": "ef0513e60a8bbdc33106b61bf96e65ef5fec36823412d3682bb1cba7984c9719"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/tsconfig.json",
+      "size": 288,
+      "sha256": "7acfbfabe8b2395297f20505ef8de1ea108c470872a3e6d7f4362d2df759d64d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/client/ui-primitives/tsdown.config.ts",
+      "size": 178,
+      "sha256": "5ea26c423ba767a4e91e9a7c6ccde36cbd27a34ba1c9353da60352bfe25b617b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/README.md",
+      "size": 5446,
+      "sha256": "ff4f1c37572e7ca7cbad2a934d72d86ebd8a1dcf6ac83ba0a4a25fc99814f823"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/README.zh.md",
+      "size": 5074,
+      "sha256": "045063de6eeaafa35230b8a60956e275d66f70467f906f2b687121b40de6a879"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/client.js",
+      "size": 112056,
+      "sha256": "c9a90c19d5a411d2f4789696a7e63f8083a4cad7eb430710471af37dcb0d060f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/index.js",
+      "size": 108410,
+      "sha256": "6934fd6efc423398bc2d54eede825606e9019841951d9f353f909c4ea3f0c324"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/invariant.js",
+      "size": 701,
+      "sha256": "e49a763af2a5ed071a1947bdeec693735cbc16821aea5c251cdfff00d63fbd70"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/typert.host.d.ts",
+      "size": 123,
+      "sha256": "5e2d26ee86d0fe170dac8cd3f5854e67bdea334c57f40a5766ace57b8304c17d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/typert.host.js",
+      "size": 139592,
+      "sha256": "05d3bf9743852363a0e561cea6220d3e8340dbca65317413d051a06afe536c6e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/typert.remote-client.d.ts",
+      "size": 5532,
+      "sha256": "43d867e63da6c95620d691742c17c1614c96bc46c8d7de3b1914abeea256e171"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/typert.remote-client.js",
+      "size": 44940,
+      "sha256": "476b0a309a91df06932f136afc050dcc92a55fbe44fa9bdfc87ef4f47b1237ee"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/agent.d.ts",
+      "size": 7776,
+      "sha256": "b3862e0043277342caede537f12b6567f3b5fdc253674007788adb426fe244db"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/agent.js",
+      "size": 24122,
+      "sha256": "101ff91a6aaacb947ad7ac2c21757e90c6e2fc23a238f61b1464f1c8b11f1699"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/catalog.d.ts",
+      "size": 651,
+      "sha256": "4a4a18eabb2c665a4dbf61a6fc2dff09adfc7a8154626984f770b13227b2081d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/catalog.js",
+      "size": 2678,
+      "sha256": "c705b895cf5586c1fec26e1c8707896f7f1ac6e6dd4aaf9b38a3b391d92bfbb1"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/contract/events.d.ts",
+      "size": 2836,
+      "sha256": "5b4501d63ec6b87500119068f689bfa6e8579f00bbc022e1173422ae76f9d9bb"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/contract/events.js",
+      "size": 2970,
+      "sha256": "4f46e2c441e345d41c562eb87ce3350522dc679fbe83982645a281e23427d812"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/contract/result.d.ts",
+      "size": 959,
+      "sha256": "bc23f85a38f2493ec4cb58cd2792bb5150839087e98f80df6e4edbec2f167441"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/contract/result.js",
+      "size": 569,
+      "sha256": "2e9645ea2b3156900c9be9d32465d712a499bf547c3be60cf51dd05dfdcf804f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/contract/session.d.ts",
+      "size": 6808,
+      "sha256": "ffdf3393ffd60f53982498015a6feacedf18df3305aa8590a1091f315a9adae8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/contract/session.js",
+      "size": 46,
+      "sha256": "ee044e5b21c3aea4359782b5fa8259c30c07887c6e9205796a96a8ba23ea7c82"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/contract/sessions.d.ts",
+      "size": 5605,
+      "sha256": "96f003dfac9687e0fd18d2ea8bbe1af341a8fcad2086c59feb40f2b54443680b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/contract/sessions.js",
+      "size": 47,
+      "sha256": "7ac43ca48c0c616c458e7a4984ba4f8abf8a1b30e13181e8a9f79167a7e424e6"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/contract/snapshot.d.ts",
+      "size": 3790,
+      "sha256": "61e23157343dca0797189a6205b9ea7ec08ca421357ca5821e6901e3e6f353a3"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/contract/snapshot.js",
+      "size": 47,
+      "sha256": "85a67be6f1b8b6754888d1d139c6d70b294df5524ff2a539124be37c53c576ac"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/drag-transfer.d.ts",
+      "size": 200,
+      "sha256": "0ec46d68e1d5a5ceda22121f9cbbda7fa61705eee6a7f9ad07f65cff1fd215f6"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/drag-transfer.js",
+      "size": 190,
+      "sha256": "d8396111efc54e62429c8b176c841d6abe35796044d3ea0fd0ce785796910820"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/index.d.ts",
+      "size": 2832,
+      "sha256": "23077faa20a703ad42a8d3edeefd74a2c9d2be15ca705b84e889cc1093d81e6e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/index.js",
+      "size": 2743,
+      "sha256": "9aa130a503d60797c1a2ab58996ded5704ceba21c3088dab5cefb77c90f7640c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/ordered-baseline.d.ts",
+      "size": 648,
+      "sha256": "53af22aa688c5441fa978c17db9f804869d789ebfeb3807c8c67a34ef02ceafe"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/ordered-baseline.js",
+      "size": 1801,
+      "sha256": "0e8b972f2a51a3897d02961212ca43f0f4985680ba6dd5e53991a22ef7350fd7"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/scope.d.ts",
+      "size": 1781,
+      "sha256": "3d61656ca2820c061a2bb8f2ac036c51291c1ea6daff1584380f08131927476e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/scope.js",
+      "size": 2478,
+      "sha256": "978cc02ac65e1dc3ec3231337da31f1e12da7a4ea821fb1680859d6ada6e7883"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/sessions/history-records.d.ts",
+      "size": 1132,
+      "sha256": "9b4ece32b0623dee0567dbdc710421704ff1771aeeaa0030fcc7bbdbd2a3af7e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/sessions/history-records.js",
+      "size": 1168,
+      "sha256": "db787887f0c7e486fed6ebf68d6852971d670ea31dd8c0e48cc3929e1f1215b6"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/sessions/lineage.d.ts",
+      "size": 1987,
+      "sha256": "da518b29729d9811781afb3d1ba4de905f016e2c2e7ecef95c41cdb711ba26ac"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/sessions/lineage.js",
+      "size": 2152,
+      "sha256": "9ae51eefcdd6594af1b24abf70a11469f123b1bddb756d569f8f0a6165c29ec9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/sessions/manager.d.ts",
+      "size": 13317,
+      "sha256": "db82ccf93bd70662967c6b320a28f3f1be4c35be2c2286d4c46997fe27d6c5d3"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/sessions/manager.js",
+      "size": 42853,
+      "sha256": "2a9d327cd4abfab04c5ef711af74e69d9aa7dd7b8acc257ebe233b0ebd20b384"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/sessions/notifier.d.ts",
+      "size": 1429,
+      "sha256": "04f597540995d3077ec63349e961734c6ead736b637b25ac3e195cbc8cdcec7f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/sessions/notifier.js",
+      "size": 3078,
+      "sha256": "fe4983f05f26b4d2efe85747863c38fb4b916e5a79cdaacb7cbe8fdce1c47350"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/sessions/projection-store.d.ts",
+      "size": 5328,
+      "sha256": "5c025d2a2007d4d9727005d6dfeadfdfb8cd43ceb9dc153caeb3766b38f62217"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/sessions/projection-store.js",
+      "size": 5130,
+      "sha256": "0e352a54a6776130fff448e13f8acce6e6ae7c3bcf4893303f225fc26a787030"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/sessions/queue-mirror.d.ts",
+      "size": 998,
+      "sha256": "7c82e9976d51a546b60b231ceac9a9c25133aa444234dcd4df2afc4c93d0ce84"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/sessions/queue-mirror.js",
+      "size": 2073,
+      "sha256": "6ebdd13614ea0d734a5b2e118ac62769e15f97bb66068e4bf2067afcad8745a5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/sessions/remotes.d.ts",
+      "size": 1803,
+      "sha256": "f62cc7ae9f6ca4bd2bf78a28b00c66513af9f710f538d65dd9ce8530660a20b9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/sessions/remotes.js",
+      "size": 286,
+      "sha256": "ef976356c0753ebfc986809b4a314b68df2d35fb39bbe81c40cf0cc2e3133cea"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/sessions/service.d.ts",
+      "size": 17430,
+      "sha256": "f1bfcc9343c06fc8f4d76fa862ae957773528ed7a63b5fb17fd928bf6ae6a424"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/sessions/service.js",
+      "size": 25468,
+      "sha256": "21858fe61293f1fd569213d1992821448f560087457ec702c2466526e82a1cea"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/sessions/session.d.ts",
+      "size": 14522,
+      "sha256": "5e83cd5b3b2b5ce629e181c0ec2c5155d5d25f609449e5556f6574dee5ad2ba4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/sessions/session.js",
+      "size": 31550,
+      "sha256": "f1ffcc64b3d9f79c571b5cc64c1ab6c91a274298ca727ab7adaad63be997d235"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/time-zone.d.ts",
+      "size": 351,
+      "sha256": "7a02109d080d039907772eb41e5624344c9aacf737903a04b05bcba44d6eed6f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/time-zone.js",
+      "size": 564,
+      "sha256": "1fecd399af0e1adebd51e0c06c6792cd4ca8e10aff05b0745463ae914568a460"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/transport.d.ts",
+      "size": 4728,
+      "sha256": "b68c7da80f39cc9a33d0bbe1e31a733024dc2c3d245192b8484868749808bd30"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/transport.js",
+      "size": 4855,
+      "sha256": "5e11b57e9a405c2eee62bbb8f05e98b57b3daf4db8788c4fb1f824961bc2302e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/window-context.d.ts",
+      "size": 1976,
+      "sha256": "96a2e700583311c89ad57ea214d0ecfbaf83b94b014d9c784e5f31b6fd58d70c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/client/window-context.js",
+      "size": 3200,
+      "sha256": "8d85f908765f93b990856af070646965dbf4db116da016c941f54c22ceebec9b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/commands.d.ts",
+      "size": 3994,
+      "sha256": "0d72aa9137bf29706c7abd4a1cde95c7ee1c3be9b53415bf66b5de373e8f4bb5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/commands.js",
+      "size": 26332,
+      "sha256": "c7bf9f3aa37abf9344116b1fa40993bf4e85e3b5ccdcd28f496c77c591162fbd"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/control.d.ts",
+      "size": 925,
+      "sha256": "3ad389b692467fe2570385c2d566d2cbaae5ec1594476a27cdc320f12c4c892a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/control.js",
+      "size": 6782,
+      "sha256": "13299827be24a674243faad3ef5e1fafd903c78175c5cf7f0e76b614700b2be9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/file-references.d.ts",
+      "size": 1353,
+      "sha256": "0f1583202e5df3eb9826fd5275be61daac98a466da014eb8f92e0c043aac8919"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/file-references.js",
+      "size": 4105,
+      "sha256": "e3d8fb568b8f53c48d11ac2134875a0fe225ebed1f83b20b35051303e00d1571"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/history.d.ts",
+      "size": 1634,
+      "sha256": "1e46c54d6b74b37f5f7a32dc354e7cc536016df569c77af2ab371d30e0593662"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/history.js",
+      "size": 15589,
+      "sha256": "9795b06c28ce545cfddccfb150c232d22fc0dd78d3b6b307d1d02e55d365a800"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/index.d.ts",
+      "size": 8883,
+      "sha256": "0f62e15b19e1d5fdfcb3d5090506efd1119089e3b39c3b2faac866c2e5bdbafb"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/index.js",
+      "size": 23997,
+      "sha256": "5c5714abea1d595e9d0a67362bb9a6186cb42147b4904abfefe87322aede2012"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/invariant.d.ts",
+      "size": 526,
+      "sha256": "b515b94b71e259323ee4e497c8242405af7749c57495921f91afc6871a6cb359"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/invariant.js",
+      "size": 705,
+      "sha256": "393727d5747bed28744c3de7edce410f17f5645a108d3f4181fbf2b45f597b09"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/list.d.ts",
+      "size": 2566,
+      "sha256": "881410f2cb9611fcff1e0f61131adf9b6d7571f26a3484932ad01de2664b207c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/list.js",
+      "size": 17986,
+      "sha256": "f6b91217af9f8f270916c5eef58b89cb828b5897f90d23386b777085afbe158a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/model-selection-projection.d.ts",
+      "size": 384,
+      "sha256": "6d5c65c03d355556a43c516dacf62bf6984a7a41d78eb8ea90e0cb2c3ca8ddab"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/model-selection-projection.js",
+      "size": 2544,
+      "sha256": "b299f5d7436dffce6ab0d45197b106ab689cf48ff94ae9a4a11ab902c86400e5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/remote-events.d.ts",
+      "size": 480,
+      "sha256": "8fe3d0456b5b93d17fa18f641870df1702c3398fbc41225e825115d52c5eb75f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/remote-events.js",
+      "size": 312,
+      "sha256": "bbe35cc0c8d4b3ec95a46e57b6b8ef86f62bca853ca215edc3ad719b86860ba2"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/skill-catalog.d.ts",
+      "size": 1518,
+      "sha256": "aeeccbcf1b822e1c8a2e165357680998d4c994c37e7df97b35b9b7ca79f65af9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/skill-catalog.js",
+      "size": 10249,
+      "sha256": "78847f6e0ec114302ab70bfbae0616060e5cfeb3034cbae7c74b5add57b4af9e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/types.d.ts",
+      "size": 20030,
+      "sha256": "93d1a50c3076e399749e64717871da96b66c627b1f152cfb39d05a0288afe59c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/lib/types/types.js",
+      "size": 352,
+      "sha256": "cb92a21416c47f924cce1bec5fe7b259a8a9455d6fbcf28ec69eb2475d0852f5"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/package.json",
+      "size": 5083,
+      "sha256": "69c60c440220b2d981bc0c68e5b5a5608cdbcb139c213078849b6c2167d0e5ef"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/agent.ts",
+      "size": 20961,
+      "sha256": "729bbd3b6b076f9ab966f80cf645282f31c79501efb7036d0af4ef45a935b6ec"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/catalog.ts",
+      "size": 2501,
+      "sha256": "168d5ac01e3b776650253a543ae87874e32a32451c60255edcf283b56038a1e7"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/contract/events.ts",
+      "size": 5158,
+      "sha256": "20d1d91ff8d3f8eb7610406379dae77aea391e4e22cd1838a3cdb64f93f51d21"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/contract/result.ts",
+      "size": 1069,
+      "sha256": "0ff9837186c9533e2a4d81a94371f01186c91a7209d3713ba3bd640532892576"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/contract/session.ts",
+      "size": 6527,
+      "sha256": "53647c5305a8099ee72a8c1236698587123907aa66f2d8e6e49bbed1a03aa2b1"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/contract/sessions.ts",
+      "size": 5303,
+      "sha256": "de6a8992a8e70f07b4b52666c04d431b3aeade3df45cdf617893ee4c88c7bb9c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/contract/snapshot.ts",
+      "size": 3610,
+      "sha256": "c297c191dec30fd06fc4918f82889560329bf0161e871bc8be1e0aa61ac4fb24"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/drag-transfer.ts",
+      "size": 148,
+      "sha256": "495573a86d93e65607714c38c10197a761f638af401f93184708e019c7562619"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/index.ts",
+      "size": 4915,
+      "sha256": "268afc5f78aa945a2a8339636cd42fcfa7a999a4462222cb3c64e1f8f7c48ca1"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/ordered-baseline.ts",
+      "size": 1694,
+      "sha256": "0a7903af3ccce78150fed0d82d1eeab1784da4b434ab8db4f89edb1805678066"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/scope.ts",
+      "size": 3445,
+      "sha256": "1ed5d9c17d3f54a95d5f688b3dc9039ca3bd114b8a7dc68768cacc7a2d21fc11"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/sessions/history-records.ts",
+      "size": 1406,
+      "sha256": "e624982ce01798379bea48c916b2103def6a9352c116f42f7c92b82ff8d34812"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/sessions/lineage.ts",
+      "size": 3508,
+      "sha256": "461a4af7f4a8353cc9b523455781c69a8ee20bd37731712918fe58ff9e41598a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/sessions/manager.ts",
+      "size": 43826,
+      "sha256": "e649342e515c47604e068ef19c19b2046a4efd44dd95adb13e20b024732429c9"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/sessions/notifier.ts",
+      "size": 2848,
+      "sha256": "34a7984f65b30363dde994f60b0b3a775955d4596dc60ab53cc6a043355be74e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/sessions/projection-store.ts",
+      "size": 7986,
+      "sha256": "3147fe4e3ea12a196575502d9554bded4ed3efff13be3fb719ff98965c47bd48"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/sessions/queue-mirror.ts",
+      "size": 2336,
+      "sha256": "17a621019cac6024ff13c2c496d639a1132b3936603ebaf32c68bce4b450cdce"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/sessions/remotes.ts",
+      "size": 1794,
+      "sha256": "8f5d64ad1ef542b4f899b8c8f5f443d39fd6a8ee1ec4fc1aa3738429a81613ad"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/sessions/service.ts",
+      "size": 29987,
+      "sha256": "b1b0a5b61b01903f28ad529b10d7a75f60a632823a736bbb74905c138118dc4e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/sessions/session.ts",
+      "size": 33127,
+      "sha256": "713bd02b4a32d8541781e44ec6243b9602f2ac62a14f9da9a57abcdea8e35ee8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/time-zone.ts",
+      "size": 521,
+      "sha256": "854e6893a62bcb558a5317987a8c5741790e905facdd17fd621e3821b717ea12"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/transport.ts",
+      "size": 7866,
+      "sha256": "76d3ba99c8ef03db165d88568189adb5c226676dac24aa792a45bf3e4a90044e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/client/window-context.ts",
+      "size": 3433,
+      "sha256": "07b3dbfdf6b7055bd6b2b79f287ff0a50268a3321de8f193e9e352f0c5237b79"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/commands.ts",
+      "size": 24066,
+      "sha256": "7433acdafb640d0ec79e924ee30651b10a702fac2565ab32c13ce4dc83a362eb"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/control.ts",
+      "size": 7238,
+      "sha256": "b6e89fe3aab81d7bfbf41aa105a6df051c05291c5d56ccc601d97be947645069"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/file-references.ts",
+      "size": 1520,
+      "sha256": "870a790822334996b731d05901e4dc4b6a8ac6dec431b697b2c95db41739d91b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/history.ts",
+      "size": 12442,
+      "sha256": "2184a700fb724f2be33266a8e19b987eb5dc095cd931ff0710520b2a432f0485"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/index.ts",
+      "size": 14709,
+      "sha256": "2e870e950995c5a61c405cb685dad293be06aa395d9d7e8066b1797caa9c66b4"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/invariant.ts",
+      "size": 865,
+      "sha256": "7e6b1244e0ab51638123de8d52fe55026a3117f9a1478f1d4a62248ac63c4718"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/list.ts",
+      "size": 14849,
+      "sha256": "b8fc780e8095ac80572e265c5b21b9fd3f99e751e610bc223f02386754efc84b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/model-selection-projection.ts",
+      "size": 3063,
+      "sha256": "dfc401247080f930d148effea68cf32c2fae37df2b9d718f387b0a0265c45d00"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/remote-events.ts",
+      "size": 440,
+      "sha256": "e0bd21299d6befdd5fed432a1586dde0e8e8bfe45f06050f2f2765a4470c2959"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/skill-catalog.ts",
+      "size": 4683,
+      "sha256": "348d7cf8633534599927e5647f1d03f4db9b11dc3b222b2fad25690d4839e889"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/src/types.ts",
+      "size": 18868,
+      "sha256": "4f9c2ac8b7ea451a87b258305b38e84a4ea743c5db07cf4b41824368303b05ca"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/tsconfig.client.json",
+      "size": 1045,
+      "sha256": "b16d1d3d465bb214e242151f482a0c3b2d02d9ffa70d06a1d24c968c48292471"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/tsconfig.host.json",
+      "size": 1622,
+      "sha256": "7160372a2d8175c41ed054577263175f1d1176fadfa4f74534972eab1f8cb184"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/tsconfig.json",
+      "size": 122,
+      "sha256": "9ae2773ce422b78211f4ed8c2d4f6adb6737a9d0f33c4c392b1ea01a41bec759"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/api/session-controller/tsdown.config.ts",
+      "size": 213,
+      "sha256": "de97e5abdddf2e60dd4f73a9c7f42a9ca525264ef5ead2a4b8bc53690868bd66"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/README.md",
+      "size": 8744,
+      "sha256": "8d94d3198961eedc32b73e4b3a3686790fca7bc6244425865d7c04f9082c6411"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/README.zh.md",
+      "size": 7815,
+      "sha256": "b9377be591a99ee6bab3927717bbbffc806108d15224bc0dda4f1b3689968579"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/client.js",
+      "size": 35441,
+      "sha256": "8048a62f9b1e8e2abc3e375c69120648b45350083df2dba09ec7c2f8640f96e8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/index.js",
+      "size": 34049,
+      "sha256": "fb163d2bf16e4eb3cb9127b252f886989eda5a46c1e0eab5bd251a59245f0de1"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/invariant.js",
+      "size": 725,
+      "sha256": "bd971354710b9d46acab2ceeb51adb588a6df1209e0911aca31047d697849033"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/types/archive.d.ts",
+      "size": 6501,
+      "sha256": "5a3591098d98be0aeaad7283498628b893d7d6c46715301b620fd791303f534c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/types/client/DeepSeekImportSection.d.ts",
+      "size": 536,
+      "sha256": "0c4b995738e1b5e75df81109c6a5839a811f0686e6e23379229fd0722a164342"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/types/client/Dialog.d.ts",
+      "size": 1295,
+      "sha256": "10a9b8baa9d29e6f95e080493f521cd4a99d82f05c819707e61fb17e97d6cfe0"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/types/client/HeaderAction.d.ts",
+      "size": 487,
+      "sha256": "e72d42bab87a5ddc905ac8bba2548f49729cc0ee1a4a0107dd8ca26e0314aa57"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/types/client/controller.d.ts",
+      "size": 3369,
+      "sha256": "55de6c85de8ac15d8879c0fbeadb3f692f2d258562553e8573c82ce1fee94662"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/types/client/image-export.d.ts",
+      "size": 1841,
+      "sha256": "9776c1cea508162d9543781746ff6bb9658311f08c0b333e7e370a94da146d98"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/types/client/index.d.ts",
+      "size": 1111,
+      "sha256": "a53984f54992f1f4c57bc19397c893473c78b7fe5518d7f7d082cf74a56e2cd6"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/types/client/locales.d.ts",
+      "size": 1528,
+      "sha256": "24b42ca5b523ad9b03f008682c02b928d9aefce1942ed89aac5b8507c2f354e8"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/types/deepseek-import-types.d.ts",
+      "size": 866,
+      "sha256": "767ba7d46a2f2e2aa0f27ceb6a187df83fbaad32ae47fac6259a7f4cc25e270c"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/types/deepseek-import.d.ts",
+      "size": 1782,
+      "sha256": "a7c423541d7b9c329eac8baf2e06ce71022d2010940511d313fa2fd24125f73b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/types/index.d.ts",
+      "size": 1859,
+      "sha256": "4cde3629b34a5a6d22c8a01bf708154ec299fc5044479430b8365065f26d44c7"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/types/invariant.d.ts",
+      "size": 509,
+      "sha256": "2bd9873467e03711471a4fcd55c97276e82b51747c7b824e69c3e3499148fb02"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/package.json",
+      "size": 3848,
+      "sha256": "d93027d3e41b0c8967be119cb51c2c9af1bb4d35bf3b2b183caaa34c295ca70e"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/archive.ts",
+      "size": 18910,
+      "sha256": "23729f1d30dba465d15d51580802d32b791498e57f1fdd3f48b115469f2a7a2a"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/client/DeepSeekImportSection.module.css",
+      "size": 3513,
+      "sha256": "bba3e97287e8c8b5205f866dff5141a3bead275020b4bfebf65ef3f43fc4d703"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/client/DeepSeekImportSection.tsx",
+      "size": 4552,
+      "sha256": "498423e514a2f5d34dadbd24f22927707e1573ec5ef0a82a182e647db34656b7"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/client/Dialog.tsx",
+      "size": 2409,
+      "sha256": "f1caa7c9371d176a891d4661a0376bbf7bcafecde207fc322e9762e307754529"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/client/HeaderAction.module.css",
+      "size": 723,
+      "sha256": "84195a7bb5a0210beae47032d865cf8f35a1edeac193661d2847d6a202819c64"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/client/HeaderAction.tsx",
+      "size": 1793,
+      "sha256": "61805610a1b9b080af09c47b283bfdb1a724b2e4f9ca75de6273b8fb407cdcc1"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/client/controller.ts",
+      "size": 6672,
+      "sha256": "9817aff6c9a2da75aa8058b1f1dfb35e3b49cda924263757b1f069bc773ce9cd"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/client/image-export.ts",
+      "size": 9698,
+      "sha256": "af7acb8f9c9f7ca6d1738dc120487b2e0bc03a8b37e4a7403cdd3c158e4b0510"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/client/index.ts",
+      "size": 5139,
+      "sha256": "e9ceae6df65819b88357b119102d92dec0d5865afc898dfe434d617aae6f0f0d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/client/locales.ts",
+      "size": 2293,
+      "sha256": "95fdb1ff795a55cac3f80762155b0acd19a0fd92b817ec576b29893d79d06142"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/css-modules.d.ts",
+      "size": 123,
+      "sha256": "e28410d74a0d763364c04fa690c2ca2202ad3019c74f8f5205e8dc6cba69c02f"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/deepseek-import-types.ts",
+      "size": 777,
+      "sha256": "aa00e0d19718cb30b016c9f1f784571b220d959ce8fa19ef2f29820fcd30db03"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/deepseek-import.ts",
+      "size": 16890,
+      "sha256": "ca70f590bb5f43b6a497a38b3285e6d0ee3ff75e1b6a995e29e6a00e81ff3e91"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/index.ts",
+      "size": 7795,
+      "sha256": "1352a02e8cc34eac76db73c91c8e080c3c69552965c595e1368e5cbfbf87c99d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/invariant.ts",
+      "size": 896,
+      "sha256": "76ba47422679d5d08433b9cc333b9db8a2378ec04f575fa3068b373c8efda53d"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/tsconfig.client.json",
+      "size": 1097,
+      "sha256": "ef183329d922382eddbd5bc5a2bbcdadb9c7b5dc815ad4d7b68011256133fe53"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/tsconfig.host.json",
+      "size": 795,
+      "sha256": "364c2942ae9f93aee85a142f3b2f448e50602508a71cf5e397b8e9c343d61fda"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/tsconfig.json",
+      "size": 122,
+      "sha256": "9ae2773ce422b78211f4ed8c2d4f6adb6737a9d0f33c4c392b1ea01a41bec759"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/session-query/session-log-export/tsdown.config.ts",
+      "size": 209,
+      "sha256": "6a53d53d1c9387c5a904afdd5d6bbaf940bd2e139e57a27960424dc14cb0f99b"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/preset/agent-presets/presets/chat/agent.cordis.yml",
+      "size": 1000,
+      "sha256": "810f29a77fc3847706e0b81e836a1e3ece1bdac4852138403a1fc5f1390268b2"
+    },
+    {
+      "path": "payload/chat-migration/repository/packages/preset/agent-presets/presets/chat/preset.yml",
+      "size": 119,
+      "sha256": "93000090ead40ac6630fc57abccbea37e080894da610053789fc19ed925b530e"
+    }
+  ],
+  "excludes": [
+    "node_modules",
+    "Git metadata",
+    "tests",
+    "caches",
+    "credentials",
+    "sessions",
+    "conversation history",
+    "user settings"
+  ]
+}

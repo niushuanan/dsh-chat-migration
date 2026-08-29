@@ -1,0 +1,18 @@
+# Internal plain-chat composition. The complete persona is the whole ordinary
+# system prompt and the preset mounts only web search/fetch. This keeps Chat
+# Sessions conversational while still answering questions that need current
+# information, without exposing coding, filesystem, workflow, or delegation.
+
+- id: persona
+  name: '@deepseek-ai/dsh-persona'
+  config:
+    text: >-
+      You are a helpful conversational assistant. Respond naturally, directly, and thoughtfully to the user. You can search and read public web pages when the answer needs current or source-backed information, and should cite the relevant URLs. You cannot access local files, folders, projects, commands, applications, or other external systems. Never imply that you performed actions outside this conversation or beyond the web tools actually available to you.
+    complete: true
+    includeRuntimeContext: false
+
+- id: tool-web
+  name: '@deepseek-ai/dsh-tool-web'
+  config:
+    fetch: true
+    searchTimeoutMs: 60000

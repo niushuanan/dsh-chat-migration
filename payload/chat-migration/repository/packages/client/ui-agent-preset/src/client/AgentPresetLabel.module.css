@@ -1,0 +1,77 @@
+/* Session-header Agent preset switcher. */
+
+.root {
+  display: inline-flex;
+  position: relative;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 220px;
+  min-height: 28px;
+  padding: 3px 2px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--dsh-session-header-action-color, var(--dsw-alias-label-secondary));
+  font-size: var(--dsh-session-header-action-font-size, 12px);
+  font-weight: var(--dsh-session-header-action-font-weight, 400);
+  line-height: var(--dsh-session-header-action-line-height, 18px);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.button:hover:not(:disabled),
+.button:focus-visible:not(:disabled) {
+  color: var(--dsh-session-header-action-hover-color, var(--dsw-alias-label-primary));
+}
+
+.button:disabled {
+  cursor: default;
+  opacity: 0.68;
+}
+
+.name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.icon {
+  flex: none;
+  opacity: 0.7;
+}
+
+.status {
+  flex: none;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--dsw-alias-fill-tsp-secondary);
+  color: var(--dsw-alias-label-tertiary);
+  font-size: 9px;
+  line-height: 16px;
+}
+
+.chevron,
+.chevronOpen {
+  flex: none;
+  transition: transform 120ms ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
