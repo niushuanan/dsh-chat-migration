@@ -566,14 +566,41 @@ function parseDeepSeekExportBytes(bytes, filename = "", contentType = "") {
 	if (selected === void 0) throw new Error("不是有效的 DeepSeek 导出文件：ZIP 中没有 JSON 对话文件");
 	return parseDeepSeekExportJson(strFromU8(selected[1]));
 }
-function importedSessionId(source) {
+function deepSeekImportedSessionId(source) {
 	return SessionId$1(`session-deepseek-${createHash("sha256").update(source).digest("hex").slice(0, 24)}`);
+}
+/** Build the newest-first, write-free conversation picker projection. */
+async function previewDeepSeekHistory(persistence, conversations) {
+	const existing = new Set((await persistence.listSnapshots()).map((snapshot) => String(snapshot.header.id)));
+	const items = conversations.map((conversation) => ({
+		sourceId: conversation.sourceId,
+		title: conversation.title,
+		createdAt: conversation.createdAt,
+		updatedAt: conversation.updatedAt,
+		messageCount: conversation.messages.length,
+		reasoningCount: conversation.messages.filter((message) => message.role === "assistant" && message.reasoning !== void 0).length,
+		imported: existing.has(String(deepSeekImportedSessionId(conversation.sourceId)))
+	})).sort((left, right) => right.updatedAt - left.updatedAt || right.createdAt - left.createdAt || left.sourceId.localeCompare(right.sourceId));
+	const imported = items.filter((item) => item.imported).length;
+	return {
+		total: items.length,
+		available: items.length - imported,
+		imported,
+		conversations: items
+	};
+}
+/** Resolve a browser selection against the freshly reparsed source file. */
+function selectDeepSeekConversations(conversations, sourceIds) {
+	const selected = new Set(sourceIds);
+	const known = new Set(conversations.map((conversation) => conversation.sourceId));
+	if ([...selected].filter((sourceId) => !known.has(sourceId)).length > 0) throw new Error("所选对话与当前导出文件不匹配，请重新选择文件");
+	return conversations.filter((conversation) => selected.has(conversation.sourceId));
 }
 /** Convert one normalized source conversation into standard DSH history events. */
 function buildDeepSeekImportedSession(conversation) {
 	const header = {
 		version: SESSION_FORMAT_VERSION,
-		id: importedSessionId(conversation.sourceId),
+		id: deepSeekImportedSessionId(conversation.sourceId),
 		createdAt: conversation.createdAt,
 		cwd: process.cwd(),
 		agentPreset: "chat"
@@ -747,19 +774,57 @@ function jsonResponse(body, status = 200) {
 		headers: { "cache-control": "no-store" }
 	});
 }
-async function deepSeekImportResponse(ctx, request) {
-	const persistence = ctx.get("sessionPersistence");
-	if (persistence === void 0) return jsonResponse({ error: "当前部署没有启用会话持久化，无法导入历史对话" }, 503);
+function parseSelection(value) {
+	if (value === null) return void 0;
+	if (typeof value !== "string") throw new Error("导入选择无效，请重新选择对话");
+	let decoded;
+	try {
+		decoded = JSON.parse(value);
+	} catch {
+		throw new Error("导入选择无效，请重新选择对话");
+	}
+	if (!Array.isArray(decoded) || decoded.some((item) => typeof item !== "string" || item.trim() === "")) throw new Error("导入选择无效，请重新选择对话");
+	return [...new Set(decoded)];
+}
+async function readDeepSeekImportRequest(request) {
+	const contentType = request.headers.get("content-type") ?? "";
+	if (contentType.toLowerCase().includes("multipart/form-data")) {
+		const form = await request.formData();
+		const file = form.get("file");
+		if (!(file instanceof Blob)) throw new Error("没有找到 DeepSeek 导出文件");
+		const name = Reflect.get(file, "name");
+		const selection = form.has("selection") ? parseSelection(form.get("selection")) : void 0;
+		return {
+			bytes: new Uint8Array(await file.arrayBuffer()),
+			filename: typeof name === "string" ? name : "deepseek-export.json",
+			contentType: file.type,
+			...selection === void 0 ? {} : { selection }
+		};
+	}
 	let filename = request.headers.get("x-dsh-import-filename") ?? "";
 	try {
 		filename = decodeURIComponent(filename);
 	} catch {
 		filename = "";
 	}
+	return {
+		bytes: new Uint8Array(await request.arrayBuffer()),
+		filename,
+		contentType
+	};
+}
+async function deepSeekImportResponse(ctx, request) {
+	const persistence = ctx.get("sessionPersistence");
+	if (persistence === void 0) return jsonResponse({ error: "当前部署没有启用会话持久化，无法导入历史对话" }, 503);
 	try {
-		const conversations = parseDeepSeekExportBytes(new Uint8Array(await request.arrayBuffer()), filename, request.headers.get("content-type") ?? "");
+		const input = await readDeepSeekImportRequest(request);
+		const conversations = parseDeepSeekExportBytes(input.bytes, input.filename, input.contentType);
+		const mode = new URL(request.url).searchParams.get("mode");
+		if (mode === "preview") return jsonResponse(await previewDeepSeekHistory(persistence, conversations));
+		if (mode !== null) throw new Error("无法识别的导入模式");
+		const selected = input.selection === void 0 ? conversations : selectDeepSeekConversations(conversations, input.selection);
 		const projectionCache = ctx.get("sessionProjectionCache");
-		return jsonResponse(await importDeepSeekHistory(persistence, conversations, projectionCache === void 0 ? void 0 : async (imported) => {
+		return jsonResponse(await importDeepSeekHistory(persistence, selected, projectionCache === void 0 ? void 0 : async (imported) => {
 			await projectionCache.write(Session.create(imported.header.id, imported.events, imported.header));
 		}));
 	} catch (error) {
@@ -798,4 +863,4 @@ async function sessionLogExportResponse(ctx, request, compressionLevel) {
 	} });
 }
 //#endregion
-export { Config, DEFAULT_SESSION_LOG_COMPRESSION_LEVEL, SESSION_DEEPSEEK_IMPORT_PATH, SESSION_LOG_EXPORT_PATH, apply, buildDeepSeekImportedSession, flushLiveSessionLog, importDeepSeekHistory, inject, name, parseDeepSeekExportBytes, parseDeepSeekExportJson, sessionLogExportDeps, sessionLogZipEntries, sessionLogZipFilename, streamSessionLogZip };
+export { Config, DEFAULT_SESSION_LOG_COMPRESSION_LEVEL, SESSION_DEEPSEEK_IMPORT_PATH, SESSION_LOG_EXPORT_PATH, apply, buildDeepSeekImportedSession, deepSeekImportedSessionId, flushLiveSessionLog, importDeepSeekHistory, inject, name, parseDeepSeekExportBytes, parseDeepSeekExportJson, previewDeepSeekHistory, selectDeepSeekConversations, sessionLogExportDeps, sessionLogZipEntries, sessionLogZipFilename, streamSessionLogZip };

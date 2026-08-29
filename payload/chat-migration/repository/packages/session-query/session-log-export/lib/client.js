@@ -351,7 +351,7 @@ window.__ModuleLoader__.load({
 		};
 		//#endregion
 		//#region \0dsh-css:/Users/zhuanghongkai/Desktop/迭代DSH/xiaozhuang-dsh/packages/session-query/session-log-export/src/client/DeepSeekImportSection.module.css.mjs
-		const css$1 = ".m1yPEq_root{height:100%;min-height:0;color:var(--dsw-alias-label-primary);flex-direction:column;display:flex}.m1yPEq_header{flex:none;padding:22px 28px 16px}.m1yPEq_header h2{margin:0;font-size:20px;font-weight:650}.m1yPEq_header p{color:var(--dsw-alias-label-secondary);margin:6px 0 0;font-size:13px;line-height:20px}.m1yPEq_body{border-top:1px solid var(--dsw-alias-border-l2);flex-direction:column;flex:1;gap:16px;min-height:0;padding:10px 28px 28px;display:flex;overflow:auto}.m1yPEq_sourceCard{background:var(--dsw-alias-bg-layer-2);border-radius:14px;grid-template-columns:44px minmax(0,1fr) max-content;align-items:center;gap:14px;padding:18px;display:grid}.m1yPEq_sourceIcon{background:var(--dsw-alias-bg-layer-1);width:44px;height:44px;color:var(--dsw-alias-brand-primary);border-radius:12px;justify-content:center;align-items:center;display:flex}.m1yPEq_sourceCopy{flex-direction:column;gap:4px;min-width:0;display:flex}.m1yPEq_sourceCopy strong{font-size:14px;font-weight:620}.m1yPEq_sourceCopy span,.m1yPEq_note{color:var(--dsw-alias-label-secondary);font-size:12px;line-height:18px}.m1yPEq_importButton{background:var(--dsw-alias-label-primary);min-width:108px;height:34px;color:var(--dsw-alias-bg-layer-1);cursor:pointer;font:inherit;border:0;border-radius:9px;padding:0 14px;font-size:12px;font-weight:600}.m1yPEq_importButton:hover:not(:disabled){opacity:.86}.m1yPEq_importButton:disabled{cursor:default;opacity:.52}.m1yPEq_importButton:focus-visible{outline:2px solid color-mix(in srgb, var(--dsw-alias-brand-primary) 35%, transparent);outline-offset:2px}.m1yPEq_fileInput{opacity:0;pointer-events:none;width:1px;height:1px;position:fixed}.m1yPEq_steps{gap:2px;margin:0;padding:0;list-style:none;display:grid}.m1yPEq_steps li{grid-template-columns:28px minmax(0,1fr);gap:10px;padding:10px 4px;display:grid}.m1yPEq_steps li>span{background:var(--dsw-alias-bg-layer-2);width:24px;height:24px;color:var(--dsw-alias-label-secondary);border-radius:50%;justify-content:center;align-items:center;font-size:11px;display:flex}.m1yPEq_steps strong{font-size:13px;font-weight:600}.m1yPEq_steps p{color:var(--dsw-alias-label-secondary);margin:3px 0 0;font-size:12px;line-height:18px}.m1yPEq_fileMeta,.m1yPEq_status,.m1yPEq_error{white-space:pre-wrap;border-radius:9px;align-items:center;gap:8px;padding:10px 12px;font-size:12px;line-height:18px;display:flex}.m1yPEq_fileMeta{background:var(--dsw-alias-bg-layer-2);color:var(--dsw-alias-label-secondary);justify-content:space-between}.m1yPEq_status{background:color-mix(in srgb, var(--dsw-alias-brand-primary) 8%, transparent);color:var(--dsw-alias-label-primary)}.m1yPEq_error{color:#c53b3b;background:#ef444414}.m1yPEq_spinner{border:2px solid color-mix(in srgb, var(--dsw-alias-brand-primary) 20%, transparent);border-top-color:var(--dsw-alias-brand-primary);border-radius:50%;flex:none;width:13px;height:13px;animation:.7s linear infinite m1yPEq_spin}.m1yPEq_note{margin:2px 0 0}@keyframes m1yPEq_spin{to{transform:rotate(360deg)}}@media (width<=720px){.m1yPEq_sourceCard{grid-template-columns:44px minmax(0,1fr)}.m1yPEq_importButton{grid-column:1/-1;width:100%}}";
+		const css$1 = ".m1yPEq_root{height:100%;min-height:0;color:var(--dsw-alias-label-primary);flex-direction:column;display:flex}.m1yPEq_header{flex:none;padding:22px 28px 16px}.m1yPEq_header h2{margin:0;font-size:20px;font-weight:650}.m1yPEq_header p{color:var(--dsw-alias-label-secondary);margin:6px 0 0;font-size:13px;line-height:20px}.m1yPEq_body{border-top:1px solid var(--dsw-alias-border-l2);flex-direction:column;flex:1;gap:14px;min-height:0;padding:14px 28px 28px;display:flex;overflow:auto}.m1yPEq_sourceCard{border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-layer-1);border-radius:14px;grid-template-columns:44px minmax(0,1fr) max-content;align-items:center;gap:14px;padding:16px 18px;display:grid}.m1yPEq_sourceIcon{background:color-mix(in srgb, var(--dsw-alias-brand-primary) 10%, var(--dsw-alias-bg-layer-2));width:44px;height:44px;color:var(--dsw-alias-brand-primary);border-radius:12px;justify-content:center;align-items:center;display:flex}.m1yPEq_sourceCopy{flex-direction:column;gap:4px;min-width:0;display:flex}.m1yPEq_sourceCopy strong{text-overflow:ellipsis;white-space:nowrap;font-size:14px;font-weight:620;overflow:hidden}.m1yPEq_sourceCopy span,.m1yPEq_note{color:var(--dsw-alias-label-secondary);font-size:12px;line-height:18px}.m1yPEq_importButton,.m1yPEq_confirmButton{background:var(--dsw-alias-label-primary);min-width:108px;height:36px;color:var(--dsw-alias-bg-layer-1);cursor:pointer;font:inherit;border:0;border-radius:10px;padding:0 15px;font-size:12px;font-weight:620;transition:opacity .12s,transform .12s}.m1yPEq_importButton:hover:not(:disabled),.m1yPEq_confirmButton:hover:not(:disabled){opacity:.86;transform:translateY(-1px)}.m1yPEq_importButton:disabled,.m1yPEq_confirmButton:disabled{cursor:default;opacity:.46}.m1yPEq_importButton:focus-visible,.m1yPEq_confirmButton:focus-visible,.m1yPEq_textButton:focus-visible{outline:2px solid color-mix(in srgb, var(--dsw-alias-brand-primary) 35%, transparent);outline-offset:2px}.m1yPEq_fileInput{opacity:0;pointer-events:none;width:1px;height:1px;position:fixed}.m1yPEq_steps{gap:2px;margin:0;padding:2px 0;list-style:none;display:grid}.m1yPEq_steps li{grid-template-columns:28px minmax(0,1fr);gap:10px;padding:10px 4px;display:grid}.m1yPEq_steps li>span{background:var(--dsw-alias-bg-layer-2);width:24px;height:24px;color:var(--dsw-alias-label-secondary);border-radius:50%;justify-content:center;align-items:center;font-size:11px;display:flex}.m1yPEq_steps strong{font-size:13px;font-weight:600}.m1yPEq_steps p{color:var(--dsw-alias-label-secondary);margin:3px 0 0;font-size:12px;line-height:18px}.m1yPEq_picker{border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-layer-1);border-radius:16px;flex-direction:column;flex:1;min-height:430px;display:flex;overflow:hidden;box-shadow:0 10px 34px #0000000a}.m1yPEq_pickerHeading{justify-content:space-between;align-items:flex-start;gap:20px;padding:20px 22px 16px;display:flex}.m1yPEq_pickerHeading h3{margin:0;font-size:16px;font-weight:650}.m1yPEq_pickerHeading p{color:var(--dsw-alias-label-secondary);margin:5px 0 0;font-size:12px;line-height:18px}.m1yPEq_summary{flex-wrap:wrap;justify-content:flex-end;gap:6px;display:flex}.m1yPEq_summary span{background:var(--dsw-alias-bg-layer-2);color:var(--dsw-alias-label-secondary);white-space:nowrap;border-radius:999px;padding:5px 9px;font-size:11px}.m1yPEq_summary .m1yPEq_summaryAvailable{background:color-mix(in srgb, var(--dsw-alias-brand-primary) 10%, transparent);color:var(--dsw-alias-brand-primary)}.m1yPEq_toolbar{border-block:1px solid var(--dsw-alias-border-l2);background:color-mix(in srgb, var(--dsw-alias-bg-layer-2) 58%, transparent);align-items:center;gap:10px;padding:10px 14px;display:flex}.m1yPEq_searchBox{border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-layer-1);min-width:180px;max-width:340px;height:34px;color:var(--dsw-alias-label-secondary);border-radius:10px;flex:1;align-items:center;gap:8px;padding:0 11px;display:flex}.m1yPEq_searchBox:focus-within{border-color:color-mix(in srgb, var(--dsw-alias-brand-primary) 55%, var(--dsw-alias-border-l2));box-shadow:0 0 0 3px color-mix(in srgb, var(--dsw-alias-brand-primary) 8%, transparent)}.m1yPEq_searchBox input{min-width:0;color:var(--dsw-alias-label-primary);font:inherit;background:0 0;border:0;outline:0;flex:1;font-size:12px}.m1yPEq_searchBox input::placeholder{color:var(--dsw-alias-label-tertiary,var(--dsw-alias-label-secondary))}.m1yPEq_matchCount{color:var(--dsw-alias-label-secondary);white-space:nowrap;font-size:11px}.m1yPEq_textButton{color:var(--dsw-alias-label-secondary);cursor:pointer;font:inherit;white-space:nowrap;background:0 0;border:0;border-radius:7px;padding:5px 7px;font-size:11px}.m1yPEq_textButton:hover:not(:disabled){background:var(--dsw-alias-bg-layer-2);color:var(--dsw-alias-label-primary)}.m1yPEq_textButton:disabled{cursor:default;opacity:.4}.m1yPEq_conversationList{overscroll-behavior:contain;scrollbar-gutter:stable;flex:1;min-height:220px;padding:6px 10px;overflow:auto}.m1yPEq_conversationRow,.m1yPEq_conversationImported{content-visibility:auto;contain-intrinsic-size:auto 58px;cursor:pointer;border-radius:10px;grid-template-columns:20px minmax(0,1fr) max-content;align-items:center;gap:12px;min-height:58px;padding:8px 10px;display:grid}.m1yPEq_conversationRow:hover{background:var(--dsw-alias-bg-layer-2)}.m1yPEq_conversationImported{color:var(--dsw-alias-label-secondary);cursor:default}.m1yPEq_conversationRow input,.m1yPEq_conversationImported input{opacity:0;width:1px;height:1px;position:absolute}.m1yPEq_checkmark{border:1.5px solid var(--dsw-alias-border-l1,var(--dsw-alias-border-l2));background:var(--dsw-alias-bg-layer-1);border-radius:6px;justify-content:center;align-items:center;width:18px;height:18px;display:flex}.m1yPEq_conversationRow input:checked+.m1yPEq_checkmark{border-color:var(--dsw-alias-brand-primary);background:var(--dsw-alias-brand-primary)}.m1yPEq_conversationRow input:checked+.m1yPEq_checkmark:after{content:\"\";border:0 solid #fff;border-width:0 0 2px 2px;width:7px;height:4px;transform:translateY(-1px)rotate(-45deg)}.m1yPEq_conversationRow input:focus-visible+.m1yPEq_checkmark{outline:2px solid color-mix(in srgb, var(--dsw-alias-brand-primary) 28%, transparent);outline-offset:2px}.m1yPEq_conversationImported .m1yPEq_checkmark{opacity:.45;border-style:dashed}.m1yPEq_conversationCopy{flex-direction:column;gap:4px;min-width:0;display:flex}.m1yPEq_conversationCopy strong{text-overflow:ellipsis;white-space:nowrap;font-size:13px;font-weight:590;overflow:hidden}.m1yPEq_conversationCopy>span{color:var(--dsw-alias-label-secondary);text-overflow:ellipsis;white-space:nowrap;font-size:11px;overflow:hidden}.m1yPEq_importedBadge{background:var(--dsw-alias-bg-layer-2);color:var(--dsw-alias-label-secondary);white-space:nowrap;border-radius:999px;padding:4px 8px;font-size:10px}.m1yPEq_empty{min-height:180px;color:var(--dsw-alias-label-secondary);justify-content:center;align-items:center;font-size:12px;display:flex}.m1yPEq_pickerFooter{border-top:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-layer-1);justify-content:space-between;align-items:center;gap:16px;padding:13px 16px;display:flex;box-shadow:0 -8px 18px #00000005}.m1yPEq_pickerFooter p{color:var(--dsw-alias-label-secondary);margin:0;font-size:12px}.m1yPEq_confirmButton{min-width:126px}.m1yPEq_status,.m1yPEq_error{white-space:pre-wrap;border-radius:9px;align-items:center;gap:8px;padding:10px 12px;font-size:12px;line-height:18px;display:flex}.m1yPEq_status{background:color-mix(in srgb, var(--dsw-alias-brand-primary) 8%, transparent);color:var(--dsw-alias-label-primary)}.m1yPEq_error{color:#c53b3b;background:#ef444414}.m1yPEq_spinner{border:2px solid color-mix(in srgb, var(--dsw-alias-brand-primary) 20%, transparent);border-top-color:var(--dsw-alias-brand-primary);border-radius:50%;flex:none;width:13px;height:13px;animation:.7s linear infinite m1yPEq_spin}.m1yPEq_note{margin:0}@keyframes m1yPEq_spin{to{transform:rotate(360deg)}}@media (width<=760px){.m1yPEq_sourceCard{grid-template-columns:44px minmax(0,1fr)}.m1yPEq_importButton{grid-column:1/-1;width:100%}.m1yPEq_pickerHeading{flex-direction:column}.m1yPEq_summary{justify-content:flex-start}.m1yPEq_toolbar{flex-wrap:wrap}.m1yPEq_searchBox{flex-basis:100%;max-width:none}.m1yPEq_matchCount{margin-right:auto}}";
 		const tagId$1 = "@deepseek-ai/dsh-session-log-export/DeepSeekImportSection.module.css";
 		if (typeof document !== "undefined" && document.querySelector("style[data-plugin-css=" + JSON.stringify(tagId$1) + "]") === null) {
 			const tag = document.createElement("style");
@@ -362,20 +362,36 @@ window.__ModuleLoader__.load({
 		}
 		var DeepSeekImportSection_module_css_default = {
 			"body": "m1yPEq_body",
+			"checkmark": "m1yPEq_checkmark",
+			"confirmButton": "m1yPEq_confirmButton",
+			"conversationCopy": "m1yPEq_conversationCopy",
+			"conversationImported": "m1yPEq_conversationImported",
+			"conversationList": "m1yPEq_conversationList",
+			"conversationRow": "m1yPEq_conversationRow",
+			"empty": "m1yPEq_empty",
 			"error": "m1yPEq_error",
 			"fileInput": "m1yPEq_fileInput",
-			"fileMeta": "m1yPEq_fileMeta",
 			"header": "m1yPEq_header",
 			"importButton": "m1yPEq_importButton",
+			"importedBadge": "m1yPEq_importedBadge",
+			"matchCount": "m1yPEq_matchCount",
 			"note": "m1yPEq_note",
+			"picker": "m1yPEq_picker",
+			"pickerFooter": "m1yPEq_pickerFooter",
+			"pickerHeading": "m1yPEq_pickerHeading",
 			"root": "m1yPEq_root",
+			"searchBox": "m1yPEq_searchBox",
 			"sourceCard": "m1yPEq_sourceCard",
 			"sourceCopy": "m1yPEq_sourceCopy",
 			"sourceIcon": "m1yPEq_sourceIcon",
 			"spin": "m1yPEq_spin",
 			"spinner": "m1yPEq_spinner",
 			"status": "m1yPEq_status",
-			"steps": "m1yPEq_steps"
+			"steps": "m1yPEq_steps",
+			"summary": "m1yPEq_summary",
+			"summaryAvailable": "m1yPEq_summaryAvailable",
+			"textButton": "m1yPEq_textButton",
+			"toolbar": "m1yPEq_toolbar"
 		};
 		//#endregion
 		//#region src/client/DeepSeekImportSection.tsx
@@ -390,47 +406,123 @@ window.__ModuleLoader__.load({
 			if (result.failed > 0) pieces.push(`${result.failed} 个导入失败`);
 			return `${pieces.join("，")}。`;
 		}
-		/** Native Settings page for one-file DeepSeek history migration. */
-		function DeepSeekImportSection({ importFile, refreshSessions }) {
+		const DATE_FORMAT = new Intl.DateTimeFormat("zh-CN", {
+			year: "numeric",
+			month: "short",
+			day: "numeric",
+			hour: "2-digit",
+			minute: "2-digit"
+		});
+		function conversationMeta(item) {
+			const pieces = [DATE_FORMAT.format(item.updatedAt), `${item.messageCount} 条消息`];
+			if (item.reasoningCount > 0) pieces.push(`${item.reasoningCount} 段思考`);
+			return pieces.join(" · ");
+		}
+		/** Native Settings page for previewing and selectively importing DeepSeek history. */
+		function DeepSeekImportSection({ previewFile, importSelection, refreshSessions }) {
 			const input = (0, react.useRef)(null);
-			const [busy, setBusy] = (0, react.useState)(false);
+			const [busy, setBusy] = (0, react.useState)();
 			const [status, setStatus] = (0, react.useState)("");
 			const [error, setError] = (0, react.useState)("");
-			const [selected, setSelected] = (0, react.useState)();
+			const [file, setFile] = (0, react.useState)();
+			const [preview, setPreview] = (0, react.useState)();
+			const [selected, setSelected] = (0, react.useState)(() => /* @__PURE__ */ new Set());
+			const [query, setQuery] = (0, react.useState)("");
 			const choose = (0, react.useCallback)(() => {
 				input.current?.click();
 			}, []);
-			const selectedFile = (0, react.useCallback)(async (file) => {
-				if (file === void 0 || busy) return;
-				setBusy(true);
+			const selectedFile = (0, react.useCallback)(async (nextFile) => {
+				if (nextFile === void 0 || busy !== void 0) return;
+				setBusy("preview");
 				setError("");
-				setSelected({
-					name: file.name,
-					size: file.size
-				});
-				setStatus("正在解析并写入历史对话，请保持页面打开…");
+				setStatus("正在解析对话窗口，不会写入任何记录…");
+				setFile(nextFile);
+				setPreview(void 0);
+				setSelected(/* @__PURE__ */ new Set());
+				setQuery("");
 				try {
-					const result = await importFile(file);
-					await refreshSessions();
-					setStatus(resultLabel(result));
-					if (result.errors.length > 0) setError(result.errors.join("\n"));
+					const nextPreview = await previewFile(nextFile);
+					setPreview(nextPreview);
+					setSelected(new Set(nextPreview.conversations.filter((conversation) => !conversation.imported).map((conversation) => conversation.sourceId)));
+					setStatus("");
 				} catch (caught) {
 					setStatus("");
 					setError(caught instanceof Error ? caught.message : String(caught));
 				} finally {
-					setBusy(false);
+					setBusy(void 0);
+				}
+			}, [busy, previewFile]);
+			const filtered = (0, react.useMemo)(() => {
+				const normalized = query.trim().toLocaleLowerCase("zh-CN");
+				if (preview === void 0 || normalized === "") return preview?.conversations ?? [];
+				return preview.conversations.filter((conversation) => conversation.title.toLocaleLowerCase("zh-CN").includes(normalized));
+			}, [preview, query]);
+			const availableFiltered = (0, react.useMemo)(() => filtered.filter((conversation) => !conversation.imported), [filtered]);
+			const allFilteredSelected = availableFiltered.length > 0 && availableFiltered.every((conversation) => selected.has(conversation.sourceId));
+			const toggle = (0, react.useCallback)((sourceId) => {
+				setSelected((current) => {
+					const next = new Set(current);
+					if (next.has(sourceId)) next.delete(sourceId);
+					else next.add(sourceId);
+					return next;
+				});
+			}, []);
+			const selectFiltered = (0, react.useCallback)(() => {
+				setSelected((current) => {
+					const next = new Set(current);
+					for (const conversation of availableFiltered) next.add(conversation.sourceId);
+					return next;
+				});
+			}, [availableFiltered]);
+			const clearSelection = (0, react.useCallback)(() => {
+				setSelected(/* @__PURE__ */ new Set());
+			}, []);
+			const runImport = (0, react.useCallback)(async () => {
+				if (file === void 0 || preview === void 0 || selected.size === 0 || busy !== void 0) return;
+				const sourceIds = [...selected];
+				setBusy("import");
+				setError("");
+				setStatus(`正在导入所选对话（${sourceIds.length} 个），请保持页面打开…`);
+				try {
+					const result = await importSelection(file, sourceIds);
+					await refreshSessions();
+					setStatus(resultLabel(result));
+					if (result.errors.length > 0) setError(result.errors.join("\n"));
+					if (result.failed === 0) {
+						const imported = new Set(sourceIds);
+						const conversations = preview.conversations.map((conversation) => imported.has(conversation.sourceId) ? {
+							...conversation,
+							imported: true
+						} : conversation);
+						const importedCount = conversations.filter((conversation) => conversation.imported).length;
+						setPreview({
+							total: conversations.length,
+							imported: importedCount,
+							available: conversations.length - importedCount,
+							conversations
+						});
+						setSelected(/* @__PURE__ */ new Set());
+					}
+				} catch (caught) {
+					setStatus("");
+					setError(caught instanceof Error ? caught.message : String(caught));
+				} finally {
+					setBusy(void 0);
 				}
 			}, [
 				busy,
-				importFile,
-				refreshSessions
+				file,
+				importSelection,
+				preview,
+				refreshSessions,
+				selected
 			]);
 			return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("section", {
 				className: DeepSeekImportSection_module_css_default.root,
 				"aria-label": "导入对话",
 				children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("header", {
 					className: DeepSeekImportSection_module_css_default.header,
-					children: /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("h2", { children: "导入对话" }), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", { children: "把 DeepSeek 官方平台导出的历史记录，原生迁移到 DeepSeek Harness。" })] })
+					children: /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("h2", { children: "导入对话" }), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", { children: "先预览 DeepSeek 导出的每个对话窗口，再选择真正需要迁移的内容。" })] })
 				}), /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 					className: DeepSeekImportSection_module_css_default.body,
 					children: [
@@ -444,14 +536,14 @@ window.__ModuleLoader__.load({
 								}),
 								/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 									className: DeepSeekImportSection_module_css_default.sourceCopy,
-									children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("strong", { children: "DeepSeek 历史对话" }), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", { children: "支持官方导出的 JSON，或包含该 JSON 的 ZIP 文件。" })]
+									children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("strong", { children: file?.name ?? "DeepSeek 历史对话" }), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", { children: file === void 0 ? "支持官方导出的 JSON，或包含该 JSON 的 ZIP 文件。" : `${sizeLabel(file.size)} · 文件只在当前导入流程中使用` })]
 								}),
 								/* @__PURE__ */ (0, react_jsx_runtime.jsx)("button", {
 									type: "button",
 									className: DeepSeekImportSection_module_css_default.importButton,
-									disabled: busy,
+									disabled: busy !== void 0,
 									onClick: choose,
-									children: busy ? "正在导入…" : "选择导出文件"
+									children: busy === "preview" ? "正在解析…" : file === void 0 ? "选择导出文件" : "重新选择"
 								}),
 								/* @__PURE__ */ (0, react_jsx_runtime.jsx)("input", {
 									ref: input,
@@ -460,29 +552,129 @@ window.__ModuleLoader__.load({
 									accept: ".json,.zip,application/json,application/zip",
 									"aria-label": "选择 DeepSeek 导出文件",
 									onChange: (event) => {
-										const file = event.currentTarget.files?.[0];
+										const nextFile = event.currentTarget.files?.[0];
 										event.currentTarget.value = "";
-										selectedFile(file);
+										selectedFile(nextFile);
 									}
 								})
 							]
 						}),
-						/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("ol", {
+						preview === void 0 && busy !== "preview" && /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("ol", {
 							className: DeepSeekImportSection_module_css_default.steps,
 							children: [
-								/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", { children: "1" }), /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("strong", { children: "在 DeepSeek 导出" }), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", { children: "我的 → 系统设置 → 数据管理 → 导出所有历史对话。" })] })] }),
-								/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", { children: "2" }), /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("strong", { children: "在这里选择文件" }), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", { children: "导入会保留原始问题、回答、时间和导出中已有的思维过程。" })] })] }),
-								/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", { children: "3" }), /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("strong", { children: "继续正常使用" }), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", { children: "导入结果会进入“聊天”目录，并按原对话时间排列。" })] })] })
+								/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", { children: "1" }), /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("strong", { children: "选择 DeepSeek 导出文件" }), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", { children: "我的 → 系统设置 → 数据管理 → 导出所有历史对话。" })] })] }),
+								/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", { children: "2" }), /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("strong", { children: "逐个确认对话窗口" }), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", { children: "解析后可搜索、勾选或批量选择，不会立刻写入。" })] })] }),
+								/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", { children: "3" }), /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("strong", { children: "导入到“聊天”目录" }), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", { children: "保留原始问题、回答、时间和导出中已有的思维过程。" })] })] })
 							]
 						}),
-						selected !== void 0 && /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
-							className: DeepSeekImportSection_module_css_default.fileMeta,
-							children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", { children: selected.name }), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", { children: sizeLabel(selected.size) })]
+						preview !== void 0 && /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
+							className: DeepSeekImportSection_module_css_default.picker,
+							children: [
+								/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
+									className: DeepSeekImportSection_module_css_default.pickerHeading,
+									children: [/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("h3", { children: "选择要导入的对话" }), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", { children: "每一行对应 DeepSeek 中的一个独立对话窗口。" })] }), /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
+										className: DeepSeekImportSection_module_css_default.summary,
+										"aria-label": "解析结果",
+										children: [
+											/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("span", { children: [preview.total, " 个对话窗口"] }),
+											/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("span", {
+												className: DeepSeekImportSection_module_css_default.summaryAvailable,
+												children: [preview.available, " 个可导入"]
+											}),
+											preview.imported > 0 && /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("span", { children: [preview.imported, " 个已导入"] })
+										]
+									})]
+								}),
+								/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
+									className: DeepSeekImportSection_module_css_default.toolbar,
+									children: [
+										/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("label", {
+											className: DeepSeekImportSection_module_css_default.searchBox,
+											children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconSearchOutline16, {
+												size: 16,
+												"aria-hidden": "true"
+											}), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("input", {
+												type: "search",
+												"aria-label": "搜索对话",
+												placeholder: "搜索对话标题",
+												value: query,
+												onChange: (event) => {
+													setQuery(event.currentTarget.value);
+												}
+											})]
+										}),
+										/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("span", {
+											className: DeepSeekImportSection_module_css_default.matchCount,
+											children: [filtered.length, " 条结果"]
+										}),
+										/* @__PURE__ */ (0, react_jsx_runtime.jsx)("button", {
+											type: "button",
+											className: DeepSeekImportSection_module_css_default.textButton,
+											disabled: availableFiltered.length === 0 || allFilteredSelected,
+											onClick: selectFiltered,
+											children: "全选当前结果"
+										}),
+										/* @__PURE__ */ (0, react_jsx_runtime.jsx)("button", {
+											type: "button",
+											className: DeepSeekImportSection_module_css_default.textButton,
+											disabled: selected.size === 0,
+											onClick: clearSelection,
+											children: "清空选择"
+										})
+									]
+								}),
+								/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
+									className: DeepSeekImportSection_module_css_default.conversationList,
+									role: "list",
+									"aria-label": "DeepSeek 对话窗口",
+									children: [filtered.map((conversation) => /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("label", {
+										className: conversation.imported ? DeepSeekImportSection_module_css_default.conversationImported : DeepSeekImportSection_module_css_default.conversationRow,
+										children: [
+											/* @__PURE__ */ (0, react_jsx_runtime.jsx)("input", {
+												type: "checkbox",
+												"aria-label": `选择 ${conversation.title}`,
+												checked: selected.has(conversation.sourceId),
+												disabled: conversation.imported || busy !== void 0,
+												onChange: () => {
+													toggle(conversation.sourceId);
+												}
+											}),
+											/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
+												className: DeepSeekImportSection_module_css_default.checkmark,
+												"aria-hidden": "true"
+											}),
+											/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("span", {
+												className: DeepSeekImportSection_module_css_default.conversationCopy,
+												children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("strong", { children: conversation.title }), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", { children: conversationMeta(conversation) })]
+											}),
+											conversation.imported && /* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
+												className: DeepSeekImportSection_module_css_default.importedBadge,
+												children: "已导入"
+											})
+										]
+									}, conversation.sourceId)), filtered.length === 0 && /* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", {
+										className: DeepSeekImportSection_module_css_default.empty,
+										children: "没有匹配的对话"
+									})]
+								}),
+								/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
+									className: DeepSeekImportSection_module_css_default.pickerFooter,
+									children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", { children: selected.size === 0 ? "请选择至少一个尚未导入的对话" : `已选择 ${selected.size} 个对话` }), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("button", {
+										type: "button",
+										className: DeepSeekImportSection_module_css_default.confirmButton,
+										disabled: selected.size === 0 || busy !== void 0,
+										onClick: () => {
+											runImport();
+										},
+										children: busy === "import" ? "正在导入…" : `导入 ${selected.size} 个对话`
+									})]
+								})
+							]
 						}),
 						status !== "" && /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 							className: DeepSeekImportSection_module_css_default.status,
 							role: "status",
-							children: [busy && /* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", { className: DeepSeekImportSection_module_css_default.spinner }), status]
+							children: [busy !== void 0 && /* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", { className: DeepSeekImportSection_module_css_default.spinner }), status]
 						}),
 						error !== "" && /* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", {
 							className: DeepSeekImportSection_module_css_default.error,
@@ -491,7 +683,7 @@ window.__ModuleLoader__.load({
 						}),
 						/* @__PURE__ */ (0, react_jsx_runtime.jsx)("p", {
 							className: DeepSeekImportSection_module_css_default.note,
-							children: "重复导入同一份记录会自动跳过已有对话，不会生成副本。当前仅兼容 DeepSeek 官方平台。"
+							children: "导入内容仅写入本机 DeepSeek Harness；已存在的对话会自动标记并跳过，不会生成副本。"
 						})
 					]
 				})]
@@ -631,17 +823,39 @@ window.__ModuleLoader__.load({
 			"sessions",
 			"uiConversation"
 		];
-		async function importDeepSeekFile(file) {
-			const response = await fetch("/api/session.import.deepseek", {
+		function rawFileHeaders(file) {
+			return {
+				"content-type": file.type || (file.name.toLowerCase().endsWith(".zip") ? "application/zip" : "application/json"),
+				"x-dsh-import-filename": encodeURIComponent(file.name)
+			};
+		}
+		async function responseBody(response, label) {
+			const body = await response.json().catch(() => ({}));
+			if (!response.ok) throw new Error(body.error ?? `${label}失败（HTTP ${response.status}）`);
+			return body;
+		}
+		async function previewDeepSeekFile(file) {
+			const body = await responseBody(await fetch("/api/session.import.deepseek?mode=preview", {
 				method: "POST",
 				body: file,
-				headers: {
-					"content-type": file.type || (file.name.toLowerCase().endsWith(".zip") ? "application/zip" : "application/json"),
-					"x-dsh-import-filename": encodeURIComponent(file.name)
-				}
-			});
-			const body = await response.json().catch(() => ({}));
-			if (!response.ok) throw new Error(body.error ?? `导入失败（HTTP ${response.status}）`);
+				headers: rawFileHeaders(file)
+			}), "解析");
+			if (typeof body.total !== "number" || typeof body.available !== "number" || typeof body.imported !== "number" || !Array.isArray(body.conversations)) throw new Error("解析服务返回了无法识别的结果");
+			return {
+				total: body.total,
+				available: body.available,
+				imported: body.imported,
+				conversations: body.conversations
+			};
+		}
+		async function importDeepSeekSelection(file, sourceIds) {
+			const form = new FormData();
+			form.append("file", file, file.name);
+			form.append("selection", JSON.stringify(sourceIds));
+			const body = await responseBody(await fetch("/api/session.import.deepseek", {
+				method: "POST",
+				body: form
+			}), "导入");
 			if (typeof body.imported !== "number" || typeof body.skipped !== "number" || typeof body.failed !== "number") throw new Error("导入服务返回了无法识别的结果");
 			return {
 				imported: body.imported,
@@ -697,7 +911,8 @@ window.__ModuleLoader__.load({
 				order: 5,
 				label: () => "导入对话",
 				inject: () => ({
-					importFile: importDeepSeekFile,
+					previewFile: previewDeepSeekFile,
+					importSelection: importDeepSeekSelection,
 					refreshSessions: () => sessions.refresh()
 				})
 			}, DeepSeekImportSection));

@@ -21,7 +21,8 @@
 
 1. 在 DeepSeek 官方应用依次进入 **我的 → 系统设置 → 数据管理 → 导出所有历史对话**。
 2. 在 DSH 打开 **设置 → 导入对话**，选择官方导出的 JSON 或 ZIP。
-3. 等待导入完成；历史会进入侧栏“聊天”目录，并按原始时间排列。重复导入同一份记录会跳过已有对话。
+3. 等待解析完成，在按独立对话窗口列出的预览中搜索、勾选真正需要迁移的记录；新记录默认选中，已经导入的记录会明确标记且不会生成副本。
+4. 确认导入；历史会进入侧栏“聊天”目录，并按原始时间排列。重复导入同一份记录会跳过已有对话。
 
 ## 内容
 
@@ -34,4 +35,4 @@
 
 ## 来源与许可
 
-本仓库是 [Xiaozhuang DSH](https://github.com/niushuanan/xiaozhuang-dsh) 的单向发布副本，不是独立开发源。当前内容同步自主仓库 commit [`82b60bb17b`](https://github.com/niushuanan/xiaozhuang-dsh/commit/82b60bb17b4bbe29a52c8183b615f0b4c36ef3da)。代码采用 [MIT License](LICENSE)。
+本仓库是 [Xiaozhuang DSH](https://github.com/niushuanan/xiaozhuang-dsh) 的单向发布副本，不是独立开发源。当前内容同步自主仓库 commit [`286f34870a`](https://github.com/niushuanan/xiaozhuang-dsh/commit/286f34870a70a8d5c3e26157b3aef9a516ce7bd5)。代码采用 [MIT License](LICENSE)。

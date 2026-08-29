@@ -21,7 +21,8 @@ Migrate the full history exported by the official DeepSeek service into DeepSeek
 
 1. In the official DeepSeek app, open **Me → System settings → Data management → Export all conversation history**.
 2. In DSH, open **Settings → Import conversations** and select the exported JSON or ZIP.
-3. Wait for completion. Imported records appear under Chats in their original chronology. Re-importing the same export skips conversations that already exist.
+3. Wait for parsing, then search and select the exact conversation windows to migrate. New records are selected by default; previously imported records are clearly marked and cannot create duplicates.
+4. Confirm the import. Imported records appear under Chats in their original chronology. Re-importing the same export skips conversations that already exist.
 
 ## Contents
 
@@ -34,4 +35,4 @@ This repository never contains a user's DeepSeek export, conversation history, a
 
 ## Source and license
 
-This repository is a one-way distribution mirror of [Xiaozhuang DSH](https://github.com/niushuanan/xiaozhuang-dsh), not an independent development source. It is synchronized from main-repository commit [`82b60bb17b`](https://github.com/niushuanan/xiaozhuang-dsh/commit/82b60bb17b4bbe29a52c8183b615f0b4c36ef3da). Licensed under the [MIT License](LICENSE).
+This repository is a one-way distribution mirror of [Xiaozhuang DSH](https://github.com/niushuanan/xiaozhuang-dsh), not an independent development source. It is synchronized from main-repository commit [`286f34870a`](https://github.com/niushuanan/xiaozhuang-dsh/commit/286f34870a70a8d5c3e26157b3aef9a516ce7bd5). Licensed under the [MIT License](LICENSE).

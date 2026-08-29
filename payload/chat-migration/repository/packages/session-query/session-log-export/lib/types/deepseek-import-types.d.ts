@@ -24,4 +24,21 @@ export interface DeepSeekImportResult {
     readonly sessionIds: readonly string[];
     readonly errors: readonly string[];
 }
+/** One source conversation shown in the pre-import picker. */
+export interface DeepSeekImportPreviewItem {
+    readonly sourceId: string;
+    readonly title: string;
+    readonly createdAt: number;
+    readonly updatedAt: number;
+    readonly messageCount: number;
+    readonly reasoningCount: number;
+    readonly imported: boolean;
+}
+/** Read-only parse result used before the user chooses what to import. */
+export interface DeepSeekImportPreview {
+    readonly total: number;
+    readonly available: number;
+    readonly imported: number;
+    readonly conversations: readonly DeepSeekImportPreviewItem[];
+}
 //# sourceMappingURL=deepseek-import-types.d.ts.map

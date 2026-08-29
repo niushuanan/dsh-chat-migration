@@ -14,6 +14,7 @@ import { strFromU8, unzipSync } from 'fflate'
 import type {
   DeepSeekImportedConversation,
   DeepSeekImportedMessage,
+  DeepSeekImportPreview,
   DeepSeekImportResult,
 } from './deepseek-import-types.ts'
 
@@ -32,6 +33,7 @@ export interface DeepSeekImportedSession {
 }
 
 type ImportPersistence = Pick<SessionPersistence, 'listSnapshots' | 'create' | 'append'>
+type PreviewPersistence = Pick<SessionPersistence, 'listSnapshots'>
 type ImportFinalizer = (session: DeepSeekImportedSession) => Promise<void>
 
 function record(value: unknown): JsonRecord | undefined {
@@ -315,13 +317,53 @@ export function parseDeepSeekExportBytes(
   return parseDeepSeekExportJson(strFromU8(selected[1]))
 }
 
-function importedSessionId(source: string): ReturnType<typeof SessionId> {
+export function deepSeekImportedSessionId(source: string): ReturnType<typeof SessionId> {
   return SessionId(`session-deepseek-${createHash('sha256').update(source).digest('hex').slice(0, 24)}`)
+}
+
+/** Build the newest-first, write-free conversation picker projection. */
+export async function previewDeepSeekHistory(
+  persistence: PreviewPersistence,
+  conversations: readonly DeepSeekImportedConversation[],
+): Promise<DeepSeekImportPreview> {
+  const existing = new Set((await persistence.listSnapshots()).map(snapshot => String(snapshot.header.id)))
+  const items = conversations.map(conversation => ({
+    sourceId: conversation.sourceId,
+    title: conversation.title,
+    createdAt: conversation.createdAt,
+    updatedAt: conversation.updatedAt,
+    messageCount: conversation.messages.length,
+    reasoningCount: conversation.messages.filter(message =>
+      message.role === 'assistant' && message.reasoning !== undefined).length,
+    imported: existing.has(String(deepSeekImportedSessionId(conversation.sourceId))),
+  })).sort((left, right) =>
+    right.updatedAt - left.updatedAt
+    || right.createdAt - left.createdAt
+    || left.sourceId.localeCompare(right.sourceId))
+  const imported = items.filter(item => item.imported).length
+  return {
+    total: items.length,
+    available: items.length - imported,
+    imported,
+    conversations: items,
+  }
+}
+
+/** Resolve a browser selection against the freshly reparsed source file. */
+export function selectDeepSeekConversations(
+  conversations: readonly DeepSeekImportedConversation[],
+  sourceIds: readonly string[],
+): DeepSeekImportedConversation[] {
+  const selected = new Set(sourceIds)
+  const known = new Set(conversations.map(conversation => conversation.sourceId))
+  const missing = [...selected].filter(sourceId => !known.has(sourceId))
+  if (missing.length > 0) throw new Error('所选对话与当前导出文件不匹配，请重新选择文件')
+  return conversations.filter(conversation => selected.has(conversation.sourceId))
 }
 
 /** Convert one normalized source conversation into standard DSH history events. */
 export function buildDeepSeekImportedSession(conversation: DeepSeekImportedConversation): DeepSeekImportedSession {
-  const id = importedSessionId(conversation.sourceId)
+  const id = deepSeekImportedSessionId(conversation.sourceId)
   const header: SessionHeader = {
     version: SESSION_FORMAT_VERSION,
     id,

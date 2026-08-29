@@ -9,7 +9,7 @@ kind: "package-reference"
 
 ## 概述
 
-`dsh-session-log-export` 统一负责 Web 产品里的对话迁移。用户可在**设置 → 导入对话**选择 DeepSeek 官方导出的 JSON 或 ZIP，保留原始对话顺序、标题、时间、问题、回答和导出中已有的思维过程；原有 `Session log` 操作和 `/export` 命令则继续把 DSH 会话树（包含子会话与附件）下载为 ZIP。设置与用法在前，随后说明实现细节。
+`dsh-session-log-export` 统一负责 Web 产品里的对话迁移。用户可在**设置 → 导入对话**选择 DeepSeek 官方导出的 JSON 或 ZIP，先预览每个独立对话窗口，再搜索、勾选真正要导入的内容；导入后保留原始对话顺序、标题、时间、问题、回答和导出中已有的思维过程。原有 `Session log` 操作和 `/export` 命令则继续把 DSH 会话树（包含子会话与附件）下载为 ZIP。设置与用法在前，随后说明实现细节。
 
 ## 目录
 
@@ -55,7 +55,9 @@ Web bundle 将本包与 Connection、`dsh-commands`、`dsh-client-ui-commands` �
 
 ### 预期行为
 
-DeepSeek 导入接受官方 `.json`，或包含该 JSON 的 `.zip`。官方 mapping 结构和 DeepSeek 原始 API 导出结构都会被归一化；重新生成的分支只保留当前选中分支，`THINK` 片段映射为原生 reasoning，存在来源 URL 时把引用标记转换成链接，导入会话统一使用 `chat` preset。系统逐个写入会话，前端在完成并刷新原生 Session 列表前保持等待状态；重复导入同一批来源 ID 会跳过已经存在的会话，不重写、不生成副本。
+DeepSeek 导入接受官方 `.json`，或包含该 JSON 的 `.zip`。选中文件后先只解析预览，不写入 Session；预览按 DeepSeek 对话窗口逐行展示标题、时间、消息数和思维过程数，并支持搜索、全选当前结果和清空选择。已导入的来源会保留在列表中并标记为不可重复选择，尚未导入的窗口默认全选；用户确认后，浏览器把同一文件与来源 ID 清单交给 Host，Host 会再次解析并只写入精确匹配的对话。
+
+官方 mapping 结构和 DeepSeek 原始 API 导出结构都会被归一化；重新生成的分支只保留当前选中分支，`THINK` 片段映射为原生 reasoning，存在来源 URL 时把引用标记转换成链接，导入会话统一使用 `chat` preset。系统逐个写入会话，前端在完成并刷新原生 Session 列表前保持等待状态；重复导入同一批来源 ID 会跳过已经存在的会话，不重写、不生成副本。
 
 弹窗报告三个阶段：准备中、开始下载或失败。关闭弹窗不会取消正在进行的下载，该操作随后完成时弹窗也不会重新打开。每个会话同时只允许一项下载，重复操作共用该任务。导出包含实时会话的最新事件：Host 端点在读取前会 flush 活动的根会话，因此斜杠命令触发的 ZIP 会包含启动下载的 `command/run` 与 `command/done` 事件对；冷持久化会话不需要 flush。
 
@@ -75,7 +77,7 @@ DeepSeek 导入接受官方 `.json`，或包含该 JSON 的 `.zip`。官方 mapp
 
 ### 设计拆分
 
-本包有两个半包。Host 半包（[`src/index.ts`](src/index.ts)）注册 `/export` 命令，并向 Connection 贡献经过认证的精确路由：`GET`/`HEAD /api/session.export` 与 `POST /api/session.import.deepseek`；[`src/archive.ts`](src/archive.ts) 构建有界 ZIP 流，[`src/deepseek-import.ts`](src/deepseek-import.ts) 则把导出内容归一化为原生 Session 事件并刷新持久化投影索引。浏览器半包（[`src/client/index.ts`](src/client/index.ts)）提供共享下载控制器、注册导入设置页，并在导入后刷新 Session 列表。
+本包有两个半包。Host 半包（[`src/index.ts`](src/index.ts)）注册 `/export` 命令，并向 Connection 贡献经过认证的精确路由：`GET`/`HEAD /api/session.export` 与 `POST /api/session.import.deepseek`；后者同时支持只读预览、带来源 ID 选择的确认导入和兼容旧调用方的整包导入。[`src/archive.ts`](src/archive.ts) 构建有界 ZIP 流，[`src/deepseek-import.ts`](src/deepseek-import.ts) 则生成预览、校验用户选择、把导出内容归一化为原生 Session 事件并刷新持久化投影索引。浏览器半包（[`src/client/index.ts`](src/client/index.ts)）保留当前选择的 `File`、提供共享下载控制器、注册导入设置页，并在确认导入后刷新 Session 列表。
 
 ### 下载流程
 

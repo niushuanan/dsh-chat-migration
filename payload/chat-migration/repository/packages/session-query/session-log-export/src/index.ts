@@ -19,8 +19,11 @@ import {
 import {
   importDeepSeekHistory,
   parseDeepSeekExportBytes,
+  previewDeepSeekHistory,
+  selectDeepSeekConversations,
   type DeepSeekImportResult,
 } from './deepseek-import.ts'
+import type { DeepSeekImportPreview } from './deepseek-import-types.ts'
 
 export {
   DEFAULT_SESSION_LOG_COMPRESSION_LEVEL,
@@ -38,13 +41,18 @@ export type {
 } from './archive.ts'
 export {
   buildDeepSeekImportedSession,
+  deepSeekImportedSessionId,
   importDeepSeekHistory,
   parseDeepSeekExportBytes,
   parseDeepSeekExportJson,
+  previewDeepSeekHistory,
+  selectDeepSeekConversations,
 } from './deepseek-import.ts'
 export type {
   DeepSeekImportedConversation,
   DeepSeekImportedMessage,
+  DeepSeekImportPreview,
+  DeepSeekImportPreviewItem,
   DeepSeekImportResult,
 } from './deepseek-import-types.ts'
 export type { DeepSeekImportedSession } from './deepseek-import.ts'
@@ -126,11 +134,56 @@ function connectionOf(ctx: Context): SessionLogConnection {
   return Reflect.get(ctx, 'connection') as SessionLogConnection
 }
 
-function jsonResponse(body: DeepSeekImportResult | { readonly error: string }, status = 200): Response {
+function jsonResponse(
+  body: DeepSeekImportResult | DeepSeekImportPreview | { readonly error: string },
+  status = 200,
+): Response {
   return Response.json(body, {
     status,
     headers: { 'cache-control': 'no-store' },
   })
+}
+
+interface DeepSeekImportRequestBody {
+  readonly bytes: Uint8Array
+  readonly filename: string
+  readonly contentType: string
+  readonly selection?: readonly string[]
+}
+
+function parseSelection(value: FormDataEntryValue | null): readonly string[] | undefined {
+  if (value === null) return undefined
+  if (typeof value !== 'string') throw new Error('导入选择无效，请重新选择对话')
+  let decoded: unknown
+  try { decoded = JSON.parse(value) } catch { throw new Error('导入选择无效，请重新选择对话') }
+  if (!Array.isArray(decoded) || decoded.some(item => typeof item !== 'string' || item.trim() === '')) {
+    throw new Error('导入选择无效，请重新选择对话')
+  }
+  return [...new Set(decoded)]
+}
+
+async function readDeepSeekImportRequest(request: Request): Promise<DeepSeekImportRequestBody> {
+  const contentType = request.headers.get('content-type') ?? ''
+  if (contentType.toLowerCase().includes('multipart/form-data')) {
+    const form = await request.formData()
+    const file = form.get('file')
+    if (!(file instanceof Blob)) throw new Error('没有找到 DeepSeek 导出文件')
+    const name = Reflect.get(file, 'name')
+    const selection = form.has('selection') ? parseSelection(form.get('selection')) : undefined
+    return {
+      bytes: new Uint8Array(await file.arrayBuffer()),
+      filename: typeof name === 'string' ? name : 'deepseek-export.json',
+      contentType: file.type,
+      ...(selection === undefined ? {} : { selection }),
+    }
+  }
+  let filename = request.headers.get('x-dsh-import-filename') ?? ''
+  try { filename = decodeURIComponent(filename) } catch { filename = '' }
+  return {
+    bytes: new Uint8Array(await request.arrayBuffer()),
+    filename,
+    contentType,
+  }
 }
 
 async function deepSeekImportResponse(ctx: Context, request: Request): Promise<Response> {
@@ -138,21 +191,26 @@ async function deepSeekImportResponse(ctx: Context, request: Request): Promise<R
   if (persistence === undefined) {
     return jsonResponse({ error: '当前部署没有启用会话持久化，无法导入历史对话' }, 503)
   }
-  let filename = request.headers.get('x-dsh-import-filename') ?? ''
-  try { filename = decodeURIComponent(filename) } catch { filename = '' }
   try {
+    const input = await readDeepSeekImportRequest(request)
     const conversations = parseDeepSeekExportBytes(
-      new Uint8Array(await request.arrayBuffer()),
-      filename,
-      request.headers.get('content-type') ?? '',
+      input.bytes,
+      input.filename,
+      input.contentType,
     )
+    const mode = new URL(request.url).searchParams.get('mode')
+    if (mode === 'preview') return jsonResponse(await previewDeepSeekHistory(persistence, conversations))
+    if (mode !== null) throw new Error('无法识别的导入模式')
+    const selected = input.selection === undefined
+      ? conversations
+      : selectDeepSeekConversations(conversations, input.selection)
     // This service is optional for deployments that have no projection cache.
     // Context#get crosses Loader trace shadows without tripping the direct-property
     // injection guard; direct Reflect/property access fails in the real Web bundle.
     const projectionCache = ctx.get('sessionProjectionCache') as SessionProjectionCacheWriter | undefined
     return jsonResponse(await importDeepSeekHistory(
       persistence,
-      conversations,
+      selected,
       projectionCache === undefined
         ? undefined
         : async (imported) => {

@@ -10,7 +10,7 @@ import type {} from '@deepseek-ai/dsh-client-ui-chat/client'
 import type {} from '@deepseek-ai/dsh-client-ui-renderer/client'
 import type {} from '@deepseek-ai/dsh-client-ui-session/client'
 import type {} from '@deepseek-ai/dsh-client-ui-settings/client'
-import type { DeepSeekImportResult } from '../deepseek-import-types.ts'
+import type { DeepSeekImportPreview, DeepSeekImportResult } from '../deepseek-import-types.ts'
 import { SessionLogDownloadController } from './controller.ts'
 import { DeepSeekImportSection, type DeepSeekImportSectionInjected } from './DeepSeekImportSection.tsx'
 import { exportConversationImage } from './image-export.ts'
@@ -34,17 +34,46 @@ export type { SessionLogDownloadEntry, SessionLogDownloadState } from './control
 
 export const inject = ['slots', 'locale', 'sessions', 'uiConversation']
 
-async function importDeepSeekFile(file: File): Promise<DeepSeekImportResult> {
-  const response = await fetch('/api/session.import.deepseek', {
+function rawFileHeaders(file: File): Record<string, string> {
+  return {
+    'content-type': file.type || (file.name.toLowerCase().endsWith('.zip') ? 'application/zip' : 'application/json'),
+    'x-dsh-import-filename': encodeURIComponent(file.name),
+  }
+}
+
+async function responseBody<T>(response: Response, label: string): Promise<T> {
+  const body = await response.json().catch(() => ({})) as T & { error?: string }
+  if (!response.ok) throw new Error(body.error ?? `${label}失败（HTTP ${response.status}）`)
+  return body
+}
+
+async function previewDeepSeekFile(file: File): Promise<DeepSeekImportPreview> {
+  const response = await fetch('/api/session.import.deepseek?mode=preview', {
     method: 'POST',
     body: file,
-    headers: {
-      'content-type': file.type || (file.name.toLowerCase().endsWith('.zip') ? 'application/zip' : 'application/json'),
-      'x-dsh-import-filename': encodeURIComponent(file.name),
-    },
+    headers: rawFileHeaders(file),
   })
-  const body = await response.json().catch(() => ({})) as Partial<DeepSeekImportResult> & { error?: string }
-  if (!response.ok) throw new Error(body.error ?? `导入失败（HTTP ${response.status}）`)
+  const body = await responseBody<Partial<DeepSeekImportPreview>>(response, '解析')
+  if (typeof body.total !== 'number'
+    || typeof body.available !== 'number'
+    || typeof body.imported !== 'number'
+    || !Array.isArray(body.conversations)) {
+    throw new Error('解析服务返回了无法识别的结果')
+  }
+  return {
+    total: body.total,
+    available: body.available,
+    imported: body.imported,
+    conversations: body.conversations,
+  }
+}
+
+async function importDeepSeekSelection(file: File, sourceIds: readonly string[]): Promise<DeepSeekImportResult> {
+  const form = new FormData()
+  form.append('file', file, file.name)
+  form.append('selection', JSON.stringify(sourceIds))
+  const response = await fetch('/api/session.import.deepseek', { method: 'POST', body: form })
+  const body = await responseBody<Partial<DeepSeekImportResult>>(response, '导入')
   if (typeof body.imported !== 'number' || typeof body.skipped !== 'number' || typeof body.failed !== 'number') {
     throw new Error('导入服务返回了无法识别的结果')
   }
@@ -97,7 +126,8 @@ export function apply(ctx: ClientContext): void {
     order: 5,
     label: () => '导入对话',
     inject: (): DeepSeekImportSectionInjected => ({
-      importFile: importDeepSeekFile,
+      previewFile: previewDeepSeekFile,
+      importSelection: importDeepSeekSelection,
       refreshSessions: () => sessions.refresh(),
     }),
   }, DeepSeekImportSection))

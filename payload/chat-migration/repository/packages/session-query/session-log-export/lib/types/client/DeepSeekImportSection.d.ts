@@ -1,9 +1,10 @@
 import { type ReactElement } from 'react';
-import type { DeepSeekImportResult } from '../deepseek-import-types.ts';
+import type { DeepSeekImportPreview, DeepSeekImportResult } from '../deepseek-import-types.ts';
 export interface DeepSeekImportSectionInjected {
-    readonly importFile: (file: File) => Promise<DeepSeekImportResult>;
+    readonly previewFile: (file: File) => Promise<DeepSeekImportPreview>;
+    readonly importSelection: (file: File, sourceIds: readonly string[]) => Promise<DeepSeekImportResult>;
     readonly refreshSessions: () => Promise<void>;
 }
-/** Native Settings page for one-file DeepSeek history migration. */
-export declare function DeepSeekImportSection({ importFile, refreshSessions, }: DeepSeekImportSectionInjected): ReactElement;
+/** Native Settings page for previewing and selectively importing DeepSeek history. */
+export declare function DeepSeekImportSection({ previewFile, importSelection, refreshSessions, }: DeepSeekImportSectionInjected): ReactElement;
 //# sourceMappingURL=DeepSeekImportSection.d.ts.map

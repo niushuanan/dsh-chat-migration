@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "kind": "xiaozhuang-dsh-plugin-export",
-  "createdAt": "2026-08-29T03:45:56.115Z",
-  "sourceCommit": "82b60bb17b4bbe29a52c8183b615f0b4c36ef3da",
+  "createdAt": "2026-08-29T05:51:59.757Z",
+  "sourceCommit": "286f34870a70a8d5c3e26157b3aef9a516ce7bd5",
   "plugins": [
     {
       "id": "chat-migration",
@@ -1421,18 +1421,18 @@
     },
     {
       "path": "payload/chat-migration/repository/packages/client/ui-workspace/README.md",
-      "size": 8383,
-      "sha256": "847713be0f44b30500520100b27b099b2152a58721a5746ff9c25ea469f345d2"
+      "size": 8695,
+      "sha256": "449f1eff35c0f76149c2d1b242672fc7f1b874cc642514d147e3f836b804c822"
     },
     {
       "path": "payload/chat-migration/repository/packages/client/ui-workspace/README.zh.md",
-      "size": 7834,
-      "sha256": "00e089ae580d627f89d92ab375d4ef34705750d2b23ad03140c5ca7ff36961c6"
+      "size": 8115,
+      "sha256": "3ea750f015caf1d3256b051b696d3cd142b22a4eb318fb809a9dc547b4102274"
     },
     {
       "path": "payload/chat-migration/repository/packages/client/ui-workspace/lib/client.js",
-      "size": 129246,
-      "sha256": "00f66954909d1a0ee9badcdb36bef56b73459158da1ad3ca230792f2c084b7b0"
+      "size": 131544,
+      "sha256": "f920f44cb35de31432f18f2d9b62f68a828b105a7d710f7c4e396a86fec4972e"
     },
     {
       "path": "payload/chat-migration/repository/packages/client/ui-workspace/lib/index.js",
@@ -1536,8 +1536,8 @@
     },
     {
       "path": "payload/chat-migration/repository/packages/client/ui-workspace/src/client/locales.ts",
-      "size": 6039,
-      "sha256": "cbb870e07e797e57b1a59e81f0fc2a3bf7e8152a31b0dcf1b4b37e48cedfa4e3"
+      "size": 6081,
+      "sha256": "56e34726c9cab3a258257c6d66ad1eac3fcfb275ace2e3a7875d1aebca5cc54e"
     },
     {
       "path": "payload/chat-migration/repository/packages/client/ui-workspace/src/client/navigation.ts",
@@ -1561,8 +1561,8 @@
     },
     {
       "path": "payload/chat-migration/repository/packages/client/ui-workspace/src/client/rows/WorkspaceBrowser.tsx",
-      "size": 59601,
-      "sha256": "bd2d107b46a8a0e3ffb87a27d04ceab0d1205182f1181a781abed36fbf8f454f"
+      "size": 59920,
+      "sha256": "f9605b64624f981bb57422ebe1b6b968d3cb872d6cf630dfde0b1b7bec33d33b"
     },
     {
       "path": "payload/chat-migration/repository/packages/client/ui-workspace/src/client/stores.ts",
@@ -4006,23 +4006,23 @@
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/README.md",
-      "size": 8744,
-      "sha256": "8d94d3198961eedc32b73e4b3a3686790fca7bc6244425865d7c04f9082c6411"
+      "size": 9558,
+      "sha256": "47199868164990f3baf491d5f70b74364732eae3acb00f54b520024d7afc0ec3"
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/README.zh.md",
-      "size": 7815,
-      "sha256": "b9377be591a99ee6bab3927717bbbffc806108d15224bc0dda4f1b3689968579"
+      "size": 8526,
+      "sha256": "b063b5cede8e08d8a832503664565cf004869114e3d32211ac4794836bfbeaa9"
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/client.js",
-      "size": 35441,
-      "sha256": "8048a62f9b1e8e2abc3e375c69120648b45350083df2dba09ec7c2f8640f96e8"
+      "size": 51108,
+      "sha256": "24a454dc5413fcae2eb832da89418b170be8810e4fef541e90337b04524ff86a"
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/index.js",
-      "size": 34040,
-      "sha256": "238e53770db50d03db36e90589305eaf8c76ce4d5f7d56cde969d2930174101e"
+      "size": 37320,
+      "sha256": "f33f6253aa1c8da67bfab11f0bf72dbbbdd34d5f93b97b467035b4cacab690bc"
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/invariant.js",
@@ -4036,8 +4036,8 @@
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/types/client/DeepSeekImportSection.d.ts",
-      "size": 536,
-      "sha256": "0c4b995738e1b5e75df81109c6a5839a811f0686e6e23379229fd0722a164342"
+      "size": 704,
+      "sha256": "9b2a2994d295cd1c50c499a293ea845cc7c63de751dc5c47dc4e5b1503ac4693"
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/types/client/Dialog.d.ts",
@@ -4071,18 +4071,18 @@
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/types/deepseek-import-types.d.ts",
-      "size": 866,
-      "sha256": "767ba7d46a2f2e2aa0f27ceb6a187df83fbaad32ae47fac6259a7f4cc25e270c"
+      "size": 1478,
+      "sha256": "330ce5c1c2c2b42706127787e4f9b52a77d6ac487180342ffcd5a531b6f0ad23"
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/types/deepseek-import.d.ts",
-      "size": 1782,
-      "sha256": "a7c423541d7b9c329eac8baf2e06ce71022d2010940511d313fa2fd24125f73b"
+      "size": 2473,
+      "sha256": "d0e8b0cf75261feeb850ac06ff920859a5eb83547abfe02d27b0c4c4ec973146"
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/types/index.d.ts",
-      "size": 1859,
-      "sha256": "4cde3629b34a5a6d22c8a01bf708154ec299fc5044479430b8365065f26d44c7"
+      "size": 1989,
+      "sha256": "ea0e484f345cc960ef535d7a8fbb50e8ea2a1c2a23e453fe0d6b31142e1a6d30"
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/types/invariant.d.ts",
@@ -4101,13 +4101,13 @@
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/client/DeepSeekImportSection.module.css",
-      "size": 3513,
-      "sha256": "bba3e97287e8c8b5205f866dff5141a3bead275020b4bfebf65ef3f43fc4d703"
+      "size": 8917,
+      "sha256": "4127144d0293bf02a4e259953825c95ea4fa6ca3f19926e27129c0d1b0b2bfbf"
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/client/DeepSeekImportSection.tsx",
-      "size": 4552,
-      "sha256": "498423e514a2f5d34dadbd24f22927707e1573ec5ef0a82a182e647db34656b7"
+      "size": 11396,
+      "sha256": "34c9b764e21c49d53fdc18e90ca44b0906f56a936a672dcdb5e5fdc97d5fe934"
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/client/Dialog.tsx",
@@ -4136,8 +4136,8 @@
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/client/index.ts",
-      "size": 5139,
-      "sha256": "e9ceae6df65819b88357b119102d92dec0d5865afc898dfe434d617aae6f0f0d"
+      "size": 6265,
+      "sha256": "7b5df612a6f743bf00910d751f483b45c894c65abe4145a0ff5ab063b01627f6"
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/client/locales.ts",
@@ -4151,18 +4151,18 @@
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/deepseek-import-types.ts",
-      "size": 777,
-      "sha256": "aa00e0d19718cb30b016c9f1f784571b220d959ce8fa19ef2f29820fcd30db03"
+      "size": 1358,
+      "sha256": "e58b824a6ffc92c0e1c0b7242702cd6bb28cc4aabb1d0560f53bcc2a5e11436e"
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/deepseek-import.ts",
-      "size": 16890,
-      "sha256": "ca70f590bb5f43b6a497a38b3285e6d0ee3ff75e1b6a995e29e6a00e81ff3e91"
+      "size": 18816,
+      "sha256": "89b91d4a4b92ff9cc81b06fce9fff82c4fb9e21dd3e31d165381eacc7bc82f7f"
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/index.ts",
-      "size": 8035,
-      "sha256": "d24199f6505126d3c369d5f493b8179a411f18a062990bdee926821a66bec6a2"
+      "size": 10330,
+      "sha256": "c341aae6212e2b5515e65dd6cb5e3a5a2cb8d105be723d32548f272a546826a8"
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/invariant.ts",
