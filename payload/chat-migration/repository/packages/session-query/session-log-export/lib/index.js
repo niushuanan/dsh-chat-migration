@@ -758,7 +758,7 @@ async function deepSeekImportResponse(ctx, request) {
 	}
 	try {
 		const conversations = parseDeepSeekExportBytes(new Uint8Array(await request.arrayBuffer()), filename, request.headers.get("content-type") ?? "");
-		const projectionCache = Reflect.get(ctx, "sessionProjectionCache");
+		const projectionCache = ctx.get("sessionProjectionCache");
 		return jsonResponse(await importDeepSeekHistory(persistence, conversations, projectionCache === void 0 ? void 0 : async (imported) => {
 			await projectionCache.write(Session.create(imported.header.id, imported.events, imported.header));
 		}));

@@ -146,7 +146,10 @@ async function deepSeekImportResponse(ctx: Context, request: Request): Promise<R
       filename,
       request.headers.get('content-type') ?? '',
     )
-    const projectionCache = Reflect.get(ctx, 'sessionProjectionCache') as SessionProjectionCacheWriter | undefined
+    // This service is optional for deployments that have no projection cache.
+    // Context#get crosses Loader trace shadows without tripping the direct-property
+    // injection guard; direct Reflect/property access fails in the real Web bundle.
+    const projectionCache = ctx.get('sessionProjectionCache') as SessionProjectionCacheWriter | undefined
     return jsonResponse(await importDeepSeekHistory(
       persistence,
       conversations,

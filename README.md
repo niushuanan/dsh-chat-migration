@@ -34,4 +34,4 @@
 
 ## 来源与许可
 
-本仓库是 [Xiaozhuang DSH](https://github.com/niushuanan/xiaozhuang-dsh) 的单向发布副本，不是独立开发源。当前内容同步自主仓库 commit [`1e8349b1f0`](https://github.com/niushuanan/xiaozhuang-dsh/commit/1e8349b1f0ffdbe7fc98a789bdfad6a1a142a156)。代码采用 [MIT License](LICENSE)。
+本仓库是 [Xiaozhuang DSH](https://github.com/niushuanan/xiaozhuang-dsh) 的单向发布副本，不是独立开发源。当前内容同步自主仓库 commit [`82b60bb17b`](https://github.com/niushuanan/xiaozhuang-dsh/commit/82b60bb17b4bbe29a52c8183b615f0b4c36ef3da)。代码采用 [MIT License](LICENSE)。

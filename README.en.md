@@ -34,4 +34,4 @@ This repository never contains a user's DeepSeek export, conversation history, a
 
 ## Source and license
 
-This repository is a one-way distribution mirror of [Xiaozhuang DSH](https://github.com/niushuanan/xiaozhuang-dsh), not an independent development source. It is synchronized from main-repository commit [`1e8349b1f0`](https://github.com/niushuanan/xiaozhuang-dsh/commit/1e8349b1f0ffdbe7fc98a789bdfad6a1a142a156). Licensed under the [MIT License](LICENSE).
+This repository is a one-way distribution mirror of [Xiaozhuang DSH](https://github.com/niushuanan/xiaozhuang-dsh), not an independent development source. It is synchronized from main-repository commit [`82b60bb17b`](https://github.com/niushuanan/xiaozhuang-dsh/commit/82b60bb17b4bbe29a52c8183b615f0b4c36ef3da). Licensed under the [MIT License](LICENSE).

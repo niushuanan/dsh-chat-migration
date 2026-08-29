@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "kind": "xiaozhuang-dsh-plugin-export",
-  "createdAt": "2026-08-29T03:20:00.754Z",
-  "sourceCommit": "1e8349b1f0ffdbe7fc98a789bdfad6a1a142a156",
+  "createdAt": "2026-08-29T03:45:56.115Z",
+  "sourceCommit": "82b60bb17b4bbe29a52c8183b615f0b4c36ef3da",
   "plugins": [
     {
       "id": "chat-migration",
@@ -4021,8 +4021,8 @@
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/index.js",
-      "size": 34049,
-      "sha256": "fb163d2bf16e4eb3cb9127b252f886989eda5a46c1e0eab5bd251a59245f0de1"
+      "size": 34040,
+      "sha256": "238e53770db50d03db36e90589305eaf8c76ce4d5f7d56cde969d2930174101e"
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/lib/invariant.js",
@@ -4161,8 +4161,8 @@
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/index.ts",
-      "size": 7795,
-      "sha256": "1352a02e8cc34eac76db73c91c8e080c3c69552965c595e1368e5cbfbf87c99d"
+      "size": 8035,
+      "sha256": "d24199f6505126d3c369d5f493b8179a411f18a062990bdee926821a66bec6a2"
     },
     {
       "path": "payload/chat-migration/repository/packages/session-query/session-log-export/src/invariant.ts",
