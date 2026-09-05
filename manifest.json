@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "kind": "xiaozhuang-dsh-plugin-export",
-  "createdAt": "2026-09-05T05:44:19.948Z",
-  "sourceCommit": "bb949c3d291ea55d378cc5fdb1b237b4f63127b6",
+  "createdAt": "2026-09-05T07:58:55.714Z",
+  "sourceCommit": "198c2edb37c4dcf1c3844831e946a57ed7259e8e",
   "plugins": [
     {
       "id": "chat-mode",
@@ -844,17 +844,17 @@
     {
       "path": "payload/shared/source/packages/client/connection/README.i18n.yaml",
       "size": 436,
-      "sha256": "91eecedbe00f4668e952b4b7df14939ec689d893bfbebf498eb858b54dd7b2eb"
+      "sha256": "fd7be0e04d2622d73fe927a8e60f09548780a15dee912f278768bae021e4f2bf"
     },
     {
       "path": "payload/shared/source/packages/client/connection/README.md",
-      "size": 8104,
-      "sha256": "a8165f13777ae4c0a6941e8cb989a0bfe1b4a9df45dc299da8bac5b347282739"
+      "size": 8423,
+      "sha256": "593aedf955b58d590f1ba4569d59424125ebed8c23c747923607d49a9743c05c"
     },
     {
       "path": "payload/shared/source/packages/client/connection/README.zh.md",
-      "size": 7370,
-      "sha256": "9be5be7352eb6f6c62ccd78f714865f86cbd67a8775308a81796875a1c2e3c68"
+      "size": 7687,
+      "sha256": "55b82d8bbb704b22bb039c3fd0b37a92276ff971fd3d891226ab6d390f5167ff"
     },
     {
       "path": "payload/shared/source/packages/client/connection/src/api-path.ts",
@@ -868,8 +868,8 @@
     },
     {
       "path": "payload/shared/source/packages/client/connection/src/browser-auth.ts",
-      "size": 12306,
-      "sha256": "473488da21b12e6b661ad4a5b7f4437ca5f529f007b47f6818e885994ca16d07"
+      "size": 12849,
+      "sha256": "48273220540c720affa623b0d63e777e06069ea5f471f8f7073d85073c0eb01b"
     },
     {
       "path": "payload/shared/source/packages/client/connection/src/client/api.ts",
@@ -5638,8 +5638,13 @@
     },
     {
       "path": "payload/shared/source/packages/client/connection/src/browser-login-page.ts",
-      "size": 1962,
-      "sha256": "7d6bca5848b8e90bbf2fbbc0f0ed175b84452aadff44d21e57a63f6a2d9f656d"
+      "size": 2158,
+      "sha256": "1af2180555ff6587bf9adf1f8dc9d848b285f042b8a4e55dda87ba03bb4ab35c"
+    },
+    {
+      "path": "payload/shared/desktop-login-reopen.patch",
+      "size": 3593,
+      "sha256": "71d2de152c7587ad7addc71e42b17778de89bb1edeee79d154dac27d68d6f362"
     }
   ],
   "excludes": [
@@ -5658,7 +5663,8 @@
     "payload/shared/session-history-base.patch",
     "payload/shared/history-navigation.patch",
     "payload/shared/settings-icons.patch",
-    "payload/shared/safari-agent-history.patch"
+    "payload/shared/safari-agent-history.patch",
+    "payload/shared/desktop-login-reopen.patch"
   ],
   "sharedDependencies": [
     {

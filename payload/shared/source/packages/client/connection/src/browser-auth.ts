@@ -233,7 +233,8 @@ export class BrowserAuth {
   /**
    * Authenticate an index request. A valid root query token mints the cookie
    * and redirects to clean `/`; a valid cookie lets the caller serve the
-   * index; every other request receives the same login-recovery 401 page.
+   * index. A bare root 401 retries once from its own document so restored
+   * desktop windows can send their saved Strict cookie; other 401s show the form.
    * @param req - incoming root or configured-index request.
    * @param res - response owned when this method returns false.
    * @returns true only when the caller may serve index.html.
@@ -277,7 +278,18 @@ export class BrowserAuth {
       this.writeUnauthorized(req, res)
       return false
     }
-    if (this.isAuthenticated(req)) return true
+    if (this.isAuthenticated(req)) {
+      if (req.method === 'GET' && url.pathname === '/' && url.searchParams.has('reconnect')) {
+        res.writeHead(303, {
+          'cache-control': 'no-store',
+          'location': '/',
+          'referrer-policy': 'no-referrer',
+        })
+        res.end()
+        return false
+      }
+      return true
+    }
     this.writeUnauthorized(req, res)
     return false
   }
@@ -303,6 +315,7 @@ export class BrowserAuth {
   }
 
   private writeUnauthorized(req: ConnectionIndexRequest, res: ConnectionIndexResponse): void {
+    const url = new URL(req.url ?? '/', 'http://dsh.invalid')
     res.writeHead(401, {
       'cache-control': 'no-store',
       'content-type': 'text/html; charset=utf-8',
@@ -311,6 +324,9 @@ export class BrowserAuth {
     })
     res.end(req.method === 'HEAD'
       ? undefined
-      : browserLoginPage(header(req.headers, 'accept-language')?.toLowerCase().startsWith('zh') === true))
+      : browserLoginPage(
+        header(req.headers, 'accept-language')?.toLowerCase().startsWith('zh') === true,
+        req.method === 'GET' && url.pathname === '/' && url.search === '',
+      ))
   }
 }

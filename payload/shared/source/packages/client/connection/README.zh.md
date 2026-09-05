@@ -32,7 +32,7 @@ kind: "package-reference"
 <a id="browser-authentication-and-request-trust"></a>
 ## 浏览器认证与请求信任
 
-未认证的 HTML 响应包含同源启动令牌表单，供没有地址栏的桌面窗口恢复登录。它仍返回 HTTP 401，不嵌入令牌，禁止向外部地址提交，并使用 `no-store` 与 `no-referrer`。提交令牌沿用既有根路径交换；HEAD 不携带正文。未认证的 API 请求仍被拒绝。
+未认证且不带查询参数的根路径 GET 返回 HTTP 401 HTML，并只跳转一次到 `/?reconnect=1`。这次站内文档导航让重新打开的桌面窗口发送已保存的 `SameSite=Strict` cookie；有效 cookie 重定向到干净的 `/`，不签发新 cookie。如果认证仍失败，就停止导航并显示同源启动令牌表单。带查询参数和配置 index 路径的认证失败直接显示表单，不自动导航。响应不嵌入令牌，禁止向外部地址提交，并使用 `no-store` 与 `no-referrer`。提交令牌沿用既有根路径交换；HEAD 不携带正文。未认证的 API 请求仍被拒绝。
 
 每个 Host RPC 方法和 WebSocket stream 都要求同一个浏览器会话，不存在按方法区分的 loopback 层。每个进程生成一个随机启动令牌。`dsh-web-app` 打印并打开带 `?token=...` 的普通根 URL；`frontend-static` 把根路径和 index 请求交给 `ctx.connection.authorizeIndex`，后者只在 `GET /` 接受该令牌，写入绑定 authority 的签名 cookie，再重定向到干净的 `/`。缺失、过期、畸形或 authority 不匹配的 cookie 会在 RPC 分发前得到 401。静态资源保持公开。HTTP 载体不在根路径交换之外接受 query token，也不接受 Authorization header token。
 

@@ -1,0 +1,73 @@
+diff --git a/packages/client/connection/src/browser-auth.ts b/packages/client/connection/src/browser-auth.ts
+index fcda2f98b7..5bec49a4c5 100644
+--- a/packages/client/connection/src/browser-auth.ts
++++ b/packages/client/connection/src/browser-auth.ts
+@@ -233,7 +233,8 @@ export class BrowserAuth {
+   /**
+    * Authenticate an index request. A valid root query token mints the cookie
+    * and redirects to clean `/`; a valid cookie lets the caller serve the
+-   * index; every other request receives the same login-recovery 401 page.
++   * index. A bare root 401 retries once from its own document so restored
++   * desktop windows can send their saved Strict cookie; other 401s show the form.
+    * @param req - incoming root or configured-index request.
+    * @param res - response owned when this method returns false.
+    * @returns true only when the caller may serve index.html.
+@@ -277,7 +278,18 @@ export class BrowserAuth {
+       this.writeUnauthorized(req, res)
+       return false
+     }
+-    if (this.isAuthenticated(req)) return true
++    if (this.isAuthenticated(req)) {
++      if (req.method === 'GET' && url.pathname === '/' && url.searchParams.has('reconnect')) {
++        res.writeHead(303, {
++          'cache-control': 'no-store',
++          'location': '/',
++          'referrer-policy': 'no-referrer',
++        })
++        res.end()
++        return false
++      }
++      return true
++    }
+     this.writeUnauthorized(req, res)
+     return false
+   }
+@@ -303,6 +315,7 @@ export class BrowserAuth {
+   }
+ 
+   private writeUnauthorized(req: ConnectionIndexRequest, res: ConnectionIndexResponse): void {
++    const url = new URL(req.url ?? '/', 'http://dsh.invalid')
+     res.writeHead(401, {
+       'cache-control': 'no-store',
+       'content-type': 'text/html; charset=utf-8',
+@@ -311,6 +324,9 @@ export class BrowserAuth {
+     })
+     res.end(req.method === 'HEAD'
+       ? undefined
+-      : browserLoginPage(header(req.headers, 'accept-language')?.toLowerCase().startsWith('zh') === true))
++      : browserLoginPage(
++        header(req.headers, 'accept-language')?.toLowerCase().startsWith('zh') === true,
++        req.method === 'GET' && url.pathname === '/' && url.search === '',
++      ))
+   }
+ }
+diff --git a/packages/client/connection/src/browser-login-page.ts b/packages/client/connection/src/browser-login-page.ts
+index e82b793632..a44b251d62 100644
+--- a/packages/client/connection/src/browser-login-page.ts
++++ b/packages/client/connection/src/browser-login-page.ts
+@@ -20,12 +20,14 @@ const labels = {
+ /**
+  * Render a same-origin form using the ordinary root token exchange.
+  * @param chinese - whether the request prefers Chinese.
++ * @param reconnect - whether to retry once as a same-site navigation for a saved Strict cookie.
+  * @returns static HTML containing no request values or authentication secrets.
+  */
+-export function browserLoginPage(chinese: boolean): string {
++export function browserLoginPage(chinese: boolean, reconnect = false): string {
+   const t = labels[chinese ? 'zh' : 'en']
+   return `<!doctype html><html lang="${chinese ? 'zh-CN' : 'en'}"><head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
++${reconnect ? '<meta http-equiv="refresh" content="0;url=/?reconnect=1">' : ''}
+ <title>${t.title}</title><style>
+ :root{color-scheme:light dark;font:16px system-ui,sans-serif}body{margin:0;padding:24px;display:grid;min-height:80vh;place-items:center}
+ main{width:min(100%,440px)}h1{font-size:24px}p{line-height:1.6}label,input,button{display:block;box-sizing:border-box;width:100%}
