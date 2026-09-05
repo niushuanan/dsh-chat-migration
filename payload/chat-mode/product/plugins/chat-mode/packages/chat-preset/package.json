@@ -1,0 +1,20 @@
+{
+  "name": "@xiaozhuang-dsh/chat-preset",
+  "version": "1.0.0",
+  "description": "Registers the removable plain-chat agent preset root.",
+  "private": true,
+  "type": "module",
+  "main": "lib/index.js",
+  "scripts": {
+    "bundle": "tsdown"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "workspace:^",
+    "@deepseek-ai/dsh-agent-presets": "workspace:^"
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "workspace:^",
+    "@deepseek-ai/dsh-agent-presets": "workspace:^",
+    "@types/node": "^22.14.0"
+  }
+}

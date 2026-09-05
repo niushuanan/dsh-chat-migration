@@ -1,0 +1,73 @@
+diff --git a/packages/client/ui-settings-general/src/client/SettingsRoot.tsx b/packages/client/ui-settings-general/src/client/SettingsRoot.tsx
+index d5b1df190a..4dff2fb9cc 100644
+--- a/packages/client/ui-settings-general/src/client/SettingsRoot.tsx
++++ b/packages/client/ui-settings-general/src/client/SettingsRoot.tsx
+@@ -77,7 +77,11 @@ function SettingsPanel({ rows, renderSlot, activeId, onSelect, onClose }: PanelP
+                 aria-current={row.id === active ? 'true' : undefined}
+                 onClick={() => { onSelect(row.id) }}
+               >
+-                {navIcon(row.id)}
++                {renderSlot('settings.section.icon', { size: 16, className: css.navIcon }, {
++                  only: row.id,
++                  fallback: navIcon(row.id),
++                  anchor: false,
++                })}
+                 <span className={css.navLabel}>{row.label}</span>
+               </button>
+             ))}
+diff --git a/packages/client/ui-settings-general/src/client/index.ts b/packages/client/ui-settings-general/src/client/index.ts
+index c8962ec009..270ec83b05 100644
+--- a/packages/client/ui-settings-general/src/client/index.ts
++++ b/packages/client/ui-settings-general/src/client/index.ts
+@@ -152,6 +152,7 @@ export function apply(ctx: ClientContext): void {
+       'settings.action': { kind: 'list', scope: 'root' },
+       'settings.close': { kind: 'single', scope: 'root' },
+       'settings.section': { kind: 'list', scope: 'root' },
++      'settings.section.icon': { kind: 'list', scope: 'root' },
+       'settings.onboarding': { kind: 'list', scope: 'root' },
+     },
+     inject: shellInjected,
+diff --git a/packages/client/ui-settings-general/src/client/shell-contract.ts b/packages/client/ui-settings-general/src/client/shell-contract.ts
+index 210f028711..9727ba5ff7 100644
+--- a/packages/client/ui-settings-general/src/client/shell-contract.ts
++++ b/packages/client/ui-settings-general/src/client/shell-contract.ts
+@@ -61,6 +61,7 @@ export type SettingsRootComponentProps =
+     | 'settings.action'
+     | 'settings.close'
+     | 'settings.section'
++    | 'settings.section.icon'
+     | 'settings.onboarding'
+   >
+   & InjectFace<SettingsRootInjected>
+diff --git a/packages/client/ui-settings/src/client/contract/slots.ts b/packages/client/ui-settings/src/client/contract/slots.ts
+index 0ae62f4cb1..e05d614ba1 100644
+--- a/packages/client/ui-settings/src/client/contract/slots.ts
++++ b/packages/client/ui-settings/src/client/contract/slots.ts
+@@ -52,6 +52,12 @@ declare module '@deepseek-ai/dsh-client-ui-slots' {
+      * item registrant; the shell neither declares nor renders it.)
+      */
+     'settings.section': { kind: 'list'; scope: 'root'; owner: SettingsSectionOwnerProps }
++    /**
++     * Optional navigation glyph, matched by the settings.section entry id.
++     * The feature owns its glyph and registration lifetime. Missing entries
++     * use the shell's default icon without affecting section availability.
++     */
++    'settings.section.icon': { kind: 'list'; scope: 'root'; owner: SettingsSectionIconOwnerProps }
+     /**
+      * One page inside the Plugins settings section. The section owner renders
+      * localized entry labels as tabs and mounts each contribution inside its
+@@ -125,6 +131,14 @@ export interface SettingsSectionOwnerProps {
+   close: () => void
+ }
+ 
++/** Presentation props supplied to a feature-owned settings navigation glyph. */
++export interface SettingsSectionIconOwnerProps {
++  /** Suggested icon size in CSS pixels; the feature may preserve its own proportions. */
++  size: number
++  /** Shell-owned alignment and flex sizing class. */
++  className: string | undefined
++}
++
+ /** Owner share of the currently active settings-backed onboarding step. */
+ export interface SettingsOnboardingOwnerProps {
+   /** Stable id of the step currently selected by the coordinator. */

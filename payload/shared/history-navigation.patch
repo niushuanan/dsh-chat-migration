@@ -1,0 +1,208 @@
+diff --git a/packages/api/session-controller/src/list.ts b/packages/api/session-controller/src/list.ts
+index 9376524aa6..e3e20443e6 100644
+--- a/packages/api/session-controller/src/list.ts
++++ b/packages/api/session-controller/src/list.ts
+@@ -272,14 +272,10 @@ export class ApiSessionList {
+     try {
+       const cache = this.ctx.get('sessionProjectionCache')
+       const block = session === undefined
+-        ? header.isSeeded
++        ? (header.isSeeded
+           ? undefined
+-          : cache?.cachedSnapshot(header, SessionLogOffset(0))
+-            ?? cache?.cachedPredecessorSnapshot(
+-              header,
+-              SessionLogOffset(0),
+-              ['title', 'agentPreset'],
+-            )
++          : cache?.cachedSnapshot(header, SessionLogOffset(0)))
++          ?? cache?.cachedNavigationSnapshot(header, ['title', 'agentPreset', 'sessionListMetadata'])
+         : this.ctx.sessionProjections.cachedSnapshot(session)
+       return block !== undefined && Object.keys(block.values).length > 0
+         ? {
+diff --git a/packages/client/ui-workspace/src/client/locales.ts b/packages/client/ui-workspace/src/client/locales.ts
+index af0f535b68..40cf801afa 100644
+--- a/packages/client/ui-workspace/src/client/locales.ts
++++ b/packages/client/ui-workspace/src/client/locales.ts
+@@ -17,8 +17,8 @@ export const zh = {
+   'orderBy.label': '排序方式',
+   'orderBy.manual': '手动排序',
+   'orderBy.updated': '最近更新',
+-  'sessions.expand': '展开其余 {n} 个会话',
+-  'sessions.collapse': '收起',
++  'sessions.expand': '再展开 {n} 个会话',
++  'sessions.expandRemaining': '展开剩余 {n} 个会话',
+   'empty.none': '暂无会话',
+   'empty.noMatches': '无匹配结果',
+   'workspace.add': '添加工作区',
+@@ -88,7 +88,7 @@ export const en = {
+   'orderBy.manual': 'Manual',
+   'orderBy.updated': 'Last updated',
+   'sessions.expand': 'Show {n} more sessions',
+-  'sessions.collapse': 'Show less',
++  'sessions.expandRemaining': 'Show remaining {n} sessions',
+   'empty.none': 'No sessions yet',
+   'empty.noMatches': 'No matches',
+   'workspace.add': 'Add workspace',
+diff --git a/packages/session/session-format-v0-to-v1/src/legacy-correlations.ts b/packages/session/session-format-v0-to-v1/src/legacy-correlations.ts
+new file mode 100644
+index 0000000000..0a4d04a3e2
+--- /dev/null
++++ b/packages/session/session-format-v0-to-v1/src/legacy-correlations.ts
+@@ -0,0 +1,65 @@
++import { SessionFormatError } from '@deepseek-ai/dsh-session-format'
++import type { SessionFormatEvent } from '@deepseek-ai/dsh-session-format'
++import { assertReleasedV0Keys, releasedV0Record } from './validation-helpers.ts'
++
++/**
++ * Restore identities absent from pre-correlation v0 compaction and retry records.
++ * @param events - complete source events in durable order.
++ * @param sessionId - source Session identity used to name reconstructed groups.
++ * @returns detached normalized events, retaining their sequence and payload facts.
++ */
++export function normalizeReleasedV0Correlations(
++  events: readonly SessionFormatEvent[],
++  sessionId: string,
++): readonly SessionFormatEvent[] {
++  const retries = new Map<string, string>()
++  let compact: { id: string; startSeq: number; summarySeq?: number } | undefined
++  return events.map((source) => {
++    let event = source
++    const legacyCompact = ['compact/start', 'compact/summary', 'compact/end', 'compact/prune'].includes(event.type)
++    if (legacyCompact) event = { ...event, type: event.type.replace('compact/', 'compaction/') }
++    if (legacyCompact && event.type !== 'compaction/prune') {
++      const data = releasedV0Record(event.data, `${event.type} ${event.seq} data`)
++      if (!Object.hasOwn(data, 'compactionId')) {
++        if (event.type === 'compaction/start') {
++          assertReleasedV0Keys(data, ['turn'], [], `compact/start ${event.seq} data`)
++          if (compact !== undefined) throw new SessionFormatError('legacy compact/start overlaps an open compaction')
++          compact = { id: `legacy-compaction:${sessionId}:${event.seq}`, startSeq: event.seq }
++        }
++        if (compact === undefined) throw new SessionFormatError(`legacy ${source.type} has no recorded compaction start`)
++        if (Object.hasOwn(data, 'sourceCommandId')) {
++          throw new SessionFormatError(`legacy ${source.type} has sourceCommandId without compactionId`)
++        }
++        event = { ...event, data: { ...data, compactionId: compact.id } }
++        if (event.type === 'compaction/summary') compact.summarySeq = event.seq
++      }
++    }
++    if (event.type === 'user/message' && compact !== undefined) {
++      const data = releasedV0Record(event.data, `user/message ${event.seq} data`)
++      const provenance = releasedV0Record(data['source'], `user/message ${event.seq} source`)
++      if (provenance['kind'] === 'plugin' && provenance['plugin'] === 'compact'
++        && !Object.hasOwn(provenance, 'compactionId')) {
++        assertReleasedV0Keys(provenance, ['kind', 'plugin'], [], `user/message ${event.seq} source`)
++        const references = event['sourceEventSeqs']
++        if (!Array.isArray(references) || references[0] !== compact.startSeq || references[1] !== compact.summarySeq
++          || compact.summarySeq === undefined) {
++          throw new SessionFormatError(`legacy checkpoint ${event.seq} does not reference its recorded compaction`)
++        }
++        event = { ...event, data: { ...data, source: { ...provenance, compactionId: compact.id } } }
++      }
++    }
++    if (event.type === 'compaction/end' || event.type === 'session/end-seed') compact = undefined
++    if (event.type === 'llm/retry') {
++      const data = releasedV0Record(event.data, `llm/retry ${event.seq} data`)
++      const key = JSON.stringify([data['turn'], data['step'], data['provider'], data['policyKey']])
++      if (!Object.hasOwn(data, 'retryId')) {
++        const retryId = retries.get(key) ?? `legacy-retry:${sessionId}:${event.seq}`
++        event = { ...event, data: { ...data, retryId } }
++        retries.set(key, retryId)
++      } else if (typeof data['retryId'] === 'string') {
++        retries.set(key, data['retryId'])
++      }
++    }
++    return event
++  })
++}
+diff --git a/packages/session/session-format-v0-to-v1/src/migration.ts b/packages/session/session-format-v0-to-v1/src/migration.ts
+index 5e895b2d62..f8403eb03a 100644
+--- a/packages/session/session-format-v0-to-v1/src/migration.ts
++++ b/packages/session/session-format-v0-to-v1/src/migration.ts
+@@ -22,6 +22,7 @@ import {
+ import { assertReleasedV0Keys, releasedV0Record } from './validation-helpers.ts'
+ import { RELEASED_V0_EVENT_DISPOSITIONS } from './dispositions.ts'
+ import { normalizeReleasedSubagentDescriptor } from './legacy-descriptor.ts'
++import { normalizeReleasedV0Correlations } from './legacy-correlations.ts'
+ 
+ /** Identity format edge that promotes released v0 into released v1. */
+ export const sessionFormatV0ToV1 = defineSessionFormatMigration({
+@@ -58,7 +59,7 @@ function normalizeReleasedV0Events(
+ ): readonly SessionFormatEvent[] {
+   const messageIds = new Map<number, string>()
+   const output: SessionFormatEvent[] = []
+-  for (const event of events) {
++  for (const event of normalizeReleasedV0Correlations(events, sessionId)) {
+     assertSupportedLegacyType(event, sessionId)
+     const start = normalizeLegacyTurnStart(event, sessionId)
+     const end = normalizeLegacyTurnEnd(start, sessionId)
+diff --git a/packages/session/session-format-v0-to-v1/src/validation.ts b/packages/session/session-format-v0-to-v1/src/validation.ts
+index af692d31bb..00a8ec6ff9 100644
+--- a/packages/session/session-format-v0-to-v1/src/validation.ts
++++ b/packages/session/session-format-v0-to-v1/src/validation.ts
+@@ -24,7 +24,10 @@ const EVENT_REQUIRED = ['type', 'seq', 'time', 'data'] as const
+ const SURFACE_EVENT_TYPES = new Set(['user/message', 'assistant/message', 'tool/result'])
+ const SURFACE_OPTIONAL = ['ignorable', 'sourceEventSeqs', 'surfaceOp'] as const
+ const LOG_OPTIONAL = ['ignorable'] as const
+-const LEGACY_SOURCE_TYPES = new Set(['steering/message', 'request/header-delta', 'mode/set'])
++const LEGACY_SOURCE_TYPES = new Set([
++  'steering/message', 'request/header-delta', 'mode/set',
++  'compact/start', 'compact/summary', 'compact/end', 'compact/prune',
++])
+ const RELEASED_V0_EVENT_TYPE_SET: ReadonlySet<string> = new Set(Object.keys(RELEASED_V0_EVENT_DISPOSITIONS))
+ 
+ /**
+diff --git a/packages/session/session-projection-cache/src/index.ts b/packages/session/session-projection-cache/src/index.ts
+index 65f889047d..7941f83aaf 100644
+--- a/packages/session/session-projection-cache/src/index.ts
++++ b/packages/session/session-projection-cache/src/index.ts
+@@ -179,6 +179,31 @@ export class SessionProjectionCache extends Service {
+     return snapshot === undefined ? undefined : { ...snapshot, asOfSeq: -1 }
+   }
+ 
++  /**
++   * Read explicitly requested navigation values when a listed header does not
++   * provide the inherited cut. The cache key, creation time, working directory,
++   * and any recorded seeded flag must match; future Session formats refuse.
++   * Missing legacy lineage fields do not prevent these display-only values.
++   * Each row still requires the current projection version and wire schema.
++   * This zero-I/O result is never a fold seed or a known sequence checkpoint.
++   * @param meta - authoritative listed Session header.
++   * @param keys - navigation keys whose meaning the caller accepts across formats and inherited cuts.
++   * @returns only requested compatible values at `asOfSeq: -1`, or `undefined`.
++   */
++  cachedNavigationSnapshot(
++    meta: SessionHeader,
++    keys: readonly Extract<keyof SessionProjectionMap, string>[],
++  ): ProjectionSnapshot | undefined {
++    const record = this.requireTable().get(meta.id)
++    if (record === undefined) return undefined
++    const stored = record.identity
++    if (stored.createdAt !== meta.createdAt || stored.cwd !== meta.cwd
++      || (stored.formatVersion !== undefined && stored.formatVersion > meta.version)
++      || (stored.isSeeded !== undefined && stored.isSeeded !== meta.isSeeded)) return undefined
++    const snapshot = this.viewRecord(record, keys)
++    return snapshot === undefined ? undefined : { ...snapshot, asOfSeq: -1 }
++  }
++
+   /**
+    * Read only a predecessor checkpoint's title as a zero-I/O listing hint.
+    *
+diff --git a/packages/session/session-projection-cache/src/spec.ts b/packages/session/session-projection-cache/src/spec.ts
+index a94ed5a493..9e4aa61e5e 100644
+--- a/packages/session/session-projection-cache/src/spec.ts
++++ b/packages/session/session-projection-cache/src/spec.ts
+@@ -85,9 +85,10 @@ export type CheckpointRecord = z.infer<typeof checkpointRecord>
+  * The per-row `ver` guard and the identity match still discard anything the
+  * current fold semantics cannot vouch for.
+  *
+- * A lifecycle-matching predecessor may still expose its version-compatible
+- * title through the cache service's listing-only hint; this never relaxes the
+- * format requirement for hydration or another fold shortcut.
++ * Explicit navigation reads may expose version-compatible display values
++ * without a known inherited cut; they still match the cache key, creation
++ * time, working directory, and any stored seeded flag, and reject future
++ * formats. They never relax the identity requirements for fold shortcuts.
+  *
+  * `invalidRecords: 'backup-and-skip'`: a stored record that fails the schema
+  * anyway is disposable derived data, so it must never cost the boot — the

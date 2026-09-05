@@ -1,0 +1,7 @@
+- insert:
+    - id: chat-preset
+      name: ./packages/chat-preset/lib/index.js
+    - id: ui-plain-chat
+      name: ./packages/ui-plain-chat/lib/index.js
+    - id: composer-add-menu
+      name: ./packages/composer-add-menu/lib/index.js

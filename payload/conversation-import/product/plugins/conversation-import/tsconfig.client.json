@@ -1,0 +1,34 @@
+{
+  "extends": "../../tsconfig.base.client.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib/types",
+    "tsBuildInfoFile": "lib/tsconfig.client.tsbuildinfo"
+  },
+  "files": [
+    "src/client/DeepSeekImportSection.tsx",
+    "src/client/Dialog.tsx",
+    "src/client/HeaderAction.tsx",
+    "src/client/controller.ts",
+    "src/client/image-export.ts",
+    "src/client/index.ts",
+    "src/client/locales.ts",
+    "src/deepseek-import-types.ts",
+    "src/css-modules.d.ts"
+  ],
+  "references": [
+    { "path": "../../vendor/cordis" },
+    { "path": "../../packages/api/session-controller/tsconfig.client.json" },
+    { "path": "../../packages/client/locale" },
+    { "path": "../../packages/client/store" },
+    { "path": "../../packages/client/ui-chat" },
+    { "path": "../../packages/client/ui-commands" },
+    { "path": "../../packages/client/ui-conversation" },
+    { "path": "../../packages/client/ui-primitives" },
+    { "path": "../../packages/client/ui-renderer" },
+    { "path": "../../packages/client/ui-session" },
+    { "path": "../../packages/client/ui-settings" },
+    { "path": "../../packages/client/ui-slots" },
+    { "path": "../../packages/core/session" }
+  ]
+}

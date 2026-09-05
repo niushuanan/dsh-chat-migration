@@ -10,6 +10,8 @@
 
 <p align="center"><img src="docs/06-pure-chat.webp" alt="无工作区约束的聊天模式" width="800"></p>
 
+当前 master 按原生插件文件夹发布，设置入口保留插件自有的原设计图标；删除对应插件文件夹即可卸载。共享兼容补丁和安装检查见 [INSTALL.md](INSTALL.md)。
+
 ## 安装
 
 1. 点击 GitHub 的 **Code → Download ZIP**，下载本仓库。
@@ -36,4 +38,4 @@
 
 ## 来源与许可
 
-本仓库是 [Xiaozhuang DSH](https://github.com/niushuanan/xiaozhuang-dsh) 的单向发布副本，不是独立开发源。当前内容同步自主仓库 commit [`45e273b8ef`](https://github.com/niushuanan/xiaozhuang-dsh/commit/45e273b8ef17168c7e2cfc28572e13096e404ad5)。代码采用 [MIT License](LICENSE)。
+本仓库是 [Xiaozhuang DSH](https://github.com/niushuanan/xiaozhuang-dsh) 的单向发布副本，不是独立开发源。当前内容同步自主仓库 commit [`e745482d8f`](https://github.com/niushuanan/xiaozhuang-dsh/commit/e745482d8f5e33497d9ed46a2a88681456024334)。代码采用 [MIT License](LICENSE)。

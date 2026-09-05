@@ -1,0 +1,15 @@
+{
+  "name": "@xiaozhuang-dsh/plugin-chat-mode",
+  "version": "1.0.0",
+  "description": "Plain-chat mode and its composer add menu as one removable product capability.",
+  "private": true,
+  "type": "module",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "bundle": "pnpm --dir packages/chat-preset run bundle && pnpm --dir packages/ui-plain-chat run bundle && pnpm --dir packages/composer-add-menu run bundle"
+  }
+}

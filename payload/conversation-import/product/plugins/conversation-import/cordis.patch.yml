@@ -1,0 +1,8 @@
+- id: session-log-download
+  name: '@deepseek-ai/dsh-session-log-export'
+  disabled: true
+
+- insert:
+    - id: conversation-import
+      name: ./lib/index.js
+      disabled: false

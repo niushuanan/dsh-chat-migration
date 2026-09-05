@@ -1,0 +1,347 @@
+diff --git a/packages/session/session-format-v0-to-v1/src/dispositions.ts b/packages/session/session-format-v0-to-v1/src/dispositions.ts
+index 24702e8bb1..2e850c307f 100644
+--- a/packages/session/session-format-v0-to-v1/src/dispositions.ts
++++ b/packages/session/session-format-v0-to-v1/src/dispositions.ts
+@@ -73,7 +73,7 @@ export const RELEASED_V0_EVENT_DISPOSITIONS: Readonly<Record<string, ReleasedV0P
+   ),
+   'llm/retry-started': disposition(['retryId', 'turn', 'step', 'retry']),
+   'model/selection': disposition(['provider', 'model'], ['reasoningEffort']),
+-  'permission/preset': disposition(['preset']),
++  'permission/preset': disposition(['preset'], ['origin']),
+   'plan/mode': disposition(['active']),
+   'request/context': disposition(['provider', 'model'], ['contextWindow']),
+   'request/header': disposition(['header', 'reason'], ['startsSeries']),
+diff --git a/packages/session/session-format-v0-to-v1/src/index.ts b/packages/session/session-format-v0-to-v1/src/index.ts
+index 5aa631ee82..fbef2b9c2c 100644
+--- a/packages/session/session-format-v0-to-v1/src/index.ts
++++ b/packages/session/session-format-v0-to-v1/src/index.ts
+@@ -2,6 +2,7 @@
+
+ export * from './codec.ts'
+ export * from './dispositions.ts'
++export * from './legacy-descriptor.ts'
+ export * from './migration.ts'
+ export { assertReleasedPayloadSemantics } from './payload-validation.ts'
+ export { assertReleasedArtifactRelationships } from './relationships.ts'
+diff --git a/packages/session/session-format-v0-to-v1/src/legacy-descriptor.ts b/packages/session/session-format-v0-to-v1/src/legacy-descriptor.ts
+new file mode 100644
+index 0000000000..52b025ab66
+--- /dev/null
++++ b/packages/session/session-format-v0-to-v1/src/legacy-descriptor.ts
+@@ -0,0 +1,25 @@
++/** Reviewed descriptor-v2 normalization shared by the v0 and v1 source edges. */
++import type { SessionFormatEvent } from '@deepseek-ai/dsh-session-format'
++import { assertReleasedEventPayload } from './validation.ts'
++import { assertReleasedV0Keys, releasedV0Record } from './validation-helpers.ts'
++
++/**
++ * Promote descriptor v2 without changing its declared child composition.
++ * Descriptor v3 adds only optional reasoning effort; v2 cannot already contain it.
++ * @param event - one event from a released v0 or v1 source.
++ * @returns the original event, or an independently validated descriptor with version 3.
++ */
++export function normalizeReleasedSubagentDescriptor(event: SessionFormatEvent): SessionFormatEvent {
++  if (event.type !== 'subagent/descriptor') return event
++  const data = releasedV0Record(event.data, `subagent/descriptor ${event.seq} data`)
++  if (data['version'] !== 2) return event
++  assertReleasedV0Keys(
++    data,
++    ['version', 'mode', 'provider'],
++    ['label', 'agentProvider', 'agentModel', 'persona', 'toolFilter'],
++    `subagent/descriptor ${event.seq} v2 data`,
++  )
++  const target = { ...event, data: { ...data, version: 3 } }
++  assertReleasedEventPayload(target, 1)
++  return target
++}
+diff --git a/packages/session/session-format-v0-to-v1/src/migration.ts b/packages/session/session-format-v0-to-v1/src/migration.ts
+index 21d171f0fc..5e895b2d62 100644
+--- a/packages/session/session-format-v0-to-v1/src/migration.ts
++++ b/packages/session/session-format-v0-to-v1/src/migration.ts
+@@ -2,6 +2,7 @@ import {
+   SessionFormatError,
+   SessionFormatUnsupportedMigrationError,
+   defineSessionFormatMigration,
++  isCompatibleSessionFormatState,
+   sessionFormatCount,
+   snapshotSessionFormatArtifact,
+ } from '@deepseek-ai/dsh-session-format'
+@@ -19,6 +20,8 @@ import {
+   assertReleasedV1Header,
+ } from './validation.ts'
+ import { assertReleasedV0Keys, releasedV0Record } from './validation-helpers.ts'
++import { RELEASED_V0_EVENT_DISPOSITIONS } from './dispositions.ts'
++import { normalizeReleasedSubagentDescriptor } from './legacy-descriptor.ts'
+
+ /** Identity format edge that promotes released v0 into released v1. */
+ export const sessionFormatV0ToV1 = defineSessionFormatMigration({
+@@ -61,7 +64,12 @@ function normalizeReleasedV0Events(
+     const end = normalizeLegacyTurnEnd(start, sessionId)
+     const header = normalizeLegacyRequestHeader(end, sessionId)
+     const steering = normalizeLegacySteering(header, sessionId)
+-    const message = normalizeLegacyMessage(steering, sessionId, messageIds)
++    if (RELEASED_V0_EVENT_DISPOSITIONS[steering.type] === undefined && isCompatibleSessionFormatState(steering, 0)) {
++      output.push({ ...steering, ignorable: true })
++      continue
++    }
++    const descriptor = normalizeReleasedSubagentDescriptor(steering)
++    const message = normalizeLegacyMessage(descriptor, sessionId, messageIds)
+     assertReleasedEventPayload(message, 0)
+     output.push(message)
+     const messageId = eventMessageId(message)
+diff --git a/packages/session/session-format-v0-to-v1/src/payload-validation.ts b/packages/session/session-format-v0-to-v1/src/payload-validation.ts
+index 0a69ca4d1f..220f3c9500 100644
+--- a/packages/session/session-format-v0-to-v1/src/payload-validation.ts
++++ b/packages/session/session-format-v0-to-v1/src/payload-validation.ts
+@@ -147,6 +147,7 @@ export function assertReleasedPayloadSemantics(event: SessionFormatEvent, versio
+       return
+     case 'permission/preset':
+       nonEmptyString(data['preset'], `${label} preset`)
++      if (data['origin'] !== undefined) literalValue(data['origin'], ['default', 'selection', 'inferred'], `${label} origin`)
+       return
+     case 'plan/mode':
+       booleanValue(data['active'], `${label} active`)
+diff --git a/packages/session/session-format-v0-to-v1/src/validation.ts b/packages/session/session-format-v0-to-v1/src/validation.ts
+index 0c08918d7c..af692d31bb 100644
+--- a/packages/session/session-format-v0-to-v1/src/validation.ts
++++ b/packages/session/session-format-v0-to-v1/src/validation.ts
+@@ -2,6 +2,7 @@ import { isAbsolute } from 'node:path'
+ import {
+   SessionFormatError,
+   SessionFormatUnsupportedMigrationError,
++  isCompatibleSessionFormatState,
+   sessionFormatCount,
+   sessionFormatSafeInteger,
+   snapshotSessionFormatJson,
+@@ -140,8 +141,11 @@ function assertArtifactCoordinates(
+     const disposition = RELEASED_V0_EVENT_DISPOSITIONS[type]
+     const legacy = allowLegacySteering && LEGACY_SOURCE_TYPES.has(type)
+     const currentKnown = knownEventTypes?.has(type) === true
++    const frozenEnvelope = !vocabularyNeutral && knownEventTypes === RELEASED_V0_EVENT_TYPE_SET
++    const compatibleState = frozenEnvelope && !currentKnown && !legacy
++      && isCompatibleSessionFormatState(event, artifact.header.version)
+     const ignorableCurrent = !allowLegacySteering && !currentKnown && record['ignorable'] === true
+-    if (!currentKnown && !legacy && !ignorableCurrent && !vocabularyNeutral) {
++    if (!currentKnown && !legacy && !compatibleState && !ignorableCurrent && !vocabularyNeutral) {
+       if (allowLegacySteering) {
+         throw new SessionFormatUnsupportedMigrationError(
+           `format v0 contains unknown historical event type ${JSON.stringify(type)} at seq ${index}; migration refuses unknown historical events even when ignorable`,
+@@ -151,7 +155,6 @@ function assertArtifactCoordinates(
+         `format v1 contains unknown required event type ${JSON.stringify(type)} at seq ${index}`,
+       )
+     }
+-    const frozenEnvelope = !vocabularyNeutral && knownEventTypes === RELEASED_V0_EVENT_TYPE_SET
+     const surface = disposition !== undefined ? SURFACE_EVENT_TYPES.has(type) : type === 'steering/message'
+     const optional = frozenEnvelope
+       ? surface ? SURFACE_OPTIONAL : LOG_OPTIONAL
+@@ -217,8 +220,8 @@ export function assertReleasedSurfaceMetadata(
+  */
+ export function assertReleasedEventPayload(event: SessionFormatEvent, version: 0 | 1): void {
+   const disposition = RELEASED_V0_EVENT_DISPOSITIONS[event.type]
+-  /* v8 ignore next -- artifact coordinate validation admits only the frozen inventory before payload validation. */
+   if (disposition === undefined) {
++    if (isCompatibleSessionFormatState(event, version)) return
+     throw new SessionFormatUnsupportedMigrationError(
+       `format v0 contains unknown event type ${JSON.stringify(event.type)} at seq ${event.seq}`,
+     )
+diff --git a/packages/session/session-format-v1-to-v2/src/migration.ts b/packages/session/session-format-v1-to-v2/src/migration.ts
+index c0e0f651a1..1bcacbb167 100644
+--- a/packages/session/session-format-v1-to-v2/src/migration.ts
++++ b/packages/session/session-format-v1-to-v2/src/migration.ts
+@@ -2,6 +2,7 @@ import { AssistantStreamAccumulator } from '@deepseek-ai/dsh-llm'
+ import {
+   SessionFormatUnsupportedMigrationError,
+   defineSessionFormatMigration,
++  isCompatibleSessionFormatState,
+   snapshotSessionFormatArtifact,
+ } from '@deepseek-ai/dsh-session-format'
+ import type {
+@@ -14,6 +15,7 @@ import {
+   RELEASED_V0_EVENT_DISPOSITIONS,
+   assertReleasedV1Artifact,
+   assertReleasedV1Header,
++  normalizeReleasedSubagentDescriptor,
+ } from '@deepseek-ai/dsh-session-format-v0-to-v1'
+ import { assertReleasedV2Artifact, assertReleasedV2Header } from './validation.ts'
+
+@@ -39,9 +41,11 @@ export const sessionFormatV1ToV2 = defineSessionFormatMigration({
+     assertReleasedV1Header(header)
+     return { ...header, version: 2 }
+   },
+-  migrate(source) {
++  migrate(artifact) {
++    const source = { ...artifact, events: artifact.events.map(normalizeReleasedSubagentDescriptor) }
+     assertReleasedV1Artifact(source)
+-    const unknown = source.events.find(event => RELEASED_V0_EVENT_DISPOSITIONS[event.type] === undefined)
++    const unknown = source.events.find(event => RELEASED_V0_EVENT_DISPOSITIONS[event.type] === undefined
++      && !isCompatibleSessionFormatState(event, 1))
+     if (unknown !== undefined) {
+       throw refusal(`format v1 contains unknown event type ${JSON.stringify(unknown.type)} at seq ${unknown.seq}`)
+     }
+@@ -72,7 +76,9 @@ export const sessionFormatV1ToV2 = defineSessionFormatMigration({
+         && sourceEvent.seq === source.inheritedEventCount
+         && sourceEvent.type === 'session/end-seed'
+         ? { ...sourceEvent, data: { inherited: true } }
+-        : sourceEvent
++        : RELEASED_V0_EVENT_DISPOSITIONS[sourceEvent.type] === undefined
++          ? { ...sourceEvent, ignorable: true }
++          : sourceEvent
+       stage(staged, oldToNew, sourceEvent.seq, event)
+     }
+
+diff --git a/packages/session/session-format-v1-to-v2/src/validation.ts b/packages/session/session-format-v1-to-v2/src/validation.ts
+index 5ad9b48d88..a3136540f0 100644
+--- a/packages/session/session-format-v1-to-v2/src/validation.ts
++++ b/packages/session/session-format-v1-to-v2/src/validation.ts
+@@ -4,6 +4,7 @@ import { deepEqualJson } from '@deepseek-ai/dsh-util-values'
+ import {
+   SessionFormatError,
+   SessionFormatUnsupportedMigrationError,
++  isCompatibleSessionFormatState,
+   sessionFormatCount,
+   sessionFormatSafeInteger,
+   snapshotSessionFormatJson,
+@@ -98,7 +99,9 @@ function validateReleasedV2Artifact(
+     const ignorableUnknown = disposition === undefined
+       && mode === 'current'
+       && record['ignorable'] === true
+-    if (mode !== 'physical' && disposition === undefined && !installed && !ignorableUnknown) {
++    const compatibleState = disposition === undefined && mode === 'target' && record['ignorable'] === true
++      && isCompatibleSessionFormatState(event, 2)
++    if (mode !== 'physical' && disposition === undefined && !installed && !ignorableUnknown && !compatibleState) {
+       throw new SessionFormatUnsupportedMigrationError(
+         `format v2 contains unknown event type ${JSON.stringify(type)} at seq ${index}`,
+       )
+diff --git a/packages/session/session-format/src/index.ts b/packages/session/session-format/src/index.ts
+index 35fac3c82b..7ac5e94958 100644
+--- a/packages/session/session-format/src/index.ts
++++ b/packages/session/session-format/src/index.ts
+@@ -5,4 +5,5 @@ export * from './catalog.ts'
+ export * from './error.ts'
+ export * from './filename.ts'
+ export * from './json.ts'
++export * from './state-compatibility.ts'
+ export * from './types.ts'
+diff --git a/packages/session/session-format/src/state-compatibility.ts b/packages/session/session-format/src/state-compatibility.ts
+new file mode 100644
+index 0000000000..65c4802547
+--- /dev/null
++++ b/packages/session/session-format/src/state-compatibility.ts
+@@ -0,0 +1,45 @@
++/** Optional plugin-owned declarations for sequence-independent historical state. */
++import { SessionFormatError, SessionFormatUnsupportedMigrationError } from './error.ts'
++import { sessionFormatVersion } from './json.ts'
++import type { SessionFormatEvent, SessionFormatStateCompatibility } from './types.ts'
++
++const declarations = new Map<string, SessionFormatStateCompatibility>()
++
++/**
++ * Register one plugin's bounded historical state semantics through a Cordis effect.
++ * The declaration may not reinterpret payloads or override first-party validation.
++ * @param declaration - exact type, version range, and complete state validator.
++ * @returns disposer that removes this declaration when its plugin unloads.
++ */
++export function registerSessionFormatStateCompatibility(declaration: SessionFormatStateCompatibility): () => void {
++  const from = sessionFormatVersion(declaration.fromVersion, 'state compatibility fromVersion')
++  const to = sessionFormatVersion(declaration.toVersion, 'state compatibility toVersion')
++  if (to <= from) throw new SessionFormatError('state compatibility must span at least one adjacent migration')
++  if (declarations.has(declaration.type)) {
++    throw new SessionFormatError(`Session state compatibility for ${JSON.stringify(declaration.type)} is duplicated`)
++  }
++  const registered = Object.freeze({ ...declaration })
++  declarations.set(declaration.type, registered)
++  return () => {
++    if (declarations.get(declaration.type) === registered) declarations.delete(declaration.type)
++  }
++}
++
++/**
++ * Validate a declared external state at one source or target generation.
++ * Call only for types absent from the edge's first-party inventory.
++ * @param event - historical event whose payload and envelope are retained.
++ * @param version - generation being validated, inside the owner's explicit range.
++ * @returns true for validated declared state, false when no declaration covers it.
++ * @throws {SessionFormatUnsupportedMigrationError} when declared state has unsupported data or references.
++ */
++export function isCompatibleSessionFormatState(event: SessionFormatEvent, version: number): boolean {
++  const declaration = declarations.get(event.type)
++  if (declaration === undefined || version < declaration.fromVersion || version > declaration.toVersion) return false
++  if (event.sourceEventSeqs !== undefined || event.surfaceOp !== undefined || !declaration.accepts(event.data)) {
++    throw new SessionFormatUnsupportedMigrationError(
++      `format v${version} contains unsupported historical state ${JSON.stringify(event.type)} at seq ${event.seq}`,
++    )
++  }
++  return true
++}
+diff --git a/packages/session/session-format/src/types.ts b/packages/session/session-format/src/types.ts
+index c1cca774dd..e683d07c20 100644
+--- a/packages/session/session-format/src/types.ts
++++ b/packages/session/session-format/src/types.ts
+@@ -33,6 +33,24 @@ export interface SessionFormatEvent extends SessionFormatJsonObject {
+   readonly data: SessionFormatJsonValue
+ }
+
++/** Plugin-owned state that remains meaningful after events are densely resequenced. */
++export interface SessionFormatStateCompatibility {
++  /** Exact event type owned by the registering plugin. */
++  readonly type: string
++  /** First historical generation whose payload this declaration validates. */
++  readonly fromVersion: number
++  /** Last supported target generation; later migrations require a new owner review. */
++  readonly toVersion: number
++  /**
++   * Accept only complete state payloads with no event-position or lifecycle dependencies.
++   * Omission by a reader without this plugin must be safe. Returning true authorizes
++   * preservation of the exact payload and addition of the envelope's ignorable marker.
++   * @param data - detached historical JSON payload.
++   * @returns whether this exact payload satisfies the plugin's state declaration.
++   */
++  accepts(data: SessionFormatJsonValue): boolean
++}
++
+ /** One detached complete logical Session artifact. */
+ export interface SessionFormatArtifact {
+   readonly header: SessionFormatHeader
+diff --git a/packages/session/session-persistence-jsonl/src/generation.ts b/packages/session/session-persistence-jsonl/src/generation.ts
+index 66b2c53959..53644d5e70 100644
+--- a/packages/session/session-persistence-jsonl/src/generation.ts
++++ b/packages/session/session-persistence-jsonl/src/generation.ts
+@@ -7,7 +7,7 @@
+  * @module @deepseek-ai/dsh-session-persistence-jsonl/generation
+  */
+
+-import { createHash, randomBytes } from 'node:crypto'
++import { randomBytes } from 'node:crypto'
+ import {
+   link as fsLink,
+   lstat as fsLstat,
+@@ -224,10 +224,6 @@ function identity(value: JsonlPhysicalIdentity): string {
+   return [value.dev, value.ino, value.size, value.mtimeNs, value.ctimeNs].join(':')
+ }
+
+-function fingerprint(value: JsonlPhysicalIdentity, bytes: Buffer): string {
+-  return `${identity(value)}:${createHash('sha256').update(bytes).digest('hex')}`
+-}
+-
+ /**
+  * Read one stable revision of a JSONL file with a single retry. If an append
+  * overlaps both reads, return the second read's committed pre-read prefix
+@@ -699,8 +695,6 @@ async function ensureCurrent(
+     const fromVersion = storedVersion(parsedSource.header)
+     /* v8 ignore next -- both headers come from the same stable physical snapshot. */
+     if (fromVersion !== quickVersion) throw new Error('session format changed within one stable physical snapshot')
+-    const sourceFingerprint = fingerprint(source.identity, source.bytes)
+-
+     let migrated: JsonlCurrentGeneration
+     try {
+       migrated = format.migrate(parsedSource)
+@@ -721,7 +715,8 @@ async function ensureCurrent(
+       await validatePhysicalCurrent(staged, compression, format, signal, internals)
+       await internals.barrier('before-source-check', attempt)
+       const beforePublish = await readStableSnapshot(sourcePath, signal, internals.fs)
+-      if (fingerprint(beforePublish.identity, beforePublish.bytes) !== sourceFingerprint) continue
++      if (identity(beforePublish.identity) !== identity(source.identity)
++        || !beforePublish.bytes.equals(source.bytes)) continue
+
+       const published = await publishCurrentExclusive(staged, currentPath, internals)
+       if (published && internals.platform === 'win32') staged = ''

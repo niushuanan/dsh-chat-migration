@@ -1,0 +1,286 @@
+/** Session-log download command and Host-owned streaming route. */
+
+import type { Context } from '@deepseek-ai/cordis'
+import Schema from '@deepseek-ai/schemastery'
+import type {} from '@deepseek-ai/dsh-attachment'
+import type { CommandResult } from '@deepseek-ai/dsh-commands'
+import { Session, SessionId } from '@deepseek-ai/dsh-session'
+import type {} from '@deepseek-ai/dsh-session-persistence'
+import {
+  DEFAULT_SESSION_LOG_COMPRESSION_LEVEL,
+  flushLiveSessionLog,
+  readSessionLogText,
+  sessionLogExportDeps,
+  sessionLogZipFilename,
+  streamSessionLogZip,
+  type SessionLogCompressionLevel,
+  type SessionLogExportReady,
+} from './archive.ts'
+import {
+  importDeepSeekHistory,
+  parseDeepSeekExportBytes,
+  previewDeepSeekHistory,
+  selectDeepSeekConversations,
+  type DeepSeekImportResult,
+} from './deepseek-import.ts'
+import type { DeepSeekImportPreview } from './deepseek-import-types.ts'
+
+export {
+  DEFAULT_SESSION_LOG_COMPRESSION_LEVEL,
+  flushLiveSessionLog,
+  readSessionLogText,
+  serializeSessionLog,
+  SESSION_LOG_FILENAME,
+  sessionLogExportDeps,
+  sessionLogZipEntries,
+  sessionLogZipFilename,
+  streamSessionLogZip,
+} from './archive.ts'
+export type {
+  SessionLogCompressionLevel,
+  SessionLogExportDeps,
+  SessionLogExportReady,
+  SessionLogZipEntry,
+} from './archive.ts'
+export {
+  buildDeepSeekImportedSession,
+  deepSeekImportedSessionId,
+  importDeepSeekHistory,
+  parseDeepSeekExportBytes,
+  parseDeepSeekExportJson,
+  previewDeepSeekHistory,
+  selectDeepSeekConversations,
+} from './deepseek-import.ts'
+export type {
+  DeepSeekImportedConversation,
+  DeepSeekImportedMessage,
+  DeepSeekImportPreview,
+  DeepSeekImportPreviewItem,
+  DeepSeekImportResult,
+} from './deepseek-import-types.ts'
+export type { DeepSeekImportedSession } from './deepseek-import.ts'
+
+export const name = 'session-log-download'
+export const inject = ['commands']
+
+/** Stable browser download path retained across the transport migration. */
+export const SESSION_LOG_EXPORT_PATH = '/api/session.export'
+/** Authenticated browser route for official DeepSeek history imports. */
+export const SESSION_DEEPSEEK_IMPORT_PATH = '/api/session.import.deepseek'
+
+/** Session-log archive policy. */
+export interface Config {
+  /** DEFLATE level for each ZIP entry. @default 6 */
+  readonly compressionLevel?: SessionLogCompressionLevel
+}
+
+/** Validate Session-log archive configuration. */
+export const Config: Schema<Config> = Schema.object({
+  compressionLevel: Schema.number().step(1).min(0).max(9)
+    .default(DEFAULT_SESSION_LOG_COMPRESSION_LEVEL) as Schema<SessionLogCompressionLevel>,
+})
+
+interface SessionLogConnection {
+  readonly fetch: {
+    register(route: {
+      readonly path: string
+      readonly methods: readonly ('GET' | 'HEAD' | 'POST')[]
+      readonly fetch: (request: Request) => Promise<Response>
+    }): () => Promise<void>
+  }
+}
+
+interface SessionProjectionCacheWriter {
+  readonly write: (session: Session) => Promise<void>
+}
+
+const REQUESTED: CommandResult = {
+  kind: 'success',
+  text: 'Session log download requested.',
+}
+
+/**
+ * Register the Web-only `/export` command and authenticated ZIP download route.
+ * @param ctx - Host context carrying the human-command registry.
+ * @param config - resolved compression policy.
+ */
+export function apply(ctx: Context, config: Config = {}): void {
+  ctx.effect(() => ctx.commands.register({
+    name: 'export',
+    description: 'Download this Session log as a ZIP archive',
+    handler: invocation => Promise.resolve(invocation.rawInput.trim() === ''
+      ? REQUESTED
+      : { kind: 'error', text: 'The Web /export command does not accept a path.' }),
+  }), 'session-log-download: command')
+  ctx.inject(['connection'], (routeCtx) => {
+    connectionOf(routeCtx).fetch.register({
+      path: SESSION_LOG_EXPORT_PATH,
+      methods: ['GET', 'HEAD'],
+      fetch: async (request) => {
+        const response = await sessionLogExportResponse(
+          routeCtx,
+          request,
+          config.compressionLevel ?? DEFAULT_SESSION_LOG_COMPRESSION_LEVEL,
+        )
+        if (request.method === 'GET') return response
+        await response.body?.cancel()
+        return new Response(null, { status: response.status, headers: response.headers })
+      },
+    })
+    connectionOf(routeCtx).fetch.register({
+      path: SESSION_DEEPSEEK_IMPORT_PATH,
+      methods: ['POST'],
+      fetch: request => deepSeekImportResponse(routeCtx, request),
+    })
+  })
+}
+
+function connectionOf(ctx: Context): SessionLogConnection {
+  return Reflect.get(ctx, 'connection') as SessionLogConnection
+}
+
+function jsonResponse(
+  body: DeepSeekImportResult | DeepSeekImportPreview | { readonly error: string },
+  status = 200,
+): Response {
+  return Response.json(body, {
+    status,
+    headers: { 'cache-control': 'no-store' },
+  })
+}
+
+interface DeepSeekImportRequestBody {
+  readonly bytes: Uint8Array
+  readonly filename: string
+  readonly contentType: string
+  readonly selection?: readonly string[]
+}
+
+function parseSelection(value: FormDataEntryValue | null): readonly string[] | undefined {
+  if (value === null) return undefined
+  if (typeof value !== 'string') throw new Error('导入选择无效，请重新选择对话')
+  let decoded: unknown
+  try { decoded = JSON.parse(value) } catch { throw new Error('导入选择无效，请重新选择对话') }
+  if (!Array.isArray(decoded) || decoded.some(item => typeof item !== 'string' || item.trim() === '')) {
+    throw new Error('导入选择无效，请重新选择对话')
+  }
+  return [...new Set(decoded)]
+}
+
+async function readDeepSeekImportRequest(request: Request): Promise<DeepSeekImportRequestBody> {
+  const contentType = request.headers.get('content-type') ?? ''
+  if (contentType.toLowerCase().includes('multipart/form-data')) {
+    const form = await request.formData()
+    const file = form.get('file')
+    if (!(file instanceof Blob)) throw new Error('没有找到 DeepSeek 导出文件')
+    const name = Reflect.get(file, 'name')
+    const selection = form.has('selection') ? parseSelection(form.get('selection')) : undefined
+    return {
+      bytes: new Uint8Array(await file.arrayBuffer()),
+      filename: typeof name === 'string' ? name : 'deepseek-export.json',
+      contentType: file.type,
+      ...(selection === undefined ? {} : { selection }),
+    }
+  }
+  let filename = request.headers.get('x-dsh-import-filename') ?? ''
+  try { filename = decodeURIComponent(filename) } catch { filename = '' }
+  return {
+    bytes: new Uint8Array(await request.arrayBuffer()),
+    filename,
+    contentType,
+  }
+}
+
+async function deepSeekImportResponse(ctx: Context, request: Request): Promise<Response> {
+  const persistence = ctx.get('sessionPersistence')
+  if (persistence === undefined) {
+    return jsonResponse({ error: '当前部署没有启用会话持久化，无法导入历史对话' }, 503)
+  }
+  try {
+    const input = await readDeepSeekImportRequest(request)
+    const conversations = parseDeepSeekExportBytes(
+      input.bytes,
+      input.filename,
+      input.contentType,
+    )
+    const mode = new URL(request.url).searchParams.get('mode')
+    if (mode === 'preview') return jsonResponse(await previewDeepSeekHistory(persistence, conversations))
+    if (mode !== null) throw new Error('无法识别的导入模式')
+    const selected = input.selection === undefined
+      ? conversations
+      : selectDeepSeekConversations(conversations, input.selection)
+    // This service is optional for deployments that have no projection cache.
+    // Context#get crosses Loader trace shadows without tripping the direct-property
+    // injection guard; direct Reflect/property access fails in the real Web bundle.
+    const projectionCache = ctx.get('sessionProjectionCache') as SessionProjectionCacheWriter | undefined
+    return jsonResponse(await importDeepSeekHistory(
+      persistence,
+      selected,
+      projectionCache === undefined
+        ? undefined
+        : async (imported) => {
+          await projectionCache.write(Session.create(imported.header.id, imported.events, imported.header))
+        },
+    ))
+  } catch (error) {
+    return jsonResponse({ error: error instanceof Error ? error.message : String(error) }, 400)
+  }
+}
+
+async function sessionLogExportResponse(
+  ctx: Context,
+  request: Request,
+  compressionLevel: SessionLogCompressionLevel,
+): Promise<Response> {
+  const url = new URL(request.url)
+  const query = Object.fromEntries(url.searchParams)
+  const sessionIdValue = query['sessionId']
+  const descendantsValue = query['includeDescendants']
+  if (sessionIdValue === undefined || sessionIdValue.length === 0
+    || (descendantsValue !== undefined && descendantsValue !== 'true' && descendantsValue !== 'false')) {
+    return new Response('missing or invalid sessionId query parameter', { status: 400 })
+  }
+  const sessionId = SessionId(sessionIdValue)
+  const deps = sessionLogExportDeps(ctx)
+  if (deps.sessionQuery === undefined
+    || deps.sessionPersistence === undefined
+    || deps.attachments === undefined) {
+    return new Response(
+      'session log export is unavailable: missing session-query, session-persistence, or attachments service',
+      { status: 500 },
+    )
+  }
+  const ready: SessionLogExportReady = {
+    sessionQuery: deps.sessionQuery,
+    sessionPersistence: deps.sessionPersistence,
+    attachments: deps.attachments,
+    sessions: deps.sessions,
+  }
+  let rootContent: string | undefined
+  try {
+    await flushLiveSessionLog(deps, sessionId, request.signal)
+    rootContent = await readSessionLogText(deps.sessionPersistence, sessionId, request.signal)
+    request.signal.throwIfAborted()
+  } catch {
+    request.signal.throwIfAborted()
+    return new Response('session log export failed to read the stored log', { status: 500 })
+  }
+  if (rootContent === undefined) return new Response('session not found', { status: 404 })
+  const response = new Response(
+    streamSessionLogZip(
+      ready,
+      rootContent,
+      sessionId,
+      descendantsValue === 'true',
+      compressionLevel,
+      request.signal,
+    ),
+    {
+      headers: {
+        'content-type': 'application/zip',
+        'content-disposition': `attachment; filename="${sessionLogZipFilename(sessionId)}"`,
+      },
+    },
+  )
+  return response
+}

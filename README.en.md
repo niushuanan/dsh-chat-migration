@@ -10,6 +10,8 @@ This bundle repository provides two native plugins that can be installed, switch
 
 <p align="center"><img src="docs/06-pure-chat.webp" alt="Workspace-free chat mode" width="800"></p>
 
+Current master ships complete native plugin folders and preserves each Settings entry's original plugin-owned icon. Remove its folder to uninstall the capability. See [INSTALL.md](INSTALL.md) for shared compatibility patches and installation checks.
+
 ## Install
 
 1. Use GitHub **Code → Download ZIP** to download this repository.
@@ -36,4 +38,4 @@ This repository never contains a user's DeepSeek export, conversation history, a
 
 ## Source and license
 
-This repository is a one-way distribution mirror of [Xiaozhuang DSH](https://github.com/niushuanan/xiaozhuang-dsh), not an independent development source. It is synchronized from main-repository commit [`45e273b8ef`](https://github.com/niushuanan/xiaozhuang-dsh/commit/45e273b8ef17168c7e2cfc28572e13096e404ad5). Licensed under the [MIT License](LICENSE).
+This repository is a one-way distribution mirror of [Xiaozhuang DSH](https://github.com/niushuanan/xiaozhuang-dsh), not an independent development source. It is synchronized from main-repository commit [`e745482d8f`](https://github.com/niushuanan/xiaozhuang-dsh/commit/e745482d8f5e33497d9ed46a2a88681456024334). Licensed under the [MIT License](LICENSE).
