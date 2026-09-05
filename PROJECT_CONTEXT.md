@@ -6,8 +6,9 @@
 
 ## 2. 代码结构是什么
 
-- `payload/chat-mode/repository/`：按主仓相对路径打包的聊天模式及其直接运行依赖。
-- `payload/conversation-import/repository/`：按主仓相对路径打包的 DeepSeek 导入器及其直接运行依赖。
+- `payload/chat-mode/product/plugins/chat-mode/`：聊天模式的完整原生插件文件夹。
+- `payload/conversation-import/product/plugins/conversation-import/`：DeepSeek 导入器的完整原生插件文件夹。
+- `payload/shared/source/` 与 `payload/shared/*.patch`：所需共享源码和按序检查的中性兼容补丁，不是可独立卸载的产品插件。
 - `manifest.json`：插件行、来源目录、主仓来源 commit、文件大小和逐文件 SHA-256。
 - `AGENTS.md`、`INSTALL.md`：交给安装 AI 的约束、兼容安装与失败恢复说明。
 - `README.md`、`README.en.md`、`docs/`：面向安装者的双语说明和真实产品截图。
@@ -16,12 +17,21 @@
 ## 3. 关键入口在哪里
 
 - `manifest.json`：安装和完整性校验的唯一清单。
-- `payload/conversation-import/repository/packages/session-query/session-log-export/`：DeepSeek 历史解析、预览、选择与原生导入。
-- `payload/chat-mode/repository/packages/client/ui-plain-chat/`：聊天模式入口。
-- `payload/chat-mode/repository/packages/preset/agent-presets/presets/chat/`：聊天模式 Agent preset。
+- `payload/conversation-import/product/plugins/conversation-import/`：DeepSeek 历史解析、预览、选择与原生导入。
+- `payload/chat-mode/product/plugins/chat-mode/packages/ui-plain-chat/`：聊天模式入口。
+- `payload/chat-mode/product/plugins/chat-mode/packages/chat-preset/`：聊天模式 Agent preset。
 - `INSTALL.md`：将闭包合并到目标 DSH checkout／Profile 的流程。
 
 ## 4. 最近改了什么
+
+### 2026-09-05 - Safari Agent 历史与桌面重连
+
+- 本次任务：从已推送的主仓提交同步实际受影响的历史读取器和 Connection 共享代码，不从未提交工作区生成。
+- 改了哪些文件：`payload/shared/source/packages/util/values/`、`payload/shared/source/packages/client/connection/`、`payload/shared/safari-agent-history.patch`、`manifest.json`、双语 README、`INSTALL.md` 和本文件。
+- 改了什么：保留原生容器校验，改用当前引擎的函数表示；同步同源登录恢复，补丁包含无缓存首页及显式重载提示。更新源码引用、安装验证路径和发布清单，保留原插件文件夹和截图。
+- 为什么这样改：WebKit 的原生函数文本含换行，写死 V8 单行格式会让正常助手数据块被拒绝，造成问答和工具结果不显示。不能通过改写原始日志解决。
+- 影响了哪些模块：共享 JSON 读取、桌面登录和页面刷新提示；不包含用户会话、导出文件、密钥或设置，也不改变插件独立卸载方式。项目用途、结构和关键入口已按现有原生文件夹布局复核。
+- 验证：10 个共享源码／说明文件直接从已推送主仓生成；6 个补丁源码在相邻版本上实际应用后逐字节匹配主仓。主产品已通过 63 项定向测试及实际 Safari 的回答、工具结果、旧分页、子 Agent、导入聊天和重启验收；本副本保留两个原生插件及两张产品截图。不执行摘要值对比。
 
 ### 2026-08-29 15:09 - 拆分聊天模式与导入对话两个插件
 

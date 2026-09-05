@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "kind": "xiaozhuang-dsh-plugin-export",
-  "createdAt": "2026-09-05T04:07:03.732Z",
-  "sourceCommit": "e745482d8f5e33497d9ed46a2a88681456024334",
+  "createdAt": "2026-09-05T05:44:19.948Z",
+  "sourceCommit": "bb949c3d291ea55d378cc5fdb1b237b4f63127b6",
   "plugins": [
     {
       "id": "chat-mode",
@@ -844,17 +844,17 @@
     {
       "path": "payload/shared/source/packages/client/connection/README.i18n.yaml",
       "size": 436,
-      "sha256": "9748b18a34a8e139d885af701ae1d4e88ef89cb65c4a1db5950489bcf121314f"
+      "sha256": "91eecedbe00f4668e952b4b7df14939ec689d893bfbebf498eb858b54dd7b2eb"
     },
     {
       "path": "payload/shared/source/packages/client/connection/README.md",
-      "size": 7754,
-      "sha256": "cd1393950c270e0529b8a4b6de8a4bf9281e7724804d6bfe59e7c73fcf9a86d5"
+      "size": 8104,
+      "sha256": "a8165f13777ae4c0a6941e8cb989a0bfe1b4a9df45dc299da8bac5b347282739"
     },
     {
       "path": "payload/shared/source/packages/client/connection/README.zh.md",
-      "size": 7047,
-      "sha256": "6fd659f992ba01c96a83897a7241766f32994ab6452f42310b12e3d588f430f1"
+      "size": 7370,
+      "sha256": "9be5be7352eb6f6c62ccd78f714865f86cbd67a8775308a81796875a1c2e3c68"
     },
     {
       "path": "payload/shared/source/packages/client/connection/src/api-path.ts",
@@ -868,8 +868,8 @@
     },
     {
       "path": "payload/shared/source/packages/client/connection/src/browser-auth.ts",
-      "size": 12036,
-      "sha256": "90f6a4220979bd98d9d71f009a457a0d8af9d9608496dd5fa78dd7045871ea98"
+      "size": 12306,
+      "sha256": "473488da21b12e6b661ad4a5b7f4437ca5f529f007b47f6818e885994ca16d07"
     },
     {
       "path": "payload/shared/source/packages/client/connection/src/client/api.ts",
@@ -938,8 +938,8 @@
     },
     {
       "path": "payload/shared/source/packages/client/connection/tsconfig.host.json",
-      "size": 813,
-      "sha256": "c7c31d9514ad36bcdcc394bdeb6158022cada75fd694f4c4d56ea6999f919f8b"
+      "size": 846,
+      "sha256": "c8e4a14b9430105be57f7aaaa3d6f58f3c6986e8198c5684279ca90a307254d0"
     },
     {
       "path": "payload/shared/source/packages/client/connection/tsconfig.json",
@@ -5289,22 +5289,22 @@
     {
       "path": "payload/shared/source/packages/util/values/README.i18n.yaml",
       "size": 430,
-      "sha256": "9cafd8a4aa4a135521471c7d71a2a2737e21ac2c82ba77b275d82ac1ce0a98c4"
+      "sha256": "420e1daeaf20a970ebc60d3961961d2d23566a03e22fe8b86558fdf069915679"
     },
     {
       "path": "payload/shared/source/packages/util/values/README.md",
-      "size": 4294,
-      "sha256": "bacbf4f05e8d99114033da305644e4213965c6ab0ea5dd44e55e08220635d964"
+      "size": 4644,
+      "sha256": "2c89a4e724f5ded97a6ad6a739d9eb1f802a9f0abd40d328806fdbd14d134922"
     },
     {
       "path": "payload/shared/source/packages/util/values/README.zh.md",
-      "size": 3962,
-      "sha256": "180b67331c10eb65918a03738ab62ce49aab8e66e90e477679b2ffde011f89b7"
+      "size": 4264,
+      "sha256": "5c5047c45994cbdc858ca088f46fd39fa7bb36395f25a5484ecc09b67e344d1c"
     },
     {
       "path": "payload/shared/source/packages/util/values/src/index.ts",
-      "size": 9759,
-      "sha256": "573c77ba7017fc747f90fdbd5445cfd565db6ff6d53a6b999f6c34ed842bbb8f"
+      "size": 9860,
+      "sha256": "3dd4a03de71079b881b76449ca137010d623c4e886b147f3eef221c93d346eb4"
     },
     {
       "path": "payload/shared/source/packages/util/values/tsconfig.json",
@@ -5630,6 +5630,16 @@
       "path": "payload/shared/source/vendor/schemastery/tsdown.config.ts",
       "size": 547,
       "sha256": "a65d7256a0f131c8ab1e63326860efd15ee033b546926f6cc1ccc1dad2d6d635"
+    },
+    {
+      "path": "payload/shared/safari-agent-history.patch",
+      "size": 11656,
+      "sha256": "01da55116397467a679003a1e5cf2aeb9bfa89b33bbcceb0b98a82086a706c9a"
+    },
+    {
+      "path": "payload/shared/source/packages/client/connection/src/browser-login-page.ts",
+      "size": 1962,
+      "sha256": "7d6bca5848b8e90bbf2fbbc0f0ed175b84452aadff44d21e57a63f6a2d9f656d"
     }
   ],
   "excludes": [
@@ -5647,7 +5657,8 @@
   "compatibilityPatches": [
     "payload/shared/session-history-base.patch",
     "payload/shared/history-navigation.patch",
-    "payload/shared/settings-icons.patch"
+    "payload/shared/settings-icons.patch",
+    "payload/shared/safari-agent-history.patch"
   ],
   "sharedDependencies": [
     {

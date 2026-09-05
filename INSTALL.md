@@ -21,3 +21,5 @@
 `payload/shared/source/` 携带聊天模式、导入器及其 Client／Host 工作区依赖的源码闭包，供目标源码缺失对应依赖时核对和构建；不是另一组产品插件，不得覆盖目标已有更新。保留共享核心依赖，只移除 `plugins/chat-mode` 或 `plugins/conversation-import` 即可分别卸载两项能力。
 
 历史兼容只通过标准读取句柄增加新版文件，不删除、覆盖原始日志或丢弃未知事件。未标记旧 Teamwork 状态的首次迁移需要其拥有者；新版生成后可在移除插件后继续读取。
+
+Safari 历史补丁修复共享 JSON 校验器的引擎文本格式识别，并提供桌面窗口的登录恢复表单、无缓存首页和手动重载提示。按目标已有实现检查后应用；重新构建内联该校验器的 Client 包，包括 session-controller、connection、ui-chat 和 ui-trajectory。必须在用户实际 Safari 桌面窗口打开旧 Agent 回答、展开 Bash／文件读取结果、加载更早记录和子 Agent 报告；仅在 Chrome 测试通过不能代替该验收。禁止通过重新导入、删除日志或跳过助手数据块“修复”显示。

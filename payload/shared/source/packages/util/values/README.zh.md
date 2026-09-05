@@ -28,6 +28,8 @@ kind: "package-library"
 
 需要 predicate 时使用 `isJsonValue()`，还需要分离副本时使用 `snapshotJsonValue()`。两者只接受无损 JSON 根值：`null`、布尔值、除负零外的有限数字、字符串、稠密的内建数组，以及只含可枚举字符串键的普通或 null-prototype 记录。循环、稀疏数组、自有 symbol 或不可枚举属性、函数和 class 实例都会被拒绝。
 
+接受其他 JavaScript realm 中的普通容器。原生构造函数识别使用当前执行引擎自己的函数文本表示，因此 WebKit 的多行格式与 V8 的单行格式得到相同结果。这使浏览器历史回放不依赖引擎特有的空白格式，同时仍拒绝自定义原型。
+
 ```ts
 import { isJsonValue, snapshotJsonValue, type JsonValue } from '@deepseek-ai/dsh-util-values'
 

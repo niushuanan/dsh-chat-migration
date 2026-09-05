@@ -12,6 +12,8 @@ This bundle repository provides two native plugins that can be installed, switch
 
 Current master ships complete native plugin folders and preserves each Settings entry's original plugin-owned icon. Remove its folder to uninstall the capability. See [INSTALL.md](INSTALL.md) for shared compatibility patches and installation checks.
 
+The shared history reader supports Safari desktop windows' native JSON representation, preventing valid Agent answers and tool results from being rejected before display. Installation checks must open old answers, expand tool results, and load earlier records in the user's actual browser; titles or a Chrome-only check do not prove complete history.
+
 ## Install
 
 1. Use GitHub **Code → Download ZIP** to download this repository.
@@ -38,4 +40,4 @@ This repository never contains a user's DeepSeek export, conversation history, a
 
 ## Source and license
 
-This repository is a one-way distribution mirror of [Xiaozhuang DSH](https://github.com/niushuanan/xiaozhuang-dsh), not an independent development source. It is synchronized from main-repository commit [`e745482d8f`](https://github.com/niushuanan/xiaozhuang-dsh/commit/e745482d8f5e33497d9ed46a2a88681456024334). Licensed under the [MIT License](LICENSE).
+This repository is a one-way distribution mirror of [Xiaozhuang DSH](https://github.com/niushuanan/xiaozhuang-dsh), not an independent development source. It is synchronized from main-repository commit [`bb949c3d29`](https://github.com/niushuanan/xiaozhuang-dsh/commit/bb949c3d291ea55d378cc5fdb1b237b4f63127b6). Licensed under the [MIT License](LICENSE).

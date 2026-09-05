@@ -12,6 +12,8 @@
 
 当前 master 按原生插件文件夹发布，设置入口保留插件自有的原设计图标；删除对应插件文件夹即可卸载。共享兼容补丁和安装检查见 [INSTALL.md](INSTALL.md)。
 
+共享历史读取器支持 Safari 桌面窗口的原生 JSON 表示，避免合法 Agent 回答和工具结果被误判后停止显示。安装验收需在实际使用的浏览器中打开旧回答、展开工具结果并加载更早记录，不能仅凭会话标题或 Chrome 验证认定历史完整。
+
 ## 安装
 
 1. 点击 GitHub 的 **Code → Download ZIP**，下载本仓库。
@@ -38,4 +40,4 @@
 
 ## 来源与许可
 
-本仓库是 [Xiaozhuang DSH](https://github.com/niushuanan/xiaozhuang-dsh) 的单向发布副本，不是独立开发源。当前内容同步自主仓库 commit [`e745482d8f`](https://github.com/niushuanan/xiaozhuang-dsh/commit/e745482d8f5e33497d9ed46a2a88681456024334)。代码采用 [MIT License](LICENSE)。
+本仓库是 [Xiaozhuang DSH](https://github.com/niushuanan/xiaozhuang-dsh) 的单向发布副本，不是独立开发源。当前内容同步自主仓库 commit [`bb949c3d29`](https://github.com/niushuanan/xiaozhuang-dsh/commit/bb949c3d291ea55d378cc5fdb1b237b4f63127b6)。代码采用 [MIT License](LICENSE)。
