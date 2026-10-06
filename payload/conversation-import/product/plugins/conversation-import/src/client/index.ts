@@ -1,7 +1,6 @@
 /** Browser plugin owning Session export download state and its shared modal. */
 
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
-import { IconChatOutline16 } from '@deepseek-ai/dsh-client-ui-primitives'
 import type { ISessions } from '@deepseek-ai/dsh-api-session-controller/client'
 import type { SessionId } from '@deepseek-ai/dsh-session/types'
 import type {} from '@deepseek-ai/dsh-client-locale/client'
@@ -132,9 +131,7 @@ export function apply(ctx: ClientContext): void {
       refreshSessions: () => sessions.refresh(),
     }),
   }, DeepSeekImportSection))
-  ctx.slots.inject('settings.section.icon', () => ctx.slots.register({
-    name: 'settings.section.icon', id: 'conversation-import',
-  }, IconChatOutline16))
+
 }
 
 export type { SessionLogDownloadDialogInjected, SessionLogDownloadDialogProps } from './Dialog.tsx'

@@ -7,6 +7,6 @@
   "include": ["src"],
   "references": [
     { "path": "../../../../vendor/cordis" },
-    { "path": "../../../../packages/preset/agent-presets" }
+    { "path": "../../../../packages/preset/agent-preset-registry" }
   ]
 }

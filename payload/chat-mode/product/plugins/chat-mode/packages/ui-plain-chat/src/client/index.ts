@@ -1,7 +1,7 @@
 /** Register the plain-chat sidebar action. */
 import type { Context } from '@deepseek-ai/cordis'
 import { createElement } from 'react'
-import { IconChatOutline16 } from '@deepseek-ai/dsh-client-ui-primitives'
+import { IconQueueOutlineRegular } from '@deepseek-ai/dsh-client-ui-primitives'
 import type { ClientRemote } from '@deepseek-ai/dsh-api-remotes/client'
 import type {} from '@deepseek-ai/dsh-api-session-controller/client'
 import type {} from '@deepseek-ai/dsh-client-locale/client'
@@ -25,7 +25,7 @@ export const inject = [
 /** Mount the launcher as the Chat half of the sidebar work-mode switch. */
 export function apply(ctx: Context): void {
   ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-plain-chat: dictionaries')
-  const starter = new ChatStarter(ctx.sessions, ctx.remote as Pick<ClientRemote, 'agentPresets'>)
+  const starter = new ChatStarter(ctx.sessions, ctx.remote as Pick<ClientRemote, 'agentPresets'>, id => ctx.uiWorkspace.openSession(id))
   const t = ctx.locale.bind(NS)
   ctx.effect(() => ctx.conversationPresentation.register({
     id: 'plain-chat',
@@ -43,7 +43,7 @@ export function apply(ctx: Context): void {
     label: () => t('group'),
     matches: session => session?.projectionValues?.agentPreset === CHAT_AGENT_PRESET,
     start: () => { starter.start() },
-    renderIcon: () => createElement(IconChatOutline16),
+    renderIcon: () => createElement(IconQueueOutlineRegular),
     newSessionLabel: () => t('session.new'),
     newSessionAriaLabel: () => t('session.new.aria'),
   }), 'ui-plain-chat: sidebar Session group')

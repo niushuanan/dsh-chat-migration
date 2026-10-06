@@ -7,8 +7,8 @@ window.__ModuleLoader__.load({
 		let react = require("react");
 		let _deepseek_ai_dsh_client_ui_primitives = require("@deepseek-ai/dsh-client-ui-primitives");
 		let react_jsx_runtime = require("react/jsx-runtime");
-		//#region \0dsh-css:/private/tmp/dsh-publish-20260905.X1Ok1K/source/plugins/chat-mode/packages/ui-plain-chat/src/client/ChatAction.module.css.mjs
-		const css = ".PCPe_a_modeSwitch{box-sizing:border-box;border:1px solid color-mix(in srgb, var(--dsw-alias-label-primary) 8%, transparent);background:var(--dsw-alias-bg-layer-1);border-radius:999px;flex:none;align-items:stretch;height:38px;margin:0 2px 8px;display:flex;position:relative;overflow:hidden}.PCPe_a_modeThumb{border-radius:inherit;background:var(--dsw-alias-button-primary-fill);pointer-events:none;width:50%;transition:transform .22s ease-in-out;position:absolute;inset:0 auto 0 0}.PCPe_a_modeThumb[data-position=left]{transform:translate(0)}.PCPe_a_modeThumb[data-position=right]{transform:translate(100%)}.PCPe_a_segment{z-index:1;min-width:0;color:var(--dsw-alias-label-primary);font:inherit;cursor:pointer;background:0 0;border:0;flex:50%;justify-content:center;align-items:center;padding:0;font-size:12px;font-weight:500;transition:color .22s ease-in-out;display:flex;position:relative;overflow:hidden}.PCPe_a_segment[aria-pressed=true]{color:var(--dsw-alias-label-primary-foreground);font-weight:600}.PCPe_a_segment[aria-pressed=true]:hover{background:0 0}.PCPe_a_segmentLabel{white-space:nowrap;max-width:200px;overflow:hidden}.PCPe_a_collapsed{background:0 0;border:0;flex-direction:column;gap:12px;width:36px;height:auto;margin:0 0 12px}.PCPe_a_collapsed .PCPe_a_segment{width:36px;height:36px;color:var(--dsw-alias-label-primary);border-radius:12px;flex:none;transition:none}.PCPe_a_collapsed .PCPe_a_segment:hover{background:var(--dsw-alias-interactive-bg-hover)}.PCPe_a_collapsed .PCPe_a_segment[aria-pressed=true]{color:var(--dsw-alias-label-primary);background:0 0}.PCPe_a_collapsed .PCPe_a_segmentLabel{max-width:0}";
+		//#region \0dsh-css:/Users/zhuanghongkai/Desktop/迭代DSH/xiaozhuang-dsh-upgrade-20261006/plugins/chat-mode/packages/ui-plain-chat/src/client/ChatAction.module.css.mjs
+		const css = "._8SMm1G_modeSwitch{box-sizing:border-box;border:1px solid color-mix(in srgb, var(--dsw-alias-label-primary) 8%, transparent);background:var(--dsw-alias-bg-layer-1);border-radius:999px;flex:none;align-items:stretch;height:38px;margin:0 2px 8px;display:flex;position:relative;overflow:hidden}._8SMm1G_modeThumb{border-radius:inherit;background:var(--dsw-alias-button-primary-fill);pointer-events:none;width:50%;transition:transform .22s ease-in-out;position:absolute;inset:0 auto 0 0}._8SMm1G_modeThumb[data-position=left]{transform:translate(0)}._8SMm1G_modeThumb[data-position=right]{transform:translate(100%)}._8SMm1G_segment{z-index:1;min-width:0;color:var(--dsw-alias-label-primary);font:inherit;cursor:pointer;background:0 0;border:0;flex:50%;justify-content:center;align-items:center;padding:0;font-size:12px;font-weight:500;transition:color .22s ease-in-out;display:flex;position:relative;overflow:hidden}._8SMm1G_segment[aria-pressed=true]{color:var(--dsw-alias-label-primary-foreground);font-weight:600}._8SMm1G_segment[aria-pressed=true]:hover{background:0 0}._8SMm1G_segmentLabel{white-space:nowrap;max-width:200px;overflow:hidden}._8SMm1G_collapsed{background:0 0;border:0;flex-direction:column;gap:12px;width:36px;height:auto;margin:0 0 12px}._8SMm1G_collapsed ._8SMm1G_segment{width:36px;height:36px;color:var(--dsw-alias-label-primary);border-radius:12px;flex:none;transition:none}._8SMm1G_collapsed ._8SMm1G_segment:hover{background:var(--dsw-alias-interactive-bg-hover)}._8SMm1G_collapsed ._8SMm1G_segment[aria-pressed=true]{color:var(--dsw-alias-label-primary);background:0 0}._8SMm1G_collapsed ._8SMm1G_segmentLabel{max-width:0}";
 		const tagId = "@deepseek-ai/dsh-client-ui-plain-chat/ChatAction.module.css";
 		if (typeof document !== "undefined" && document.querySelector("style[data-plugin-css=" + JSON.stringify(tagId) + "]") === null) {
 			const tag = document.createElement("style");
@@ -18,11 +18,11 @@ window.__ModuleLoader__.load({
 			document.head.appendChild(tag);
 		}
 		var ChatAction_module_css_default = {
-			"collapsed": "PCPe_a_collapsed",
-			"modeSwitch": "PCPe_a_modeSwitch",
-			"modeThumb": "PCPe_a_modeThumb",
-			"segment": "PCPe_a_segment",
-			"segmentLabel": "PCPe_a_segmentLabel"
+			"collapsed": "_8SMm1G_collapsed",
+			"modeSwitch": "_8SMm1G_modeSwitch",
+			"modeThumb": "_8SMm1G_modeThumb",
+			"segment": "_8SMm1G_segment",
+			"segmentLabel": "_8SMm1G_segmentLabel"
 		};
 		//#endregion
 		//#region src/client/ChatAction.tsx
@@ -31,7 +31,7 @@ window.__ModuleLoader__.load({
 			const subscribe = (0, react.useCallback)((listener) => sessions.subscribe(listener), [sessions]);
 			const getSnapshot = (0, react.useCallback)(() => sessions.getSnapshot(), [sessions]);
 			const state = (0, react.useSyncExternalStore)(subscribe, getSnapshot, getSnapshot);
-			const sessionId = state.current;
+			const sessionId = Object.entries(state.byId).find(([, row]) => (row.retainedBy?.mainView ?? 0) > 0)?.[0];
 			const chatActive = sessionId !== void 0 && state.byId[sessionId]?.projectionValues?.agentPreset === "chat";
 			return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 				className: `${ChatAction_module_css_default.modeSwitch}${wide ? "" : ` ${ChatAction_module_css_default.collapsed}`}`,
@@ -52,7 +52,7 @@ window.__ModuleLoader__.load({
 							"aria-label": ariaLabel,
 							"aria-pressed": !chatActive,
 							onClick: startSession,
-							children: [!wide && /* @__PURE__ */ (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconNewChatOutline16, { size: 18 }), wide && /* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
+							children: [!wide && /* @__PURE__ */ (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconNewChatOutlineRegular, { size: 18 }), wide && /* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
 								className: ChatAction_module_css_default.segmentLabel,
 								children: t("mode.agent") || label
 							})]
@@ -68,7 +68,7 @@ window.__ModuleLoader__.load({
 							"aria-label": t("start.label"),
 							"aria-pressed": chatActive,
 							onClick: startChat,
-							children: [!wide && /* @__PURE__ */ (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconChatOutline16, { size: 18 }), wide && /* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
+							children: [!wide && /* @__PURE__ */ (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconQueueOutlineRegular, { size: 18 }), wide && /* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
 								className: ChatAction_module_css_default.segmentLabel,
 								children: t("start")
 							})]
@@ -107,10 +107,12 @@ window.__ModuleLoader__.load({
 		var ChatStarter = class {
 			sessions;
 			remote;
+			open;
 			creating;
-			constructor(sessions, remote) {
+			constructor(sessions, remote, open) {
 				this.sessions = sessions;
 				this.remote = remote;
+				this.open = open;
 			}
 			async createChat() {
 				const id = await this.sessions.create();
@@ -126,7 +128,7 @@ window.__ModuleLoader__.load({
 					return row?.blank === true && row.projectionValues?.agentPreset === "chat";
 				});
 				if (reusable !== void 0) {
-					this.sessions.open(reusable);
+					this.open(reusable);
 					return;
 				}
 				const pending = this.creating ?? this.createChat();
@@ -137,7 +139,7 @@ window.__ModuleLoader__.load({
 					}).catch(() => void 0);
 				}
 				pending.then((id) => {
-					this.sessions.open(id);
+					this.open(id);
 				}, (reason) => {
 					console.warn("start chat failed:", reason);
 				});
@@ -161,7 +163,7 @@ window.__ModuleLoader__.load({
 				zh,
 				en
 			}), "ui-plain-chat: dictionaries");
-			const starter = new ChatStarter(ctx.sessions, ctx.remote);
+			const starter = new ChatStarter(ctx.sessions, ctx.remote, (id) => ctx.uiWorkspace.openSession(id));
 			const t = ctx.locale.bind(NS);
 			ctx.effect(() => ctx.conversationPresentation.register({
 				id: "plain-chat",
@@ -181,7 +183,7 @@ window.__ModuleLoader__.load({
 				start: () => {
 					starter.start();
 				},
-				renderIcon: () => (0, react.createElement)(_deepseek_ai_dsh_client_ui_primitives.IconChatOutline16),
+				renderIcon: () => (0, react.createElement)(_deepseek_ai_dsh_client_ui_primitives.IconQueueOutlineRegular),
 				newSessionLabel: () => t("session.new"),
 				newSessionAriaLabel: () => t("session.new.aria")
 			}), "ui-plain-chat: sidebar Session group");

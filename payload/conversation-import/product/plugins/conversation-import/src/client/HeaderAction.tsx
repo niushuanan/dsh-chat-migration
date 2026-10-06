@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react'
-import { IconDownloadOutline16, Menu } from '@deepseek-ai/dsh-client-ui-primitives'
+import { IconDownloadOutlineRegular, Menu } from '@deepseek-ai/dsh-client-ui-primitives'
 import type { SessionExportKind } from './controller.ts'
 import { SessionLogDownloadDialog, type SessionLogDownloadDialogProps } from './Dialog.tsx'
 import css from './HeaderAction.module.css'
@@ -42,7 +42,7 @@ export function SessionLogDownloadHeaderAction(props: SessionLogDownloadDialogPr
             onClick={() => { setOpen(value => !value) }}
           >
             <span>{t('action.label')}</span>
-            <IconDownloadOutline16 size={12} />
+            <IconDownloadOutlineRegular size={12} />
           </button>
         )}
       />

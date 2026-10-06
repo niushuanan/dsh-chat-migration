@@ -13,16 +13,35 @@
     "src/invariant.ts"
   ],
   "references": [
-    { "path": "../../vendor/cordis" },
-    { "path": "../../vendor/schemastery" },
-    { "path": "../../packages/attachment/attachment" },
-    { "path": "../../packages/core/session" },
-    { "path": "../../packages/llm/llm" },
-    { "path": "../../packages/interaction/commands" },
-    { "path": "../../packages/runtime-diagnostics/invariants" },
-    { "path": "../../packages/session/session-persistence" },
-    { "path": "../../packages/session/session-title" },
-    { "path": "../../packages/session-query/session-log-export/tsconfig.host.json" },
-    { "path": "../../packages/session-query/session-query" }
+    {
+      "path": "../../vendor/cordis"
+    },
+    {
+      "path": "../../vendor/schemastery"
+    },
+    {
+      "path": "../../packages/attachment/attachment"
+    },
+    {
+      "path": "../../packages/core/session"
+    },
+    {
+      "path": "../../packages/llm/llm"
+    },
+    {
+      "path": "../../packages/interaction/commands"
+    },
+    {
+      "path": "../../packages/session/session-persistence"
+    },
+    {
+      "path": "../../packages/session/session-title"
+    },
+    {
+      "path": "../../packages/session-query/session-log-export/tsconfig.host.json"
+    },
+    {
+      "path": "../../packages/session-query/session-query"
+    }
   ]
 }

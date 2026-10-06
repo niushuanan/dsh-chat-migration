@@ -5,7 +5,7 @@ import type { SessionId } from '@deepseek-ai/dsh-session/types'
 /** Durable preset that identifies a plain-chat Session. */
 export const CHAT_AGENT_PRESET = 'chat'
 
-type ChatSessions = Pick<ISessions, 'list' | 'create' | 'open'>
+type ChatSessions = Pick<ISessions, 'list' | 'create'>
 type PresetRemote = Pick<ClientRemote, 'agentPresets'>
 
 /** Reuse a blank chat or create and compose exactly one replacement. */
@@ -15,6 +15,7 @@ export class ChatStarter {
   constructor(
     private readonly sessions: ChatSessions,
     private readonly remote: PresetRemote,
+    private readonly open: (id: SessionId) => void,
   ) {}
 
   private async createChat(): Promise<SessionId> {
@@ -32,7 +33,7 @@ export class ChatStarter {
       return row?.blank === true && row.projectionValues?.agentPreset === CHAT_AGENT_PRESET
     })
     if (reusable !== undefined) {
-      this.sessions.open(reusable)
+      this.open(reusable)
       return
     }
 
@@ -44,7 +45,7 @@ export class ChatStarter {
       }).catch(() => undefined)
     }
     void pending.then(
-      (id) => { this.sessions.open(id) },
+      (id) => { this.open(id) },
       (reason) => { console.warn('start chat failed:', reason) },
     )
   }

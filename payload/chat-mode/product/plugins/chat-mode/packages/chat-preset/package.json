@@ -1,6 +1,6 @@
 {
   "name": "@xiaozhuang-dsh/chat-preset",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Registers the removable plain-chat agent preset root.",
   "private": true,
   "type": "module",
@@ -10,11 +10,11 @@
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "workspace:^",
-    "@deepseek-ai/dsh-agent-presets": "workspace:^"
+    "@deepseek-ai/dsh-agent-preset-registry": "workspace:^"
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "workspace:^",
-    "@deepseek-ai/dsh-agent-presets": "workspace:^",
+    "@deepseek-ai/dsh-agent-preset-registry": "workspace:^",
     "@types/node": "^22.14.0"
   }
 }

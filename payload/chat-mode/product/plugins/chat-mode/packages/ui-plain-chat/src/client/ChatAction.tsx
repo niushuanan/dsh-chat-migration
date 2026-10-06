@@ -1,4 +1,4 @@
-import { IconChatOutline16, IconNewChatOutline16, Tooltip } from '@deepseek-ai/dsh-client-ui-primitives'
+import { IconQueueOutlineRegular, IconNewChatOutlineRegular, Tooltip } from '@deepseek-ai/dsh-client-ui-primitives'
 import type { HostObservable } from '@deepseek-ai/dsh-client-ui-slots'
 import type { PropsLocale, PropsRuntime } from '@deepseek-ai/dsh-client-ui-slots'
 import type {} from '@deepseek-ai/dsh-client-ui-sidebar/client'
@@ -6,8 +6,10 @@ import { useCallback, useSyncExternalStore } from 'react'
 import css from './ChatAction.module.css'
 
 interface ModeSessionState {
-  readonly current: string | undefined
+  readonly current?: string | undefined
   readonly byId: Record<string, {
+    readonly id?: string
+    readonly retainedBy?: Readonly<Record<string, number>>
     readonly projectionValues?: Record<string, unknown>
   }>
 }
@@ -28,7 +30,7 @@ export function ChatAction({
   const subscribe = useCallback((listener: () => void) => sessions.subscribe(listener), [sessions])
   const getSnapshot = useCallback(() => sessions.getSnapshot(), [sessions])
   const state = useSyncExternalStore(subscribe, getSnapshot, getSnapshot)
-  const sessionId = state.current
+  const sessionId = Object.entries(state.byId).find(([, row]) => (row.retainedBy?.mainView ?? 0) > 0)?.[0]
   const chatActive = sessionId !== undefined
     && state.byId[sessionId]?.projectionValues?.agentPreset === 'chat'
   return (
@@ -42,7 +44,7 @@ export function ChatAction({
           aria-pressed={!chatActive}
           onClick={startSession}
         >
-          {!wide && <IconNewChatOutline16 size={18} />}
+          {!wide && <IconNewChatOutlineRegular size={18} />}
           {wide && <span className={css.segmentLabel}>{t('mode.agent') || label}</span>}
         </button>
       </Tooltip>
@@ -54,7 +56,7 @@ export function ChatAction({
         aria-pressed={chatActive}
         onClick={startChat}
       >
-        {!wide && <IconChatOutline16 size={18} />}
+        {!wide && <IconQueueOutlineRegular size={18} />}
         {wide && <span className={css.segmentLabel}>{t('start')}</span>}
       </button>
       </Tooltip>

@@ -1,0 +1,338 @@
+diff --git a/packages/core/session/src/index.ts b/packages/core/session/src/index.ts
+index c3b783bf38..a028bc55c6 100644
+--- a/packages/core/session/src/index.ts
++++ b/packages/core/session/src/index.ts
+@@ -718,9 +718,9 @@ export class Session {
+   append<T extends SessionEventType>(
+     type: T,
+     data: SessionEventMap[T],
+-    ...opts: T extends SurfaceEventType ? [opts: SurfaceIntent<T>] : []
++    ...opts: T extends SurfaceEventType ? [opts: SurfaceIntent<T> & { readonly ignorable?: true }] : [opts?: { readonly ignorable?: true }]
+   ): SessionEvent<T> {
+-    const surfaceOpts: SurfaceIntent | undefined = opts[0]
++    const surfaceOpts = opts[0] as (SurfaceIntent & { readonly ignorable?: true }) | undefined
+     const surfaceMetadata = {
+       ...surfaceOpts?.sourceEventSeqs === undefined ? {} : { sourceEventSeqs: surfaceOpts.sourceEventSeqs },
+       ...surfaceOpts?.surfaceOp === undefined ? {} : { surfaceOp: surfaceOpts.surfaceOp },
+@@ -742,6 +742,7 @@ export class Session {
+       seq: SessionSeq(this.log.length),
+       time: Date.now(),
+       data: dataSnapshot,
++      ...(surfaceOpts?.ignorable === true ? { ignorable: true } : {}),
+       ...(surfaceMetadataSnapshot as { surfaceOp?: unknown; sourceEventSeqs?: unknown }),
+     } as unknown as SessionEvent<T>)
+     validateSessionEventData(event, `session event "${type}" at seq ${event.seq}`)
+diff --git a/packages/session/session-format-v0-to-v1/src/migration.ts b/packages/session/session-format-v0-to-v1/src/migration.ts
+index 0a4ead8bcf..bd5b0028de 100644
+--- a/packages/session/session-format-v0-to-v1/src/migration.ts
++++ b/packages/session/session-format-v0-to-v1/src/migration.ts
+@@ -1,4 +1,6 @@
++import { RELEASED_V0_EVENT_DISPOSITIONS } from './dispositions.ts'
+ import {
++  isMigratableSessionFormatState,
+   SessionFormatError,
+   SessionFormatUnsupportedMigrationError,
+   defineSessionFormatMigration,
+@@ -51,6 +53,10 @@ class ReleasedV0ToV1Stage implements SessionFormatMigrationStage {
+     event: SessionFormatEvent,
+     context: SessionFormatMigrationContext,
+   ): void {
++    if (RELEASED_V0_EVENT_DISPOSITIONS[event.type] === undefined && isMigratableSessionFormatState(event, 0, 1)) {
++      context.emitEvent({ ...event, ignorable: true })
++      return
++    }
+     const normalized = normalizeReleasedV0Event(event, this.input.sourceHeader.id, this.state)
+     assertSourceDeliveryMarker(normalized, this.input)
+     context.emitEvent(normalized)
+diff --git a/packages/session/session-format-v0-to-v1/src/validation.ts b/packages/session/session-format-v0-to-v1/src/validation.ts
+index 762ed963f7..48eaea8d80 100644
+--- a/packages/session/session-format-v0-to-v1/src/validation.ts
++++ b/packages/session/session-format-v0-to-v1/src/validation.ts
+@@ -1,5 +1,6 @@
+ import { isAbsolute } from 'node:path'
+ import {
++  isCompatibleSessionFormatState,
+   SessionFormatError,
+   SessionFormatUnsupportedMigrationError,
+   sessionFormatCount,
+@@ -114,7 +115,9 @@ export function assertReleasedArtifactCoordinates(
+     const legacy = allowLegacySteering && LEGACY_SOURCE_TYPES.has(type)
+     const currentKnown = knownEventTypes?.has(type) === true
+     const ignorableCurrent = !allowLegacySteering && !currentKnown && record['ignorable'] === true
+-    if (!currentKnown && !legacy && !ignorableCurrent && !vocabularyNeutral) {
++    const compatibleState = frozenEnvelope && disposition === undefined && !legacy
++      && isCompatibleSessionFormatState(event, artifact.header.version)
++    if (!currentKnown && !legacy && !compatibleState && !ignorableCurrent && !vocabularyNeutral) {
+       if (allowLegacySteering) {
+         throw new SessionFormatUnsupportedMigrationError(
+           `format v0 contains unknown historical event type ${JSON.stringify(type)} at seq ${index}; migration refuses unknown historical events even when ignorable`,
+@@ -190,6 +193,7 @@ export function assertReleasedEventPayload(event: SessionFormatEvent, version: 0
+   const disposition = RELEASED_V0_EVENT_DISPOSITIONS[event.type]
+   /* v8 ignore next -- artifact coordinate validation admits only the frozen inventory before payload validation. */
+   if (disposition === undefined) {
++    if (isCompatibleSessionFormatState(event, version)) return
+     throw new SessionFormatUnsupportedMigrationError(
+       `format v0 contains unknown historical event type ${JSON.stringify(event.type)} at seq ${event.seq}; migration refuses unknown historical events even when ignorable`,
+     )
+diff --git a/packages/session/session-format-v1-to-v2/src/migration.ts b/packages/session/session-format-v1-to-v2/src/migration.ts
+index b7a8b94afb..3a64841c55 100644
+--- a/packages/session/session-format-v1-to-v2/src/migration.ts
++++ b/packages/session/session-format-v1-to-v2/src/migration.ts
+@@ -1,6 +1,7 @@
+ import { AssistantStreamAccumulator } from '@deepseek-ai/dsh-llm'
+ import type { AssistantStreamRecord } from '@deepseek-ai/dsh-llm'
+ import {
++  isMigratableSessionFormatState,
+   SessionFormatUnsupportedMigrationError,
+   defineSessionFormatMigration,
+   sessionFormatCount,
+@@ -128,7 +129,8 @@ function transformReleasedEvent(
+ ): void {
+   if (event.type === 'assistant/chunk') assertChunkEnvelope(event)
+   if (RELEASED_V0_EVENT_DISPOSITIONS[event.type] === undefined) {
+-    throw refusal(`format v1 contains unknown event type ${JSON.stringify(event.type)} at seq ${event.seq}`)
++    if (isMigratableSessionFormatState(event, 1, 2)) event = { ...event, ignorable: true }
++    else throw refusal(`format v1 contains unknown event type ${JSON.stringify(event.type)} at seq ${event.seq}`)
+   }
+   const interrupted = legacyInterruptedTurn(state.legacyTurns, event)
+   if (event.type === 'turn/start' && state.legacyTurns.openTurn !== null && interrupted === undefined) {
+diff --git a/packages/session/session-format-v2-to-v3/src/migration.ts b/packages/session/session-format-v2-to-v3/src/migration.ts
+index 3aecf8a518..d6d1766877 100644
+--- a/packages/session/session-format-v2-to-v3/src/migration.ts
++++ b/packages/session/session-format-v2-to-v3/src/migration.ts
+@@ -1,9 +1,9 @@
+ /** Streaming system-prompt promotion followed by canonical V3 envelope conversion. */
+ 
+ import { createHash } from 'node:crypto'
+-import { SessionFormatError, SessionFormatUnsupportedMigrationError, defineSessionFormatMigration, sessionFormatCount } from '@deepseek-ai/dsh-session-format'
++import { isMigratableSessionFormatState, SessionFormatError, SessionFormatUnsupportedMigrationError, defineSessionFormatMigration, sessionFormatCount } from '@deepseek-ai/dsh-session-format'
+ import type { SessionFormatEvent, SessionFormatEventRun, SessionFormatJsonObject, SessionFormatJsonValue, SessionFormatMigrationContext, SessionFormatMigrationStage, SessionFormatMigrationStageInput } from '@deepseek-ai/dsh-session-format'
+-import { assertReleasedV2Header } from '@deepseek-ai/dsh-session-format-v1-to-v2'
++import { RELEASED_V2_EVENT_DISPOSITIONS, assertReleasedV2Header } from '@deepseek-ai/dsh-session-format-v1-to-v2'
+ import { assertEvent, canonicalizeTransformedEvent, record, SURFACE_TYPES } from './payload.ts'
+ import { remapEvent } from './references.ts'
+ import { assertReleasedV3Header } from './validation.ts'
+@@ -43,6 +43,11 @@ class ReleasedV2ToV3Stage implements SessionFormatMigrationStage {
+ 
+   transformEvent(event: SessionFormatEvent, context: SessionFormatMigrationContext): void {
+     if (event.seq !== this.mapping.length) throw new SessionFormatError('format v2 source events must be dense')
++    if (RELEASED_V2_EVENT_DISPOSITIONS[event.type] === undefined && isMigratableSessionFormatState(event, 2, 3)) {
++      this.mapping.push(this.targetSeq)
++      context.emitEvent({ ...event, seq: this.targetSeq++, ignorable: true })
++      return
++    }
+     assertEvent(event, 2)
+     this.observeMessageIds(event)
+     let source = event
+diff --git a/packages/session/session-format-v3-to-v4/src/migration.ts b/packages/session/session-format-v3-to-v4/src/migration.ts
+index 63a3460608..214b84f156 100644
+--- a/packages/session/session-format-v3-to-v4/src/migration.ts
++++ b/packages/session/session-format-v3-to-v4/src/migration.ts
+@@ -1,6 +1,6 @@
+ /** Append historical child facts after converting V3 source events to V4. */
+ 
+-import { defineSessionFormatMigration, SessionFormatError, SessionFormatUnsupportedMigrationError, isSessionFormatJsonObject, sessionFormatCount } from '@deepseek-ai/dsh-session-format'
++import { isMigratableSessionFormatState, defineSessionFormatMigration, SessionFormatError, SessionFormatUnsupportedMigrationError, isSessionFormatJsonObject, sessionFormatCount } from '@deepseek-ai/dsh-session-format'
+ import type { SessionFormatEvent, SessionFormatEventRun, SessionFormatJsonObject, SessionFormatJsonValue, SessionFormatMigration, SessionFormatMigrationContext, SessionFormatMigrationStage, SessionFormatMigrationStageInput } from '@deepseek-ai/dsh-session-format'
+ import { assertReleasedV3Header } from '@deepseek-ai/dsh-session-format-v2-to-v3'
+ import { mapEventMessages, rewriteV3MessageSource } from './sources.ts'
+@@ -86,6 +86,11 @@ class ReleasedV3ToV4Stage implements SessionFormatMigrationStage {
+       }
+       if (deliveryId !== undefined && deliveryId !== this.input.sourceHeader.id) this.foreignDeliverySeq = event.seq
+     }
++    if (!RELEASED_V3_EVENT_TYPES.has(event.type) && isMigratableSessionFormatState(event, 3, 4)) {
++      this.mapping.push(targetSeq)
++      context.emitEvent({ ...event, seq: targetSeq, ignorable: true })
++      return
++    }
+     const opaque = namespaceV3OpaqueEvent(event)
+     if (opaque !== event) {
+       // Unknown ignorable events keep their unvalidated envelope references: V3 admission never checked
+diff --git a/packages/session/session-format-v3-to-v4/src/validation.ts b/packages/session/session-format-v3-to-v4/src/validation.ts
+index 8c0e74d61d..376899bb0c 100644
+--- a/packages/session/session-format-v3-to-v4/src/validation.ts
++++ b/packages/session/session-format-v3-to-v4/src/validation.ts
+@@ -1,7 +1,7 @@
+ /** Native V4 metadata and generation-owned relationship validation. */
+ 
+ import { isAbsolute } from 'node:path'
+-import { SessionFormatError, SessionFormatUnsupportedMigrationError, isSessionFormatJsonObject, sessionFormatCount } from '@deepseek-ai/dsh-session-format'
++import { SessionFormatError, SessionFormatUnsupportedMigrationError, isSessionFormatJsonObject, sessionFormatCount, isCompatibleSessionFormatState } from '@deepseek-ai/dsh-session-format'
+ import type { SessionFormatArtifact, SessionFormatEvent } from '@deepseek-ai/dsh-session-format'
+ import { assertV4DeveloperData } from './developer.ts'
+ import { assertV4LifecycleRelationships } from './relationships.ts'
+@@ -56,7 +56,8 @@ export function restoreReleasedV4Artifact(artifact: SessionFormatArtifact, known
+   if (!artifact.header.isSeeded && cut !== 0) throw new SessionFormatError('unseeded format v4 Session has inherited events')
+   let lastInheritedMarker: number | undefined
+   for (const [index, event] of artifact.events.entries()) {
+-    if (!knownEventTypes.has(event.type) && event['ignorable'] !== true) {
++    if (!knownEventTypes.has(event.type) && event['ignorable'] !== true
++      && !isCompatibleSessionFormatState(event, 4)) {
+       throw new SessionFormatUnsupportedMigrationError(
+         `format v4 contains unknown event type ${JSON.stringify(event.type)} at seq ${index}`,
+       )
+diff --git a/packages/session/session-format/src/index.ts b/packages/session/session-format/src/index.ts
+index 44614cce12..42c2cb7784 100644
+--- a/packages/session/session-format/src/index.ts
++++ b/packages/session/session-format/src/index.ts
+@@ -7,3 +7,4 @@ export * from './error.ts'
+ export * from './filename.ts'
+ export * from './json.ts'
+ export * from './types.ts'
++export * from './state-compatibility.ts'
+diff --git a/packages/session/session-format/src/state-compatibility.ts b/packages/session/session-format/src/state-compatibility.ts
+new file mode 100644
+index 0000000000..6784bc3560
+--- /dev/null
++++ b/packages/session/session-format/src/state-compatibility.ts
+@@ -0,0 +1,56 @@
++/** Optional plugin-owned declarations for sequence-independent historical state. */
++import { SessionFormatError, SessionFormatUnsupportedMigrationError } from './error.ts'
++import { sessionFormatVersion } from './json.ts'
++import type { SessionFormatEvent, SessionFormatStateCompatibility } from './types.ts'
++
++const declarations = new Map<string, SessionFormatStateCompatibility>()
++
++/**
++ * Register one plugin's bounded historical state semantics through a Cordis effect.
++ * The declaration may not reinterpret payloads or override first-party validation.
++ * @param declaration - exact type, version range, and complete state validator.
++ * @returns disposer that removes this declaration when its plugin unloads.
++ */
++export function registerSessionFormatStateCompatibility(declaration: SessionFormatStateCompatibility): () => void {
++  const from = sessionFormatVersion(declaration.fromVersion, 'state compatibility fromVersion')
++  const to = sessionFormatVersion(declaration.toVersion, 'state compatibility toVersion')
++  if (to <= from) throw new SessionFormatError('state compatibility must span at least one adjacent migration')
++  if (declarations.has(declaration.type)) {
++    throw new SessionFormatError(`Session state compatibility for ${JSON.stringify(declaration.type)} is duplicated`)
++  }
++  const registered = Object.freeze({ ...declaration })
++  declarations.set(declaration.type, registered)
++  return () => {
++    if (declarations.get(declaration.type) === registered) declarations.delete(declaration.type)
++  }
++}
++
++/**
++ * Validate a declared external state at one source or target generation.
++ * Call only for types absent from the edge's first-party inventory.
++ * @param event - historical event whose payload and envelope are retained.
++ * @param version - generation being validated, inside the owner's explicit range.
++ * @returns true for validated declared state, false when no declaration covers it.
++ * @throws {SessionFormatUnsupportedMigrationError} when declared state has unsupported data or references.
++ */
++export function isCompatibleSessionFormatState(event: SessionFormatEvent, version: number): boolean {
++  const declaration = declarations.get(event.type)
++  if (declaration === undefined || version < declaration.fromVersion || version > declaration.toVersion) return false
++  if (event.sourceEventSeqs !== undefined || event.surfaceOp !== undefined || !declaration.accepts(event.data)) {
++    throw new SessionFormatUnsupportedMigrationError(
++      `format v${version} contains unsupported historical state ${JSON.stringify(event.type)} at seq ${event.seq}`,
++    )
++  }
++  return true
++}
++
++/** Admit state only when its owner reviewed both generations of this edge. */
++export function isMigratableSessionFormatState(event: SessionFormatEvent, fromVersion: number, toVersion: number): boolean {
++  if (!isCompatibleSessionFormatState(event, fromVersion)) return false
++  if (!isCompatibleSessionFormatState(event, toVersion)) {
++    throw new SessionFormatUnsupportedMigrationError(
++      `historical state ${JSON.stringify(event.type)} does not declare compatibility through format v${toVersion}`,
++    )
++  }
++  return true
++}
+diff --git a/packages/session/session-format/src/types.ts b/packages/session/session-format/src/types.ts
+index dbbc316a52..bea3e545dc 100644
+--- a/packages/session/session-format/src/types.ts
++++ b/packages/session/session-format/src/types.ts
+@@ -228,3 +228,21 @@ export interface SessionFormatRestore {
+   /** Finish every decoder and migration stage and return the current artifact. */
+   finish(): SessionFormatArtifact
+ }
++
++/** Explicit owner validation for sequence-independent historical state. */
++export interface SessionFormatStateCompatibility {
++  /** Exact event type owned by the registering plugin. */
++  readonly type: string
++  /** First historical generation whose payload this declaration validates. */
++  readonly fromVersion: number
++  /** Last supported target generation; later migrations require a new owner review. */
++  readonly toVersion: number
++  /**
++   * Accept only complete state payloads with no event-position or lifecycle dependencies.
++   * Omission by a reader without this plugin must be safe. Returning true authorizes
++   * preservation of the exact payload and addition of the envelope's ignorable marker.
++   * @param data - detached historical JSON payload.
++   * @returns whether this exact payload satisfies the plugin's state declaration.
++   */
++  accepts(data: SessionFormatJsonValue): boolean
++}
+diff --git a/packages/session/session-persistence/package.json b/packages/session/session-persistence/package.json
+index 6b9647575c..0a38ed6063 100644
+--- a/packages/session/session-persistence/package.json
++++ b/packages/session/session-persistence/package.json
+@@ -40,6 +40,7 @@
+     "@deepseek-ai/dsh-timeout": "workspace:*"
+   },
+   "dependencies": {
+-    "@deepseek-ai/dsh-util-values": "workspace:*"
++    "@deepseek-ai/dsh-util-values": "workspace:*",
++    "@deepseek-ai/dsh-session-format": "workspace:*"
+   }
+ }
+diff --git a/packages/session/session-persistence/src/storage-contract.ts b/packages/session/session-persistence/src/storage-contract.ts
+index 172a59a258..2eff0e4b55 100644
+--- a/packages/session/session-persistence/src/storage-contract.ts
++++ b/packages/session/session-persistence/src/storage-contract.ts
+@@ -1,3 +1,4 @@
++import { isCompatibleSessionFormatState, type SessionFormatEvent } from '@deepseek-ai/dsh-session-format'
+ /**
+  * Backend-shared storage validation: the version gate, the fail-closed event
+  * vocabulary, append-batch materialization, and contiguity — one place so
+@@ -72,7 +73,8 @@ export function validateStoredEvents(
+   location?: SessionLocation,
+ ): SessionEvent[] {
+   for (const event of events) {
+-    if (!KNOWN_SESSION_EVENT_TYPES.has(event.type) && event.ignorable !== true) {
++    if (!KNOWN_SESSION_EVENT_TYPES.has(event.type) && event.ignorable !== true
++      && !isCompatibleSessionFormatState(event as unknown as SessionFormatEvent, SESSION_FORMAT_VERSION)) {
+       throw unsupported(
+         `session "${meta.id}" contains event type "${event.type}" (seq ${event.seq}) unknown to this harness and not marked ignorable; refusing to interpret the log — it was likely written by a newer harness`,
+         location,
+@@ -92,7 +94,11 @@ export function validateStoredEvents(
+     }
+   }
+   try {
+-    for (const [index, event] of events.entries()) events[index] = adoptSessionEvent(event)
++    for (const [index, event] of events.entries()) {
++      const compatible = !KNOWN_SESSION_EVENT_TYPES.has(event.type) && event.ignorable !== true
++        && isCompatibleSessionFormatState(event as unknown as SessionFormatEvent, SESSION_FORMAT_VERSION)
++      events[index] = adoptSessionEvent(compatible ? { ...event, ignorable: true } : event)
++    }
+   } catch (error: unknown) {
+     if (error instanceof SessionFormatUnsupportedError) throw error
+     throw new SessionPersistenceCorruptionError(
+diff --git a/packages/session/session-persistence/tsconfig.json b/packages/session/session-persistence/tsconfig.json
+index 84c6f5ccb0..f99de1740d 100644
+--- a/packages/session/session-persistence/tsconfig.json
++++ b/packages/session/session-persistence/tsconfig.json
+@@ -19,6 +19,9 @@
+     },
+     {
+       "path": "../../core/session"
++    },
++    {
++      "path": "../session-format"
+     }
+   ]
+ }
+diff --git a/packages/session/session-persistence/tsdown.config.ts b/packages/session/session-persistence/tsdown.config.ts
+new file mode 100644
+index 0000000000..be29690579
+--- /dev/null
++++ b/packages/session/session-persistence/tsdown.config.ts
+@@ -0,0 +1,3 @@
++import { defineConfig } from 'tsdown'
++
++export default defineConfig({ entry: ['lib/types/index.js'], outDir: 'lib', format: ['esm'], platform: 'node', target: 'es2024', fixedExtension: false, dts: false, clean: false })

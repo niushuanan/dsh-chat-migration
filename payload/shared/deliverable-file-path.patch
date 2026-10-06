@@ -1,0 +1,37 @@
+diff --git a/packages/client/ui-deliverables/src/client/Deliverables.tsx b/packages/client/ui-deliverables/src/client/Deliverables.tsx
+index 544e7a82b2..7b1e487e5a 100644
+--- a/packages/client/ui-deliverables/src/client/Deliverables.tsx
++++ b/packages/client/ui-deliverables/src/client/Deliverables.tsx
+@@ -110,6 +110,7 @@ export function Deliverables({
+           host={host === 'error' ? null : host} t={t}
+           onPreview={() => { openFile(file.path) }}
+           actions={renderSlot('deliverables.file.actions', {
++            path: file.path,
+             actionUrl: presentedFileUrl(sessionId, file.seq, file.index),
+             available: host !== null && host !== 'error' && host.available,
+             pending: states[presentedFileUrl(sessionId, file.seq, file.index)] === 'opening'
+diff --git a/packages/client/ui-deliverables/src/client/ReviewTab.tsx b/packages/client/ui-deliverables/src/client/ReviewTab.tsx
+index 7840fc57eb..8dd80f2947 100644
+--- a/packages/client/ui-deliverables/src/client/ReviewTab.tsx
++++ b/packages/client/ui-deliverables/src/client/ReviewTab.tsx
+@@ -145,6 +145,7 @@ export function ReviewTab({
+               onClick={() => { tab.actions.openResource(fileAddressFor(sessionId, cwd, file.path)) }}><IconInspectOutlineRegular /></button>
+           </Tooltip>}
+           {file !== undefined && renderSlot('deliverables.review.file.actions', {
++            path: file.path,
+             actionUrl: changedFileUrl(sessionId, seq, index), available: native,
+             pending: phase === 'opening' || phase === 'revealing',
+             onAction: (action, application) => openChanged(sessionId, seq, index, action, application),
+diff --git a/packages/client/ui-deliverables/src/client/file-actions.ts b/packages/client/ui-deliverables/src/client/file-actions.ts
+index 1326f80b76..e83161c9dc 100644
+--- a/packages/client/ui-deliverables/src/client/file-actions.ts
++++ b/packages/client/ui-deliverables/src/client/file-actions.ts
+@@ -9,6 +9,8 @@ declare module '@deepseek-ai/dsh-client-ui-slots' {
+       kind: 'list'
+       scope: 'session'
+       owner: {
++        /** Workspace-relative file path presented by this action surface. */
++        readonly path: string
+         /** Authenticated document-relative action route carrying Session event coordinates. */
+         readonly actionUrl: string
+         readonly available: boolean

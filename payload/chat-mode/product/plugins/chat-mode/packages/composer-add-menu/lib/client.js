@@ -7,8 +7,8 @@ window.__ModuleLoader__.load({
 		let react = require("react");
 		let _deepseek_ai_dsh_client_ui_primitives = require("@deepseek-ai/dsh-client-ui-primitives");
 		let react_jsx_runtime = require("react/jsx-runtime");
-		//#region \0dsh-css:/private/tmp/dsh-publish-20260905.X1Ok1K/source/plugins/chat-mode/packages/composer-add-menu/src/client/ComposerAddMenu.module.css.mjs
-		const css = ".KHQ2fa_root{flex:none;align-items:center;gap:8px;display:flex;position:relative}.KHQ2fa_trigger{background:var(--dsw-specific-selector);width:28px;height:28px;color:var(--dsw-alias-label-primary);cursor:pointer;border:0;border-radius:999px;place-items:center;padding:0;transition:background-color .14s;display:grid}.KHQ2fa_trigger:hover:not(:disabled),.KHQ2fa_trigger[aria-expanded=true]{background:var(--dsw-alias-interactive-bg-hover-solid)}.KHQ2fa_trigger:focus-visible{outline:2px solid color-mix(in srgb, var(--dsw-alias-brand-primary) 34%, transparent);outline-offset:2px}.KHQ2fa_trigger:disabled{opacity:.5;cursor:default}.KHQ2fa_web{border:1px solid var(--dsw-alias-border-l2);height:28px;color:var(--dsw-alias-label-secondary);font:inherit;white-space:nowrap;cursor:pointer;background:0 0;border-radius:999px;justify-content:center;align-items:center;gap:5px;padding:0 11px;font-size:12px;line-height:1;transition:border-color .14s,color .14s,background-color .14s;display:inline-flex}.KHQ2fa_web[aria-pressed=true]{border-color:color-mix(in srgb, var(--dsw-alias-brand-primary-new-colorprimary-new-color) 58%, transparent);color:var(--dsw-alias-brand-primary-new-colorprimary-new-color)}.KHQ2fa_web:hover:not(:disabled){background:var(--dsw-alias-interactive-bg-hover)}.KHQ2fa_web:focus-visible{outline:2px solid color-mix(in srgb, var(--dsw-alias-brand-primary-new-colorprimary-new-color) 34%, transparent);outline-offset:2px}.KHQ2fa_web:disabled{opacity:.5;cursor:default}.KHQ2fa_menu{--dsh-scrollbar-thumb:var(--dsw-alias-scrollbar-bg-l2);--dsh-scrollbar-thumb-hover:var(--dsw-alias-scrollbar-hover-l2);z-index:40;border:1px solid color-mix(in srgb, var(--dsw-alias-label-tertiary) 15%, transparent);background:var(--dsw-alias-bg-layer-1);border-radius:14px;flex-direction:column;width:360px;max-height:min(430px,100vh - 140px);padding:6px;display:flex;position:absolute;bottom:calc(100% + 10px);left:0;overflow:hidden;box-shadow:0 12px 32px #0f172a1c,0 2px 8px #0f172a0d}.KHQ2fa_section{color:var(--dsw-alias-label-caption);flex:none;padding:7px 9px 4px;font-size:10px;font-weight:500;line-height:16px}.KHQ2fa_divided{border-top:1px solid var(--dsw-alias-border-l2);margin-top:4px;padding-top:9px}.KHQ2fa_scroll{overscroll-behavior:contain;scrollbar-width:thin;min-height:0;overflow:hidden auto}.KHQ2fa_item{width:100%;min-height:38px;color:var(--dsw-alias-label-primary);text-align:left;cursor:pointer;background:0 0;border:0;border-radius:9px;grid-template-columns:20px max-content minmax(0,1fr);align-items:center;gap:8px;padding:6px 9px;display:grid}.KHQ2fa_item:hover:not(:disabled),.KHQ2fa_item:focus-visible{background:var(--dsw-alias-interactive-bg-hover);outline:0}.KHQ2fa_item:focus-visible{box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--dsw-alias-brand-primary) 30%, transparent)}.KHQ2fa_item:disabled{cursor:default;opacity:.45}.KHQ2fa_icon{width:20px;height:20px;color:var(--dsw-alias-label-secondary);place-items:center;display:grid}.KHQ2fa_icon svg{width:16px;height:16px}.KHQ2fa_title{white-space:nowrap;font-size:13px;font-weight:500;line-height:19px}.KHQ2fa_description{min-width:0;color:var(--dsw-alias-label-caption);text-overflow:ellipsis;white-space:nowrap;font-size:11px;line-height:18px;overflow:hidden}.KHQ2fa_empty{color:var(--dsw-alias-label-caption);padding:8px 9px 10px 37px;font-size:11px;line-height:18px}.KHQ2fa_file{display:none}@media (width<=520px){.KHQ2fa_menu{width:min(360px,100vw - 32px)}.KHQ2fa_item{grid-template-columns:20px minmax(0,1fr)}.KHQ2fa_description{display:none}}@media (prefers-reduced-motion:reduce){.KHQ2fa_trigger,.KHQ2fa_web{transition:none}}";
+		//#region \0dsh-css:/Users/zhuanghongkai/Desktop/迭代DSH/xiaozhuang-dsh-upgrade-20261006/plugins/chat-mode/packages/composer-add-menu/src/client/ComposerAddMenu.module.css.mjs
+		const css = ".EAqgOa_root{flex:none;align-items:center;gap:8px;display:flex;position:relative}.EAqgOa_trigger{background:var(--dsw-specific-selector);width:28px;height:28px;color:var(--dsw-alias-label-primary);cursor:pointer;border:0;border-radius:999px;place-items:center;padding:0;transition:background-color .14s;display:grid}.EAqgOa_trigger:hover:not(:disabled),.EAqgOa_trigger[aria-expanded=true]{background:var(--dsw-alias-interactive-bg-hover-solid)}.EAqgOa_trigger:focus-visible{outline:2px solid color-mix(in srgb, var(--dsw-alias-brand-primary) 34%, transparent);outline-offset:2px}.EAqgOa_trigger:disabled{opacity:.5;cursor:default}.EAqgOa_web{border:1px solid var(--dsw-alias-border-l2);height:28px;color:var(--dsw-alias-label-secondary);font:inherit;white-space:nowrap;cursor:pointer;background:0 0;border-radius:999px;justify-content:center;align-items:center;gap:5px;padding:0 11px;font-size:12px;line-height:1;transition:border-color .14s,color .14s,background-color .14s;display:inline-flex}.EAqgOa_web[aria-pressed=true]{border-color:color-mix(in srgb, var(--dsw-alias-brand-primary-new-colorprimary-new-color) 58%, transparent);color:var(--dsw-alias-brand-primary-new-colorprimary-new-color)}.EAqgOa_web:hover:not(:disabled){background:var(--dsw-alias-interactive-bg-hover)}.EAqgOa_web:focus-visible{outline:2px solid color-mix(in srgb, var(--dsw-alias-brand-primary-new-colorprimary-new-color) 34%, transparent);outline-offset:2px}.EAqgOa_web:disabled{opacity:.5;cursor:default}.EAqgOa_menu{--dsh-scrollbar-thumb:var(--dsw-alias-scrollbar-bg-l2);--dsh-scrollbar-thumb-hover:var(--dsw-alias-scrollbar-hover-l2);z-index:40;border:1px solid color-mix(in srgb, var(--dsw-alias-label-tertiary) 15%, transparent);background:var(--dsw-alias-bg-layer-1);border-radius:14px;flex-direction:column;width:360px;max-height:min(430px,100vh - 140px);padding:6px;display:flex;position:absolute;bottom:calc(100% + 10px);left:0;overflow:hidden;box-shadow:0 12px 32px #0f172a1c,0 2px 8px #0f172a0d}.EAqgOa_section{color:var(--dsw-alias-label-caption);flex:none;padding:7px 9px 4px;font-size:10px;font-weight:500;line-height:16px}.EAqgOa_divided{border-top:1px solid var(--dsw-alias-border-l2);margin-top:4px;padding-top:9px}.EAqgOa_scroll{overscroll-behavior:contain;scrollbar-width:thin;min-height:0;overflow:hidden auto}.EAqgOa_item{width:100%;min-height:38px;color:var(--dsw-alias-label-primary);text-align:left;cursor:pointer;background:0 0;border:0;border-radius:9px;grid-template-columns:20px max-content minmax(0,1fr);align-items:center;gap:8px;padding:6px 9px;display:grid}.EAqgOa_item:hover:not(:disabled),.EAqgOa_item:focus-visible{background:var(--dsw-alias-interactive-bg-hover);outline:0}.EAqgOa_item:focus-visible{box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--dsw-alias-brand-primary) 30%, transparent)}.EAqgOa_item:disabled{cursor:default;opacity:.45}.EAqgOa_icon{width:20px;height:20px;color:var(--dsw-alias-label-secondary);place-items:center;display:grid}.EAqgOa_icon svg{width:16px;height:16px}.EAqgOa_title{white-space:nowrap;font-size:13px;font-weight:500;line-height:19px}.EAqgOa_description{min-width:0;color:var(--dsw-alias-label-caption);text-overflow:ellipsis;white-space:nowrap;font-size:11px;line-height:18px;overflow:hidden}.EAqgOa_empty{color:var(--dsw-alias-label-caption);padding:8px 9px 10px 37px;font-size:11px;line-height:18px}.EAqgOa_file{display:none}@media (width<=520px){.EAqgOa_menu{width:min(360px,100vw - 32px)}.EAqgOa_item{grid-template-columns:20px minmax(0,1fr)}.EAqgOa_description{display:none}}@media (prefers-reduced-motion:reduce){.EAqgOa_trigger,.EAqgOa_web{transition:none}}";
 		const tagId = "@deepseek-ai/dsh-composer-add-menu/ComposerAddMenu.module.css";
 		if (typeof document !== "undefined" && document.querySelector("style[data-plugin-css=" + JSON.stringify(tagId) + "]") === null) {
 			const tag = document.createElement("style");
@@ -18,19 +18,19 @@ window.__ModuleLoader__.load({
 			document.head.appendChild(tag);
 		}
 		var ComposerAddMenu_module_css_default = {
-			"description": "KHQ2fa_description",
-			"divided": "KHQ2fa_divided",
-			"empty": "KHQ2fa_empty",
-			"file": "KHQ2fa_file",
-			"icon": "KHQ2fa_icon",
-			"item": "KHQ2fa_item",
-			"menu": "KHQ2fa_menu",
-			"root": "KHQ2fa_root",
-			"scroll": "KHQ2fa_scroll",
-			"section": "KHQ2fa_section",
-			"title": "KHQ2fa_title",
-			"trigger": "KHQ2fa_trigger",
-			"web": "KHQ2fa_web"
+			"description": "EAqgOa_description",
+			"divided": "EAqgOa_divided",
+			"empty": "EAqgOa_empty",
+			"file": "EAqgOa_file",
+			"icon": "EAqgOa_icon",
+			"item": "EAqgOa_item",
+			"menu": "EAqgOa_menu",
+			"root": "EAqgOa_root",
+			"scroll": "EAqgOa_scroll",
+			"section": "EAqgOa_section",
+			"title": "EAqgOa_title",
+			"trigger": "EAqgOa_trigger",
+			"web": "EAqgOa_web"
 		};
 		//#endregion
 		//#region src/client/ComposerAddMenu.tsx
@@ -120,7 +120,7 @@ window.__ModuleLoader__.load({
 							disabled,
 							onMouseDown: keepFocus,
 							onClick: toggle,
-							children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconPlusOutline16, { size: 14 })
+							children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconPlusOutlineRegular, { size: 14 })
 						})
 					}),
 					mode === "chat" ? /* @__PURE__ */ (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.Tooltip, {
@@ -137,7 +137,7 @@ window.__ModuleLoader__.load({
 							onClick: () => {
 								onSetWebSearchEnabled(!webSearchEnabled);
 							},
-							children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconGlobeOutline14, {}), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", { children: t("web.label") })]
+							children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconGlobeOutlineRegular, {}), /* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", { children: t("web.label") })]
 						})
 					}) : null,
 					/* @__PURE__ */ (0, react_jsx_runtime.jsx)("input", {
@@ -184,7 +184,7 @@ window.__ModuleLoader__.load({
 									/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
 										className: ComposerAddMenu_module_css_default.icon,
 										"aria-hidden": "true",
-										children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconPaperclipOutline16, {})
+										children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconPaperclipOutlineRegular, {})
 									}),
 									/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
 										className: ComposerAddMenu_module_css_default.title,
@@ -208,7 +208,7 @@ window.__ModuleLoader__.load({
 									/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
 										className: ComposerAddMenu_module_css_default.icon,
 										"aria-hidden": "true",
-										children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconFolderOpenOutline16, {})
+										children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconFolderOpenOutlineRegular, {})
 									}),
 									/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
 										className: ComposerAddMenu_module_css_default.title,
@@ -231,7 +231,7 @@ window.__ModuleLoader__.load({
 										/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
 											className: ComposerAddMenu_module_css_default.icon,
 											"aria-hidden": "true",
-											children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconFolderOpenOutline16, {})
+											children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconFolderOpenOutlineRegular, {})
 										}),
 										/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
 											className: ComposerAddMenu_module_css_default.title,
@@ -262,7 +262,7 @@ window.__ModuleLoader__.load({
 												/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
 													className: ComposerAddMenu_module_css_default.icon,
 													"aria-hidden": "true",
-													children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconCordisPluginOutline14, { size: 16 })
+													children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconCordisPluginOutlineRegular, { size: 16 })
 												}),
 												/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
 													className: ComposerAddMenu_module_css_default.title,
@@ -285,7 +285,7 @@ window.__ModuleLoader__.load({
 												/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
 													className: ComposerAddMenu_module_css_default.icon,
 													"aria-hidden": "true",
-													children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconSkillOutline16, {})
+													children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconSkillOutlineRegular, {})
 												}),
 												/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
 													className: ComposerAddMenu_module_css_default.title,

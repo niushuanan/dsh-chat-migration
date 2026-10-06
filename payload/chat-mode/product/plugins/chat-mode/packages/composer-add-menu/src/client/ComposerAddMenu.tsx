@@ -2,12 +2,12 @@ import {
   useEffect, useId, useRef, useState, type ChangeEvent, type MouseEvent, type ReactElement,
 } from 'react'
 import {
-  IconCordisPluginOutline14,
-  IconFolderOpenOutline16,
-  IconGlobeOutline14,
-  IconPaperclipOutline16,
-  IconPlusOutline16,
-  IconSkillOutline16,
+  IconCordisPluginOutlineRegular,
+  IconFolderOpenOutlineRegular,
+  IconGlobeOutlineRegular,
+  IconPaperclipOutlineRegular,
+  IconPlusOutlineRegular,
+  IconSkillOutlineRegular,
   Tooltip,
 } from '@deepseek-ai/dsh-client-ui-primitives'
 import type { PropsLocale, PropsRuntime } from '@deepseek-ai/dsh-client-ui-slots'
@@ -116,7 +116,7 @@ export function ComposerAddMenu(props: PropsRuntime<'conversation.input.add'> & 
         disabled={disabled}
         onMouseDown={keepFocus}
         onClick={toggle}
-      ><IconPlusOutline16 size={14} /></button>
+      ><IconPlusOutlineRegular size={14} /></button>
     </Tooltip>
     {mode === 'chat' ? <Tooltip label={t(webSearchEnabled ? 'web.disableHint' : 'web.enableHint')} side="top" delayMs={500}>
       <button
@@ -128,7 +128,7 @@ export function ComposerAddMenu(props: PropsRuntime<'conversation.input.add'> & 
         onMouseDown={keepFocus}
         onClick={() => { onSetWebSearchEnabled(!webSearchEnabled) }}
       >
-        <IconGlobeOutline14 />
+        <IconGlobeOutlineRegular />
         <span>{t('web.label')}</span>
       </button>
     </Tooltip> : null}
@@ -161,7 +161,7 @@ export function ComposerAddMenu(props: PropsRuntime<'conversation.input.add'> & 
         disabled={!effectiveCanAddFiles}
         onClick={() => { imageInputRef.current?.click(); setOpen(false) }}
       >
-        <span className={css.icon} aria-hidden="true"><IconPaperclipOutline16 /></span>
+        <span className={css.icon} aria-hidden="true"><IconPaperclipOutlineRegular /></span>
         <span className={css.title}>{t(mode === 'chat' ? 'image.chatTitle' : 'image.workTitle')}</span>
         <span className={css.description}>{t(effectiveCanAddFiles ? 'image.select' : 'image.unsupported')}</span>
       </button>
@@ -171,7 +171,7 @@ export function ComposerAddMenu(props: PropsRuntime<'conversation.input.add'> & 
         role="menuitem"
         onClick={() => { textInputRef.current?.click(); setOpen(false) }}
       >
-        <span className={css.icon} aria-hidden="true"><IconFolderOpenOutline16 /></span>
+        <span className={css.icon} aria-hidden="true"><IconFolderOpenOutlineRegular /></span>
         <span className={css.title}>{t('file.title')}</span>
         <span className={css.description}>{t('file.description')}</span>
       </button> : null}
@@ -183,7 +183,7 @@ export function ComposerAddMenu(props: PropsRuntime<'conversation.input.add'> & 
           disabled={!canReferenceFiles}
           onClick={chooseReference}
         >
-          <span className={css.icon} aria-hidden="true"><IconFolderOpenOutline16 /></span>
+          <span className={css.icon} aria-hidden="true"><IconFolderOpenOutlineRegular /></span>
           <span className={css.title}>{t('reference.title')}</span>
           <span className={css.description}>{t(canReferenceFiles ? 'reference.enabled' : 'reference.disabled')}</span>
         </button>
@@ -196,7 +196,7 @@ export function ComposerAddMenu(props: PropsRuntime<'conversation.input.add'> & 
             role="menuitem"
             onClick={() => { chooseSlash(item.name) }}
           >
-            <span className={css.icon} aria-hidden="true"><IconCordisPluginOutline14 size={16} /></span>
+            <span className={css.icon} aria-hidden="true"><IconCordisPluginOutlineRegular size={16} /></span>
             <span className={css.title}>{item.name}</span>
             <span className={css.description}>{item.description}</span>
           </button>)}
@@ -207,7 +207,7 @@ export function ComposerAddMenu(props: PropsRuntime<'conversation.input.add'> & 
             role="menuitem"
             onClick={() => { chooseSlash(name) }}
           >
-            <span className={css.icon} aria-hidden="true"><IconSkillOutline16 /></span>
+            <span className={css.icon} aria-hidden="true"><IconSkillOutlineRegular /></span>
             <span className={css.title}>{name}</span>
             <span className={css.description}>{t('skill.invoke', { name })}</span>
           </button>)}

@@ -1,5 +1,5 @@
 import { type ReactElement, useCallback, useMemo, useRef, useState } from 'react'
-import { IconChatOutline16, IconSearchOutline16, SettingsSectionHeader } from '@deepseek-ai/dsh-client-ui-primitives'
+import { IconQueueOutlineRegular, IconSearchOutlineRegular, SettingsSectionHeader } from '@deepseek-ai/dsh-client-ui-primitives'
 import type {
   DeepSeekImportPreview,
   DeepSeekImportPreviewItem,
@@ -148,7 +148,7 @@ export function DeepSeekImportSection({
 
       <div className={css.body}>
         <div className={css.sourceCard}>
-          <div className={css.sourceIcon} aria-hidden="true"><IconChatOutline16 size={20} /></div>
+          <div className={css.sourceIcon} aria-hidden="true"><IconQueueOutlineRegular size={20} /></div>
           <div className={css.sourceCopy}>
             <strong>{file?.name ?? 'DeepSeek 历史对话'}</strong>
             <span>{file === undefined
@@ -196,7 +196,7 @@ export function DeepSeekImportSection({
 
             <div className={css.toolbar}>
               <label className={css.searchBox}>
-                <IconSearchOutline16 size={16} aria-hidden="true" />
+                <IconSearchOutlineRegular size={16} aria-hidden="true" />
                 <input
                   type="search"
                   aria-label="搜索对话"

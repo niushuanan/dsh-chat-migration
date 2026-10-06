@@ -1,0 +1,485 @@
+diff --git a/apps/cli/src/bin.ts b/apps/cli/src/bin.ts
+index 1ae0c4a591..a66873fa0b 100644
+--- a/apps/cli/src/bin.ts
++++ b/apps/cli/src/bin.ts
+@@ -54,7 +54,7 @@ export async function runCli(options: RunCliOptions = {}): Promise<void> {
+     }
+     case 'dump-config': {
+       const { runDumpConfig } = await import('./dump-config.ts')
+-      runDumpConfig(
++      await runDumpConfig(
+         invocation.profile,
+         invocation.defaultOnly,
+         invocation.patches,
+diff --git a/apps/cli/src/dump-config-schema.ts b/apps/cli/src/dump-config-schema.ts
+index 1d92f2dfca..3f01923d2b 100644
+--- a/apps/cli/src/dump-config-schema.ts
++++ b/apps/cli/src/dump-config-schema.ts
+@@ -28,7 +28,7 @@ export async function runDumpConfigSchema(
+   fromDefaultProfile?: string,
+ ): Promise<void> {
+   const loaded = prepareProfile(profile, true, fromDefaultProfile)
+-  const layers = collectConfigDumpLayers(loaded, false, patches)
++  const layers = await collectConfigDumpLayers(loaded, false, patches)
+   // oxlint-disable-next-line typescript/unbound-method -- Saved only for exact restoration, never called unbound.
+   const stdoutWrite = process.stdout.write
+   let dump: ConfigSchemaDump
+diff --git a/apps/cli/src/dump-config.ts b/apps/cli/src/dump-config.ts
+index 44593b9847..b46b1ebe04 100644
+--- a/apps/cli/src/dump-config.ts
++++ b/apps/cli/src/dump-config.ts
+@@ -15,7 +15,8 @@ import {
+   type ConfigDumpLayer,
+   type Profile,
+ } from '@deepseek-ai/dsh-app-boot'
+-import { homePatchPath, prepareProfile, PROFILE_ROOT_FILENAME } from './profile-boot.ts'
++import { homePatchPath, prepareProfile, PROFILE_ROOT_FILENAME, INSTALL_ANCHOR } from './profile-boot.ts'
++import { loadProductPluginLayers, reconcileProductPluginUserPatches, resolveProductPluginRoot } from './product-plugin-directory.ts'
+ 
+ const NAME = 'dsh'
+ 
+@@ -29,14 +30,14 @@ const NAME = 'dsh'
+  * @param patches - `--patch` overlay paths, in argv order.
+  * @param fromDefaultProfile - shipped template used once to initialize a missing profile.
+  */
+-export function runDumpConfig(
++export async function runDumpConfig(
+   profile: string,
+   defaultOnly: boolean,
+   patches: readonly string[],
+   fromDefaultProfile?: string,
+-): void {
++): Promise<void> {
+   const loaded = prepareProfile(profile, !defaultOnly, fromDefaultProfile)
+-  const layers = collectConfigDumpLayers(loaded, defaultOnly, patches)
++  const layers = await collectConfigDumpLayers(loaded, defaultOnly, patches)
+   // The dump anchors on the same empty root file the boot includes.
+   process.stdout.write(renderConfigDump(NAME, join(loaded.dir, PROFILE_ROOT_FILENAME), layers))
+ }
+@@ -48,27 +49,29 @@ export function runDumpConfig(
+  * @param patches - overlay paths relative to the invoking directory, in argv order.
+  * @returns the labeled layers shared by YAML and schema dumps.
+  */
+-export function collectConfigDumpLayers(
++export async function collectConfigDumpLayers(
+   loaded: Profile,
+   defaultOnly: boolean,
+   patches: readonly string[],
+-): ConfigDumpLayer[] {
++): Promise<ConfigDumpLayer[]> {
+   const layers: ConfigDumpLayer[] = loaded.layers.map(layer => ({
+     label: layer.packageName,
+     patches: layer.patches,
+   }))
++  const productLayers = await loadProductPluginLayers(resolveProductPluginRoot(INSTALL_ANCHOR, process.env.DSH_PRODUCT_PLUGINS_DIR))
++  layers.push(...productLayers.map(layer => ({ label: layer.patchPath, patches: layer.patches })))
+   if (!defaultOnly) {
+     if (existsSync(loaded.patchPath)) {
+-      layers.push({ label: loaded.patchPath, patches: loaded.patches })
++      layers.push({ label: loaded.patchPath, patches: reconcileProductPluginUserPatches(productLayers, loaded.patches) })
+     }
+     const homePatchFile = homePatchPath()
+     const homePatches = loadOptionalPatches(NAME, homePatchFile)
+     if (homePatches !== undefined) {
+-      layers.push({ label: homePatchFile, patches: homePatches })
++      layers.push({ label: homePatchFile, patches: reconcileProductPluginUserPatches(productLayers, homePatches) })
+     }
+     for (const file of patches) {
+       const absolute = resolve(file)
+-      layers.push({ label: absolute, patches: loadOverlayPatches(NAME, absolute) })
++      layers.push({ label: absolute, patches: reconcileProductPluginUserPatches(productLayers, loadOverlayPatches(NAME, absolute)) })
+     }
+   }
+   return layers
+diff --git a/apps/cli/src/product-plugin-directory.ts b/apps/cli/src/product-plugin-directory.ts
+new file mode 100644
+index 0000000000..3ba3f5c89c
+--- /dev/null
++++ b/apps/cli/src/product-plugin-directory.ts
+@@ -0,0 +1,220 @@
++/**
++ * Optional repository-local product bundle discovery.
++ * @module @deepseek-ai/dsh/product-plugin-directory
++ */
++
++import { readFile, readdir, stat } from 'node:fs/promises'
++import { dirname, isAbsolute, join, relative, resolve } from 'node:path'
++import type { PatchOptions } from '@deepseek-ai/cordis-plugin-include'
++
++interface ProductPluginManifest {
++  name?: unknown
++  dsh?: { bundle?: { patch?: unknown; replaces?: unknown } }
++}
++
++/** One native bundle found beneath the product plugin directory. */
++export interface ProductPluginBundle {
++  /** Stable plugin id declared by its folder name. */
++  readonly id: string
++  /** Absolute plugin folder. */
++  readonly directory: string
++  /** Absolute package manifest path. */
++  readonly manifestPath: string
++  /** Absolute bundle patch path. */
++  readonly patchPath: string
++  /** Optional upstream-row to bundle-row redirects used while reading legacy user patches. */
++  readonly replacements?: Readonly<Record<string, string>>
++}
++
++/** One discovered bundle with its parsed Cordis patch layer. */
++export interface ProductPluginLayer extends ProductPluginBundle {
++  /** Parsed entries from the plugin-owned bundle patch. */
++  readonly patches: PatchOptions[]
++}
++
++function parseReplacements(manifestPath: string, value: unknown): Readonly<Record<string, string>> | undefined {
++  if (value === undefined) return undefined
++  if (value === null || typeof value !== 'object' || Array.isArray(value)) {
++    throw new Error(`${manifestPath}: dsh.bundle.replaces must be an object mapping old row ids to bundle row ids`)
++  }
++  const replacements: Record<string, string> = {}
++  for (const [source, target] of Object.entries(value)) {
++    if (source.trim() === '' || typeof target !== 'string' || target.trim() === '') {
++      throw new Error(`${manifestPath}: dsh.bundle.replaces must map non-empty row ids to non-empty row ids`)
++    }
++    if (source === target) {
++      throw new Error(`${manifestPath}: dsh.bundle.replaces cannot map ${JSON.stringify(source)} to itself`)
++    }
++    replacements[source] = target
++  }
++  return replacements
++}
++
++function insertedRowIds(patches: readonly PatchOptions[]): ReadonlySet<string> {
++  const ids = new Set<string>()
++  for (const patch of patches) {
++    for (const entry of patch.insert ?? []) {
++      if (typeof entry.id === 'string' && entry.id !== '') ids.add(entry.id)
++      if (entry.group && Array.isArray(entry.config)) {
++        for (const id of insertedRowIds([{ insert: entry.config }])) ids.add(id)
++      }
++    }
++  }
++  return ids
++}
++
++/**
++ * Resolve the optional product plugin directory for this installation.
++ * @param installAnchor - absolute path of the CLI package manifest.
++ * @param configured - optional inherited-environment override.
++ * @param cwd - base for a relative override.
++ * @returns the absolute directory to scan.
++ */
++export function resolveProductPluginRoot(
++  installAnchor: string,
++  configured: string | undefined,
++  cwd: string = process.cwd(),
++): string {
++  if (configured !== undefined && configured.trim() !== '') return resolve(cwd, configured)
++  return resolve(dirname(installAnchor), '..', '..', 'plugins')
++}
++
++/**
++ * Discover native product bundles from direct child folders.
++ * @param root - absolute product plugin directory.
++ * @returns discovered bundles; a missing root is an empty optional layer.
++ */
++export async function discoverProductPluginBundles(root: string): Promise<readonly ProductPluginBundle[]> {
++  const absoluteRoot = resolve(root)
++  let entries
++  try {
++    entries = await readdir(absoluteRoot, { withFileTypes: true })
++  } catch (error) {
++    if ((error as NodeJS.ErrnoException).code === 'ENOENT') return []
++    throw error
++  }
++  const bundles: ProductPluginBundle[] = []
++  for (const entry of entries.filter(entry => entry.isDirectory()).sort((a, b) => a.name.localeCompare(b.name))) {
++    const directory = join(absoluteRoot, entry.name)
++    const manifestPath = join(directory, 'package.json')
++    let manifest: ProductPluginManifest
++    try {
++      manifest = JSON.parse(await readFile(manifestPath, 'utf8')) as ProductPluginManifest
++    } catch (error) {
++      throw new Error(`${manifestPath}: failed to read product plugin manifest: ${String(error)}`)
++    }
++    if (typeof manifest.name !== 'string' || manifest.name.trim() === '') {
++      throw new Error(`${manifestPath}: name must be a non-empty string`)
++    }
++    const declaredPatch = manifest.dsh?.bundle?.patch
++    if (typeof declaredPatch !== 'string' || declaredPatch.trim() === '' || isAbsolute(declaredPatch)) {
++      throw new Error(`${manifestPath}: dsh.bundle.patch must be a non-empty relative path`)
++    }
++    const patchPath = resolve(directory, declaredPatch)
++    const patchFromDirectory = relative(directory, patchPath)
++    if (patchFromDirectory === '..' || patchFromDirectory.startsWith(`..${process.platform === 'win32' ? '\\' : '/'}`)
++      || isAbsolute(patchFromDirectory)) {
++      throw new Error(`${manifestPath}: dsh.bundle.patch must stay inside the plugin folder`)
++    }
++    try {
++      if (!(await stat(patchPath)).isFile()) throw new Error('path is not a file')
++    } catch (error) {
++      throw new Error(`${manifestPath}: dsh.bundle.patch does not name a readable file: ${String(error)}`)
++    }
++    const replacements = parseReplacements(manifestPath, manifest.dsh?.bundle?.replaces)
++    bundles.push({
++      id: entry.name,
++      directory,
++      manifestPath,
++      patchPath,
++      ...(replacements === undefined ? {} : { replacements }),
++    })
++  }
++  return bundles
++}
++
++/**
++ * Load every present product plugin's native bundle patch.
++ * @param root - absolute product plugin directory.
++ * @returns parsed layers in stable folder order.
++ */
++export async function loadProductPluginLayers(root: string): Promise<readonly ProductPluginLayer[]> {
++  // Discovery is also used by the pre-build orchestrator, before app-boot has
++  // emitted its package entrypoint. Load the parser only on the runtime path.
++  const { loadOverlayPatches } = await import('@deepseek-ai/dsh-app-boot')
++  const bundles = await discoverProductPluginBundles(root)
++  return bundles.map((bundle) => {
++    const patches = loadOverlayPatches(`dsh product plugin ${bundle.id}`, bundle.patchPath)
++    const ownedIds = insertedRowIds(patches)
++    for (const target of Object.values(bundle.replacements ?? {})) {
++      if (!ownedIds.has(target)) {
++        throw new Error(`${bundle.manifestPath}: dsh.bundle.replaces target ${JSON.stringify(target)} is not inserted by this plugin`)
++      }
++    }
++    return { ...bundle, patches }
++  })
++}
++
++/**
++ * Reconcile user patches written by the pre-directory product with the
++ * physically present product bundles. Duplicate legacy inserts become
++ * ordinary overrides of the folder-owned row, while a bundle-declared
++ * upstream replacement receives the user's former switch/config patches.
++ * With the folder absent there is no ownership claim and the user patch is
++ * returned unchanged, preserving the upstream fallback.
++ * @param layers - product bundles present for this composition.
++ * @param patches - one later user or command-line patch layer.
++ * @returns a detached compatible patch list.
++ */
++export function reconcileProductPluginUserPatches(
++  layers: readonly ProductPluginLayer[],
++  patches: readonly PatchOptions[],
++): PatchOptions[] {
++  const ownedIds = new Set<string>()
++  const replacements = new Map<string, string>()
++  for (const layer of layers) {
++    for (const id of insertedRowIds(layer.patches)) ownedIds.add(id)
++    for (const [source, target] of Object.entries(layer.replacements ?? {})) {
++      const previous = replacements.get(source)
++      if (previous !== undefined && previous !== target) {
++        throw new Error(`product plugins replace row ${JSON.stringify(source)} with both ${JSON.stringify(previous)} and ${JSON.stringify(target)}`)
++      }
++      replacements.set(source, target)
++    }
++  }
++  if (ownedIds.size === 0 && replacements.size === 0) return patches.map(patch => structuredClone(patch))
++
++  const result: PatchOptions[] = []
++  for (const original of patches) {
++    const patch = structuredClone(original)
++    if (patch.insert !== undefined) {
++      const retained = []
++      const overrides: PatchOptions[] = []
++      for (const entry of patch.insert) {
++        const target = ownedIds.has(entry.id) ? entry.id : replacements.get(entry.id)
++        if (target === undefined) {
++          retained.push(entry)
++          continue
++        }
++        const { id: _id, name: _name, ...values } = entry
++        if (Object.keys(values).length > 0) overrides.push({ id: target, ...values })
++      }
++      if (retained.length > 0) result.push({ ...patch, insert: retained })
++      result.push(...overrides)
++      continue
++    }
++
++    if (typeof patch.id !== 'string') {
++      result.push(patch)
++      continue
++    }
++    const target = replacements.get(patch.id) ?? (ownedIds.has(patch.id) ? patch.id : undefined)
++    if (target === undefined) {
++      result.push(patch)
++      continue
++    }
++    const { name: _name, ...values } = patch
++    result.push({ ...values, id: target })
++  }
++  return result
++}
+diff --git a/apps/cli/src/profile-boot.ts b/apps/cli/src/profile-boot.ts
+index b795f627ca..3a07a01ff3 100644
+--- a/apps/cli/src/profile-boot.ts
++++ b/apps/cli/src/profile-boot.ts
+@@ -37,6 +37,8 @@ import { installProxyFromEnvironment } from '@deepseek-ai/dsh-http-proxy'
+ import { DSH_LAUNCH_ENVIRONMENT_KEY, type LaunchEnvironmentSnapshot } from '@deepseek-ai/dsh-launch-environment'
+ import { provideCmdline, type AppReady } from '@deepseek-ai/dsh-cmdline'
+ import { createProcessShutdown, type ProcessShutdown } from './process-shutdown.ts'
++import { loadProductPluginLayers, reconcileProductPluginUserPatches, resolveProductPluginRoot, type ProductPluginLayer } from './product-plugin-directory.ts'
++export { discoverProductPluginBundles, loadProductPluginLayers, reconcileProductPluginUserPatches, resolveProductPluginRoot } from './product-plugin-directory.ts'
+ 
+ const NAME = 'dsh'
+ 
+@@ -179,6 +181,7 @@ interface ComposedProfile {
+   resolution: RuntimeResolution
+   /** Command-line overlay contents, frozen for this invocation. */
+   overlays: PatchOptions[]
++  productLayers: readonly ProductPluginLayer[]
+ }
+ 
+ /**
+@@ -205,7 +208,10 @@ async function composeProfile(
+   const resolutionOptions = { installAnchor: resolvedProfile?.installAnchor ?? INSTALL_ANCHOR, profile }
+   const resolution = await createRuntimeResolution(resolutionOptions)
+   const overlays = patchFiles.flatMap(file => loadOverlayPatches(NAME, resolve(file)))
+-  return { profile, resolution, overlays }
++  const productLayers = await loadProductPluginLayers(resolveProductPluginRoot(
++    resolutionOptions.installAnchor, process.env.DSH_PRODUCT_PLUGINS_DIR,
++  ))
++  return { profile, resolution, overlays, productLayers }
+ }
+ 
+ /** An application-owned profile and its independent installation fallback. */
+@@ -290,6 +296,8 @@ export async function runProfile(options: RunProfileOptions): Promise<{ ctx: Con
+       dir: composed.profile.dir, patchPath: composed.profile.patchPath,
+       installAnchor: options.resolvedProfile?.installAnchor ?? INSTALL_ANCHOR,
+       startedBundles: composed.profile.layers.map(layer => layer.packageName),
++      installationPatches: composed.productLayers.flatMap(layer => layer.patches),
++      normalizeUserPatches: patches => reconcileProductPluginUserPatches(composed.productLayers, patches),
+       cwd: process.cwd(), home: resolveDshHome(),
+       overlays: composed.overlays, telemetryDisabledEnv: process.env.DSH_TELEMETRY_DISABLED,
+     }
+diff --git a/packages/boot/app-boot/src/profile-context.ts b/packages/boot/app-boot/src/profile-context.ts
+index 328b543e00..888b153b5a 100644
+--- a/packages/boot/app-boot/src/profile-context.ts
++++ b/packages/boot/app-boot/src/profile-context.ts
+@@ -23,6 +23,10 @@ export interface ProfileContext {
+   readonly home: string
+   /** Bundle packages used to start this process, before any persisted edits. */
+   readonly startedBundles: readonly string[]
++  /** Optional installation-owned bundle rows, applied before persisted user preferences. */
++  readonly installationPatches?: readonly PatchOptions[]
++  /** Normalize persisted patches against installation-owned row replacements. */
++  readonly normalizeUserPatches?: (patches: readonly PatchOptions[]) => PatchOptions[]
+   /** Parsed command-line overlays, applied above profile and home patches. */
+   readonly overlays: readonly PatchOptions[]
+   /** Launch-time DSH_TELEMETRY_DISABLED value; any non-empty value opts out. */
+@@ -62,11 +66,13 @@ export function resolveTelemetryPatch(disabledEnv: string | undefined, hasRow: b
+  */
+ export function readProfilePatches(binName: string, context: ProfileContext, initialProfile?: Profile): PatchOptions[] {
+   const profile = initialProfile ?? loadProfileDirectory(binName, context.dir, context.installAnchor, { userLayer: false })
++  const normalize = context.normalizeUserPatches ?? ((patches: readonly PatchOptions[]) => [...patches])
+   const patches = structuredClone([
+     ...profile.layers.flatMap(layer => layer.patches),
+-    ...(initialProfile?.patches ?? loadOptionalPatches(binName, context.patchPath) ?? []),
+-    ...(loadOptionalPatches(binName, join(context.home, PROFILE_PATCH_FILENAME)) ?? []),
+-    ...context.overlays,
++    ...(context.installationPatches ?? []),
++    ...normalize(initialProfile?.patches ?? loadOptionalPatches(binName, context.patchPath) ?? []),
++    ...normalize(loadOptionalPatches(binName, join(context.home, PROFILE_PATCH_FILENAME)) ?? []),
++    ...normalize(context.overlays),
+   ])
+   const telemetryPatch = resolveTelemetryPatch(context.telemetryDisabledEnv,
+     composeEntries([patches]).some(row => row.id === TELEMETRY_ROW_ID))
+diff --git a/packages/boot/app-boot/src/profile.ts b/packages/boot/app-boot/src/profile.ts
+index 9ea867ca5e..f7e2d6a130 100644
+--- a/packages/boot/app-boot/src/profile.ts
++++ b/packages/boot/app-boot/src/profile.ts
+@@ -366,7 +366,11 @@ function readPackageManifest(anchor: string): ProfileManifest {
+ 
+ /** Return dependency names that may be imported by a loader-visible plugin. */
+ function profileDependencyNames(manifest: ProfileManifest): string[] {
+-  return [...Object.keys(manifest.dependencies ?? {}), ...Object.keys(manifest.peerDependencies ?? {})]
++  return [
++    ...Object.keys(manifest.dependencies ?? {}),
++    ...Object.keys(manifest.peerDependencies ?? {}),
++    ...Object.keys(manifest.optionalDependencies ?? {}),
++  ]
+ }
+ 
+ /** Resolve the installation packages that the runtime resolver supplies to every profile. */
+diff --git a/packages/boot/config-editor/src/index.ts b/packages/boot/config-editor/src/index.ts
+index ffec879f40..2983920881 100644
+--- a/packages/boot/config-editor/src/index.ts
++++ b/packages/boot/config-editor/src/index.ts
+@@ -49,12 +49,15 @@ export class ConfigEditor extends Service {
+   configuration(): Array<{ entry: Entry; inherited: Record<string, unknown>; override: Record<string, unknown> }> {
+     const profile = this.ownerContext.profileContext
+     const loaded = loadProfileDirectory('dsh', profile.dir, profile.installAnchor)
++    const normalize = profile.normalizeUserPatches ?? ((patches: readonly PatchOptions[]) => [...patches])
++    loaded.patches = normalize(loaded.patches)
+     const entries = this.entries()
+     // An own config key can replace inherited config even when its value is undefined.
+     const overridden = new Set(loaded.patches.filter(patch => patch.insert === undefined && Object.hasOwn(patch, 'config')).map(patch => patch.id))
+     const composed = new Map<string, EntryOptions>()
+     if (entries.some(entry => !overridden.has(entry.options.id))) {
+-      for (const row of flatten(composeEntries([...loaded.layers.map(layer => layer.patches), loaded.patches]))) {
++      const layers = [...loaded.layers.map(layer => layer.patches), [...profile.installationPatches ?? []], loaded.patches]
++      for (const row of flatten(composeEntries(layers))) {
+         if (!composed.has(row.id)) composed.set(row.id, row)
+       }
+     }
+@@ -70,12 +73,15 @@ export class ConfigEditor extends Service {
+   }
+ 
+   private inherited(entry: Entry, loaded: ReturnType<typeof loadProfileDirectory>): Record<string, unknown> {
+-    const patches = loaded.patches.map((patch) => {
++    const profile = this.ownerContext.profileContext
++    const normalize = profile.normalizeUserPatches ?? ((patches: readonly PatchOptions[]) => [...patches])
++    const patches = normalize(loaded.patches).map((patch) => {
+       if (patch.id !== entry.options.id || patch.insert !== undefined) return patch
+       const rest = { ...patch }; Reflect.deleteProperty(rest, 'config')
+       return rest
+     })
+-    const row = flatten(composeEntries([...loaded.layers.map(layer => layer.patches), patches])).find(row => row.id === entry.options.id)
++    const layers = [...loaded.layers.map(layer => layer.patches), [...profile.installationPatches ?? []], patches]
++    const row = flatten(composeEntries(layers)).find(row => row.id === entry.options.id)
+     return structuredClone((row?.config ?? {}) as Record<string, unknown>)
+   }
+ 
+diff --git a/packages/client/tsdown.client.ts b/packages/client/tsdown.client.ts
+index 386beef230..13d258a488 100644
+--- a/packages/client/tsdown.client.ts
++++ b/packages/client/tsdown.client.ts
+@@ -356,7 +356,8 @@ const clientExternalCache = new Map<string, ReadonlySet<string>>()
+ function workspaceManifest(id: string): WorkspaceManifest {
+   const cached = manifestCache.get(id)
+   if (cached !== undefined) return cached
+-  for (const manifestPath of globSync('packages/*/*/package.json', { cwd: REPOSITORY_ROOT })) {
++  const patterns = ['packages/*/*/package.json', 'plugins/*/package.json', 'plugins/*/packages/*/package.json']
++  for (const manifestPath of patterns.flatMap(pattern => globSync(pattern, { cwd: REPOSITORY_ROOT }))) {
+     const manifest = JSON.parse(
+       readFileSync(resolvePath(REPOSITORY_ROOT, manifestPath), 'utf8'),
+     ) as WorkspaceManifest
+@@ -364,7 +365,7 @@ function workspaceManifest(id: string): WorkspaceManifest {
+     manifestCache.set(id, manifest)
+     return manifest
+   }
+-  throw new Error(`tsdown: no packages/*/*/package.json declares the name ${id}`)
++  throw new Error(`tsdown: no workspace package.json declares the name ${id}`)
+ }
+ 
+ /**
+diff --git a/packages/util/package-manifest/src/types.ts b/packages/util/package-manifest/src/types.ts
+index e5289ad1e2..4a0314c837 100644
+--- a/packages/util/package-manifest/src/types.ts
++++ b/packages/util/package-manifest/src/types.ts
+@@ -18,6 +18,8 @@ export interface DshPackageManifest {
+   private?: boolean
+   /** Packages installed alongside this package. */
+   dependencies?: Record<string, string>
++  /** Optional packages supplied by the installation when present. */
++  optionalDependencies?: Record<string, string>
+   /** Compatible versions of packages supplied by the consuming project. */
+   peerDependencies?: Record<string, string>
+   /** Runtime requirements; DSH compatibility is declarative until a reader enforces it. */
