@@ -1,5 +1,7 @@
 # dsh-chat-migration
 
+Conversation import **0.2.1** restores its original chat-bubble artwork through a plugin-owned Settings icon registration. The shared compatibility patch fixes keyed icon dispatch; chat mode retains its existing version.
+
 Current master targets Harness **0.2.1-alpha.1** and includes the native plugin upgrade made with [dsh-plugin-upgrade-skill](https://github.com/oh-my-dsh/dsh-plugin-upgrade-skill/). Download the current branch for this source update; existing releases retain their original version.
 
 English | [中文](README.md)

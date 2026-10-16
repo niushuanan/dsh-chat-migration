@@ -1,7 +1,7 @@
 {
   "name": "@xiaozhuang-dsh/conversation-import",
   "description": "Native Session export plus DeepSeek conversation history import",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "publishConfig": {
     "access": "public"
   },

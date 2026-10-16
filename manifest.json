@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "kind": "xiaozhuang-dsh-plugin-export",
-  "createdAt": "2026-10-06T18:35:53.732129+00:00",
-  "sourceCommit": "efbbbc6a1977cf4559bf306221533eb16393664c",
+  "createdAt": "2026-10-16T06:43:22.126501+00:00",
+  "sourceCommit": "37f1223134fd7e07b1e4360a932a0c257f21a712",
   "sourceRepository": "https://github.com/niushuanan/xiaozhuang-dsh",
   "repository": "https://github.com/niushuanan/dsh-chat-migration",
   "targetHarness": "0.2.1-alpha.1",
@@ -48,7 +48,7 @@
           "path": "plugins/conversation-import"
         }
       ],
-      "version": "0.2.0"
+      "version": "0.2.1"
     }
   ],
   "files": [
@@ -279,13 +279,13 @@
     },
     {
       "path": "payload/conversation-import/product/plugins/conversation-import/lib/client.js",
-      "size": 50841,
-      "sha256": "6e165c0a64d4e3275f4247dc8d0a2269ce10771a9fefd23b4f9dd46479de13c2"
+      "size": 52209,
+      "sha256": "580c11aa0b05d682e21567fa350b860c842a3fdd52f2c94882a019233cef3a5b"
     },
     {
       "path": "payload/conversation-import/product/plugins/conversation-import/lib/client.js.map",
-      "size": 62590,
-      "sha256": "0e743018f896c634c5a6ac88f7e5c8349886a5cdbfc68d7e8439900fb8cfed09"
+      "size": 64457,
+      "sha256": "a372d0a9b2ce62492645a5422bd4c6688b2d8de5d236273bdfcdd8736571400b"
     },
     {
       "path": "payload/conversation-import/product/plugins/conversation-import/lib/index.js",
@@ -295,7 +295,7 @@
     {
       "path": "payload/conversation-import/product/plugins/conversation-import/package.json",
       "size": 4033,
-      "sha256": "42b8dfdea3fb3af77d44432348d4e6746e05a56ebf25580a5d00ebfc7493b56c"
+      "sha256": "0f82ae9cae30b2359caf9e02f21182fc5b7297bc49151acba2e3528ebb45615d"
     },
     {
       "path": "payload/conversation-import/product/plugins/conversation-import/src/archive.ts",
@@ -328,6 +328,11 @@
       "sha256": "54ff0358953e7be23a1b42cacb9b081cf3d2319ddf99988ed077d457c6ab248c"
     },
     {
+      "path": "payload/conversation-import/product/plugins/conversation-import/src/client/SettingsIcon.tsx",
+      "size": 965,
+      "sha256": "9ac67747e536cf0f7d8d4c8742c7a0ca680c8a25e514f1fb6dc3f56e551fd9ef"
+    },
+    {
       "path": "payload/conversation-import/product/plugins/conversation-import/src/client/controller.ts",
       "size": 6672,
       "sha256": "9817aff6c9a2da75aa8058b1f1dfb35e3b49cda924263757b1f069bc773ce9cd"
@@ -339,8 +344,8 @@
     },
     {
       "path": "payload/conversation-import/product/plugins/conversation-import/src/client/index.ts",
-      "size": 6266,
-      "sha256": "bb5ad994954d7e4ee96c16de511fcd1cd926b73f52a1d3b562ea7dfba93db2f5"
+      "size": 6481,
+      "sha256": "50e1334236ceeb086e82bc49228d7a09035ca0bdf3f44759028158191c5d7b7b"
     },
     {
       "path": "payload/conversation-import/product/plugins/conversation-import/src/client/locales.ts",
@@ -404,8 +409,8 @@
     },
     {
       "path": "payload/shared/settings-and-ui-slots.patch",
-      "size": 73183,
-      "sha256": "ce217a393adba9a3c3d1692ea14868a7d8f3d4e936a3895c216ae1f7d136a176"
+      "size": 73187,
+      "sha256": "480f6615d48fe4b424c9f8265a6140a3d769aff61097da849732e0fe6232c11c"
     }
   ],
   "compatibilityPatches": [

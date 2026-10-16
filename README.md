@@ -1,5 +1,7 @@
 # dsh-chat-migration
 
+导入对话 **0.2.1** 恢复原有聊天气泡设置图标，由导入插件自己提供并注册；公共兼容补丁修复 keyed 图标选择。聊天模式继续沿用当前版本。
+
 当前 master 面向 Harness **0.2.1-alpha.1**，已使用 [dsh-plugin-upgrade-skill](https://github.com/oh-my-dsh/dsh-plugin-upgrade-skill/) 完成原生插件适配。下载当前分支获得本次源码更新；既有 Release 保持各自原版本。
 
 [English](README.en.md) | 中文

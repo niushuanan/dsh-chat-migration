@@ -13,6 +13,7 @@ import type {} from '@deepseek-ai/dsh-client-ui-settings/client'
 import type { DeepSeekImportPreview, DeepSeekImportResult } from '../deepseek-import-types.ts'
 import { SessionLogDownloadController } from './controller.ts'
 import { DeepSeekImportSection, type DeepSeekImportSectionInjected } from './DeepSeekImportSection.tsx'
+import { ImportSettingsIcon } from './SettingsIcon.tsx'
 import { exportConversationImage } from './image-export.ts'
 import type { SessionLogDownloadDialogInjected } from './Dialog.tsx'
 import { SessionLogDownloadHeaderAction } from './HeaderAction.tsx'
@@ -131,7 +132,9 @@ export function apply(ctx: ClientContext): void {
       refreshSessions: () => sessions.refresh(),
     }),
   }, DeepSeekImportSection))
-
+  ctx.slots.inject('settings.section.icon', () => ctx.slots.register({
+    name: 'settings.section.icon', key: 'conversation-import',
+  }, ImportSettingsIcon))
 }
 
 export type { SessionLogDownloadDialogInjected, SessionLogDownloadDialogProps } from './Dialog.tsx'
